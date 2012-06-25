@@ -46,5 +46,7 @@ gem 'haml-rails'
 
 gem 'simple_form'
 
+gem 'nested_set'
+
 gem 'devise'
 gem 'cancan'
