@@ -4,6 +4,13 @@ gem 'rails', '3.2.6'
 
 gem 'pg'
 
+gem 'rspec-rails', :group => [:test, :development]
+group :tests do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+end
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
