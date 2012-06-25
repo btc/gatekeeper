@@ -18,6 +18,11 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  # This gem is only needed in this group as it’s only used by the assets
+  # pipeline. If we’re using static assets in production then it won’t be
+  # needed.
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'
@@ -38,3 +43,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'haml-rails'
+
