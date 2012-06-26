@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :roles
 
+  def is_admin?
+    Role.is_admin? self
+  end
+
 end
