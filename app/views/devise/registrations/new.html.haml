@@ -1,0 +1,18 @@
+- # TODO validate email address format
+.vern-auth-form
+  = simple_form_for(resource,
+    :as => resource_name,
+    :url => registration_path(resource_name)) do |f|
+    - # TODO iterate and line up buttons
+    = f.error_notification
+    = f.input :email, :wrapper => :prepend, :label => false, :autofocus => true do
+      = content_tag :span, 'email', :class => 'add-on'
+      = f.input_field :email
+    = f.input :password, :wrapper => :prepend, :label => false do
+      = content_tag :span, 'password', :class => 'add-on'
+      = f.input_field :password
+    = f.input :password_confirmation, :wrapper => :prepend, :label => false do
+      = content_tag :span, 're-type password', :class => 'add-on'
+      = f.input_field :password_confirmation
+    = f.button :submit, "Sign up", :class => 'btn-success'
+  = render "devise/shared/links"
