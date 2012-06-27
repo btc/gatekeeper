@@ -10,8 +10,15 @@ class User < ActiveRecord::Base
 
   has_many :roles
 
+  private
   def is_admin?
     Role.is_admin? self
+  end
+
+  def admin=(bool)
+    if bool == true
+      Role.add_admin(self)
+    end
   end
 
 end
