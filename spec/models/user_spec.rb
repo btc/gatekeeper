@@ -21,4 +21,9 @@ describe User do
     a = FactoryGirl.create(:admin)
   end
 
+  it "creates an admin using only the specified factory" do
+    a = FactoryGirl.create(:admin)
+    a.is_admin?.should be_true
+  end
+
 end
