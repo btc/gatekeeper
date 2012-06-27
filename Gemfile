@@ -7,6 +7,9 @@ gem 'thin'
 gem 'pg'
 
 gem 'rspec-rails', :group => [:test, :development]
+
+gem 'guard-spork', :group => [:test, :development]
+
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
