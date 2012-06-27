@@ -12,7 +12,7 @@ class Role < ActiveRecord::Base
   belongs_to :user
 
   def self.is_admin? user
-    find_by_user_id_and_name(user.id, 'admin')
+    find_by_user_id_and_name(user.id, 'admin') ? true : false
   end
 
   def self.add_admin user
