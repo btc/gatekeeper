@@ -8,7 +8,7 @@ FactoryGirl.define do
     email
     password SecureRandom.hex
     factory :admin do
-      admin true
+      after(:create) { |user| user.admin = true }
     end
   end
 
