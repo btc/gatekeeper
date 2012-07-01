@@ -8,6 +8,11 @@ gem 'pg'
 
 gem 'rspec-rails', :group => [:test, :development]
 
+group :development do
+  gem 'ruby_gntp'                         # notifications (growl)
+  gem 'guard-livereload'                  # must install browser extension
+end
+
 gem 'guard-spork', :group => [:test, :development]
 
 gem 'factory_girl_rails', :group => [:test, :development]
