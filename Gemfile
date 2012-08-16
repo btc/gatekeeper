@@ -19,7 +19,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-  # This gem is only needed in this group as it’s only used by the assets
+  # This gem is only needed in this group as it’s onliy used by the assets
   # pipeline. If we’re using static assets in production then it won’t be
   # needed.
   gem 'twitter-bootstrap-rails'
