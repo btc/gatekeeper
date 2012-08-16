@@ -1,18 +1,18 @@
 common: &common
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: phenom
+  username: brian
+  password:
   pool: 5
 
 development:
   <<: *common
-  database: vern_development
+  database: vip_development
 
 test:
   <<: *common
-  database: vern_test
+  database: vip_test
 
 production:
   <<: *common
-  database: vern_production
+  database: vip_production
