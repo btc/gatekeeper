@@ -6,7 +6,7 @@
     - # TODO iterate and line up buttons
     = f.error_notification
     = f.input :email, :wrapper => :prepend, :label => false, :autofocus => true do
-      = content_tag :span, '', :class => 'add-on icon-envelope'
+      = content_tag :span, 'email', :class => 'add-on'
       = f.input_field :email
     = f.input :password, :wrapper => :prepend, :label => false do
       = content_tag :span, 'password', :class => 'add-on'
