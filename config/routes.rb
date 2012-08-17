@@ -1,8 +1,8 @@
 Vern::Application.routes.draw do
-
-  resources :photos
+  match 'photos/webcam' => 'photos#webcam'
 
   scope 'api' do
+    resources :photos
     resources :guests
   end
 
