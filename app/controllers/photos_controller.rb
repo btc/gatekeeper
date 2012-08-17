@@ -80,4 +80,19 @@ class PhotosController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def upload
+    File.open(upload_path, 'w') do |f|
+      # must force encoding else ASCII conflict
+      f.write request.raw_post.force_encoding('UTF-8')
+    end
+    render :text => "ok"
+  end
+
+  private
+
+  def upload_path # is used in upload and create
+    file_name = Photo.generate_file_name(extension: '.jpg')
+    File.join(Rails.root, 'public', 'uploads', file_name)
+  end
 end

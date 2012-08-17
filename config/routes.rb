@@ -1,5 +1,7 @@
 Vern::Application.routes.draw do
-  match 'photos/webcam' => 'photos#webcam'
+
+  get 'photos/webcam'
+  post 'photos/upload'
 
   scope 'api' do
     resources :photos
