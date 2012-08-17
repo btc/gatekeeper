@@ -86,51 +86,33 @@ class PhotosController < ApplicationController
   # paperclip (webcam_create) creates copies, so these uploads should be
   # deleted periodically
   def upload
-    path = upload_path
-    File.open(path, 'w') do |f|
+    File.open(webcam_upload_path, 'w') do |f|
       # must force encoding else ASCII conflict
       f.write request.raw_post.force_encoding('UTF-8')
       # store path to image for subsequent request
-      flash[:image_path] = path
     end
     render :text => "ok"
   end
 
   def webcam_create
-    @photo = Photo.new(params[:photo])
+    @photo = Photo.new
+    @photo.image = File.new(webcam_upload_path)
 
     respond_to do |format|
-
-      error_response = Proc.new do
-        format.html { render action: "new" and return }
-        format.json do
-          render json: @photo.errors, status: :unprocessable_entity
-          return
-        end
-      end
-
-      if flash[:image_path].present?
-        # get path to image from previous request
-        @photo.image = File.new(flash[:image_path])
-
-        if @photo.save
-          format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-          format.json { render json: @photo, status: :created, location: @photo }
-        else
-          error_response.call
-        end
-
+      if @photo.save
+        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        format.json { render json: @photo, status: :created, location: @photo }
       else
-        error_response.call
+        format.html { render action: "new" }
+        format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   private
 
-  def upload_path # is used in upload and create
+  def webcam_upload_path # is used in upload and create
     file_name = session[:session_id].to_s + '.jpg'
-    File.join(Rails.root, 'public', 'uploads', file_name)
+    File.join(Rails.root, 'public', 'temp', file_name)
   end
 end
