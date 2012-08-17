@@ -26,4 +26,6 @@ describe User do
     a.is_admin?.should be_true
   end
 
+  it "must have a properly formatted, valid email address"
+
 end
