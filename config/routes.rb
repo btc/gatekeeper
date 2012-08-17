@@ -1,5 +1,8 @@
 Vern::Application.routes.draw do
-  resources :guests
+
+  scope 'api' do
+    resources :guests
+  end
 
   devise_for :users
 
