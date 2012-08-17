@@ -2,6 +2,7 @@ Vern::Application.routes.draw do
 
   get 'photos/webcam'
   post 'photos/upload'
+  post 'photos/webcam_create'
 
   scope 'api' do
     resources :photos

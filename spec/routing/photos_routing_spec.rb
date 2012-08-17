@@ -31,5 +31,17 @@ describe PhotosController do
       delete("api/photos/1").should route_to("photos#destroy", :id => "1")
     end
 
+    it "routes to #webcam_create" do
+      post("photos/webcam_create").should route_to("photos#webcam_create")
+    end
+
+    it "routes to #webcam" do
+      get("photos/webcam").should route_to("photos#webcam")
+    end
+
+    it "routes to #upload" do
+      post('photos/upload').should route_to('photos#upload')
+    end
+
   end
 end

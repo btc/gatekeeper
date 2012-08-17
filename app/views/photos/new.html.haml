@@ -1,5 +1,12 @@
 %h1 New photo
 
+%hr
+
+= link_to photos_webcam_path do
+  %button.btn
+    %i.icon-camera
+    New from webcam
+
 = render 'form'
 
 = link_to 'Back', photos_path

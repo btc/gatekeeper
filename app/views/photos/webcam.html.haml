@@ -10,7 +10,7 @@
 
 .hide#new_photo
   %hr
-  = form_for Photo.new do |f|
+  = form_for Photo.new, url: '/photos/webcam_create' do |f|
     %p
       = f.submit "Save photo", class: 'btn'
       or
