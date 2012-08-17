@@ -44,3 +44,5 @@ gem 'devise'
 gem 'cancan'
 
 gem 'coffee-filter'
+
+gem 'paperclip'

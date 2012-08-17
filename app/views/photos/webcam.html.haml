@@ -1,0 +1,28 @@
+= javascript_include_tag 'webcam', 'webcam_app'
+
+-# webcam trigger
+%button.btn.btn-large(onclick='webcam.snap();')
+  %i.icon-camera
+%hr
+
+-# the webcam preview is displayed here
+#webcam
+
+.hide#new_photo
+  %hr
+  = form_for Photo.new, url: '/photos/webcam_create' do |f|
+    %p
+      = f.submit "Save photo", class: 'btn'
+      or
+      = link_to "Take another", photos_webcam_path, class: 'btn'
+
+:coffeescript
+  webcamApp = new window.VIP.WebcamApp
+    api_url: "#{photos_upload_path}"
+    quality: 90
+    swf_path: '/webcam.swf'
+    sound_path: '/shutter.mp3'
+    div_id: '#webcam'
+    width: 640
+    height: 480
+

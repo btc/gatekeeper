@@ -14,4 +14,6 @@ describe Guest do
     @guest.last_name = nil
     @guest.valid?.should eq(false)
   end
+
+  it { should have_many(:photos) }
 end
