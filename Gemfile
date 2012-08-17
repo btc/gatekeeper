@@ -15,12 +15,11 @@ end
 
 gem 'guard-spork', :group => [:test, :development]
 
-gem 'factory_girl_rails', :group => [:test, :development]
-
 group :test do
   gem 'capybara'                          # simulate UX in tests
   gem 'guard-rspec'                       # run continuous* tests
   gem 'shoulda-matchers'                  # useful test methods
+  gem 'factory_girl_rails'
 end
 
 group :assets do
