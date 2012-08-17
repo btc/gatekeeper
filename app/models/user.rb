@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
 
   has_many :roles
 
-  private
   def is_admin?
     Role.is_admin? self
   end
