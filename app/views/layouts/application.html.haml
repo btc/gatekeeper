@@ -10,6 +10,27 @@
     = stylesheet_link_tag     "application"
     = javascript_include_tag  "application"
     = csrf_meta_tags
-  %body
-    = yield
+
+  %body.page_classes
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+
+          %a.brand
+            -# bring peace and justice to country
+            抚绥
+
+          %ul.nav.pull-right
+            %li
+              %a(href='/placeholder')
+                %i.icon-user.icon-white
+                placeholder
+            %li.divider-vertical
+            %li
+              %a(href='/')
+                %i.icon-home.icon-white
+
+    .container-fluid
+      = yield
+
 
