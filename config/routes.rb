@@ -1,4 +1,6 @@
 Vern::Application.routes.draw do
+  resources :photos
+
   resources :guests
 
   devise_for :users

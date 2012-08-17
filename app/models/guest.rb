@@ -4,4 +4,6 @@ class Guest < ActiveRecord::Base
   # validate presence but NOT inclusion.
   # it is acceptable and expected that duplicate names will exist
   validates_presence_of :first_name, :last_name
+
+  has_many :photos
 end
