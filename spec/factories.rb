@@ -13,8 +13,8 @@ FactoryGirl.define do
   end
 
   factory :role do
-    name 'name'
-    user
+    name 'admin'
+    user FactoryGirl.create(:user)
   end
 
 end
