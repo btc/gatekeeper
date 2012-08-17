@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @guest.first_name
+%p
+  %b Last name:
+  = @guest.last_name
+%p
+  %b Email:
+  = @guest.email
+%p
+  %b Phone number:
+  = @guest.phone_number
+
+= link_to 'Edit', edit_guest_path(@guest)
+\|
+= link_to 'Back', guests_path

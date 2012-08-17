@@ -1,4 +1,6 @@
 Vern::Application.routes.draw do
+  resources :guests
+
   devise_for :users
 
   # The priority is based upon order of creation:
