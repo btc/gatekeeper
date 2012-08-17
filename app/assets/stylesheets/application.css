@@ -10,7 +10,6 @@
  *
  *= require_self
  *= require normalize
- *= require scaffolds
  *= require devise
  *= require guests
  *= require bootstrap_and_overrides
