@@ -1,0 +1,44 @@
+!!! 5
+%html
+  = render partial: 'layouts/head'
+
+  %body.page_classes
+    = render partial: 'layouts/nav'
+
+    .container-fluid
+      .row-fluid
+        .span2
+          %ul.nav.nav-list
+
+            %li.nav-header
+              resources
+
+            %li
+              = link_to guests_path do
+                %i.icon-user
+                guests
+
+            %li
+              = link_to photos_path do
+                %i.icon-camera
+                photos
+
+            %li
+              = link_to committees_path do
+                %i.icon-star
+                committees
+
+            %li
+              = link_to guestlists_path do
+                %i.icon-list-alt
+                guestlists
+
+            %li
+              = link_to events_path do
+                %i.icon-glass
+                events
+
+        .span10
+          = yield
+
+
