@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  layout 'resources'
   # GET /photos
   # GET /photos.json
   def index

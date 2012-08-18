@@ -1,4 +1,5 @@
 class GuestlistsController < ApplicationController
+  layout 'resources'
   # GET /guestlists
   # GET /guestlists.json
   def index

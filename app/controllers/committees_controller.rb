@@ -1,4 +1,5 @@
 class CommitteesController < ApplicationController
+  layout 'resources'
   # GET /committees
   # GET /committees.json
   def index
