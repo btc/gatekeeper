@@ -16,4 +16,8 @@ describe Guest do
   end
 
   it { should have_many(:photos) }
+  it { should have_and_belong_to_many(:events) }
+  it { should have_and_belong_to_many(:guestlists) }
+  it { should have_one(:user) }
+
 end

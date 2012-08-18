@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_many :roles
+  has_and_belongs_to_many :committees
+  belongs_to :guest
+  has_many :guestlists
 
   def is_admin?
     Role.is_admin? self

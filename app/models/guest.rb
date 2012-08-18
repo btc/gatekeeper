@@ -6,4 +6,7 @@ class Guest < ActiveRecord::Base
   validates_presence_of :first_name, :last_name
 
   has_many :photos
+  has_and_belongs_to_many :events
+  has_and_belongs_to_many :guestlists
+  has_one :user
 end

@@ -26,6 +26,8 @@ describe User do
     a.is_admin?.should be_true
   end
 
-  it "must have a properly formatted, valid email address"
+  it { should belong_to(:guest) }
+  it { should have_and_belong_to_many(:committees) }
+  it { should have_many(:guestlists) }
 
 end

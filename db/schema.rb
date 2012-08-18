@@ -11,7 +11,43 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817181459) do
+ActiveRecord::Schema.define(:version => 20120818044030) do
+
+  create_table "committees", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "committees_events", :id => false, :force => true do |t|
+    t.integer "committee_id"
+    t.integer "event_id"
+  end
+
+  create_table "committees_users", :id => false, :force => true do |t|
+    t.integer "committee_id"
+    t.integer "user_id"
+  end
+
+  create_table "events", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "events_guests", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "guest_id"
+  end
+
+  create_table "guestlists", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
+  create_table "guestlists_guests", :id => false, :force => true do |t|
+    t.integer "guestlist_id"
+    t.integer "guest_id"
+  end
 
   create_table "guests", :force => true do |t|
     t.string   "first_name"
@@ -52,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20120817181459) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "guest_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

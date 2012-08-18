@@ -1,0 +1,17 @@
+%h1 Listing committees
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @committees.each do |committee|
+    %tr
+      %td= link_to 'Show', committee
+      %td= link_to 'Edit', edit_committee_path(committee)
+      %td= link_to 'Destroy', committee, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Committee', new_committee_path

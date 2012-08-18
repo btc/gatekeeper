@@ -7,6 +7,9 @@ Vern::Application.routes.draw do
   scope 'api' do
     resources :photos
     resources :guests
+    resources :committees
+    resources :guestlists
+    resources :events
   end
 
   devise_for :users

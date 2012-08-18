@@ -1,0 +1,17 @@
+%h1 Listing guestlists
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @guestlists.each do |guestlist|
+    %tr
+      %td= link_to 'Show', guestlist
+      %td= link_to 'Edit', edit_guestlist_path(guestlist)
+      %td= link_to 'Destroy', guestlist, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Guestlist', new_guestlist_path
