@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818044030) do
+ActiveRecord::Schema.define(:version => 20120818052225) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120818044030) do
   create_table "events", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "title"
   end
 
   create_table "events_guests", :id => false, :force => true do |t|
