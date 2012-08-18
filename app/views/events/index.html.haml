@@ -1,17 +1,24 @@
-%h1 Listing events
+= link_to new_event_path do
+  %button.btn.btn-primary
+    create new event
 
-%table
-  %tr
-    %th
+%table.table.table-condensed
+  %caption
+    %h1 all events
+  %thead
+    %th title
+    %th actions
     %th
     %th
 
+  %tbody
   - @events.each do |event|
     %tr
-      %td= link_to 'Show', event
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+      %td= event.title.downcase
+      %td= link_to 'Show', event, class: 'btn'
+      %td= link_to 'Edit', edit_event_path(event), class: 'btn'
+      %td= link_to 'Destroy', event, class: 'btn btn-danger',
+        :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New Event', new_event_path

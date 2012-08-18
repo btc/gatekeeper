@@ -1,7 +1,12 @@
-%h1 Editing event
+= render 'back'
+
+.page-header
+  %h1
+    = "editing #{@event.title}"
+    %small
+      = link_to @event do
+        cancel
 
 = render 'form'
 
-= link_to 'Show', @event
-\|
-= link_to 'Back', events_path
+

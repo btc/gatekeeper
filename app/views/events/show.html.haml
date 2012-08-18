@@ -1,6 +1,7 @@
 %p#notice= notice
-
-
-= link_to 'Edit', edit_event_path(@event)
-\|
-= link_to 'Back', events_path
+= render 'back'
+.page_header
+  %h1
+    = @event.title
+    %small
+      = link_to 'Edit', edit_event_path(@event)
