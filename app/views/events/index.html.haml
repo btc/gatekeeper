@@ -15,10 +15,11 @@
   - @events.each do |event|
     %tr
       %td= event.title.downcase
-      %td= link_to 'Show', event, class: 'btn'
-      %td= link_to 'Edit', edit_event_path(event), class: 'btn'
-      %td= link_to 'Destroy', event, class: 'btn btn-danger',
-        :confirm => 'Are you sure?', :method => :delete
+      %td
+        = link_to 'Show', event, class: 'btn'
+        = link_to 'Edit', edit_event_path(event), class: 'btn'
+        = link_to 'Destroy', event, class: 'btn btn-danger',
+          :confirm => 'Are you sure?', :method => :delete
 
 %br
 
