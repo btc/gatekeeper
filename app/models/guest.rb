@@ -9,11 +9,4 @@ class Guest < ActiveRecord::Base
   has_and_belongs_to_many :events
   has_and_belongs_to_many :guestlists
   has_one :user
-  def first_name
-    super.titlecase
-  end
-
-  def last_name
-    super.titlecase
-  end
 end
