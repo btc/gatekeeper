@@ -12,6 +12,5 @@ no erb here. use haml!
 
 DATABASE SETUP
 ==============
+use config/database.yml.example to create your own local database.yml
 
-For the moment, you must have postgres set up with username: postgres, password:
-phenom.
