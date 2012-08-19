@@ -13,8 +13,8 @@
   %tbody
     - @events.sort_by { |e| e.date }.reverse.each do |event|
       %tr
-        %td= event.date.to_date.to_formatted_s(:short)
-        %td= event.title.downcase
+        %td= event.date
+        %td= event.title
         %td
           = link_to 'Show', event, class: 'btn'
           = link_to 'Edit', edit_event_path(event), class: 'btn'
