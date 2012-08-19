@@ -18,3 +18,4 @@
 
 /public/temp/
 /public/system/
+config/database.yml
