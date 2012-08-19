@@ -114,6 +114,6 @@ class PhotosController < ApplicationController
 
   def webcam_upload_path # is used in upload and create
     file_name = session[:session_id].to_s + '.jpg'
-    File.join(Rails.root, 'public', 'temp', file_name)
+    File.join(Rails.root, 'public', 'webcamtemp', file_name)
   end
 end
