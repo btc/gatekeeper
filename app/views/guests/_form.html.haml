@@ -5,6 +5,7 @@
     = f.input :first_name
     = f.input :last_name
     = f.input :gender, collection: Guest.genders, as: :radio
+    = f.input :rating, collection: Guest.ratings, as: :radio
     = f.input :email
     = f.input :phone_number, label: 'Phone number (optional)'
 

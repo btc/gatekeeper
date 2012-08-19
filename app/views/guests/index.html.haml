@@ -6,6 +6,7 @@
   %caption
     %h1 all guests
   %thead
+    %th rating
     %th first name
     %th last name
     %th gender
@@ -15,6 +16,7 @@
 
   - @guests.each do |guest|
     %tr
+      %td= guest.rating
       %td= guest.first_name
       %td= guest.last_name
       %td= guest.gender

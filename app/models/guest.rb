@@ -1,5 +1,6 @@
 class Guest < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_name, :phone_number, :gender
+  attr_accessible :email, :first_name, :last_name,
+    :phone_number, :gender, :rating
 
   # validate presence but NOT inclusion.
   # it is acceptable and expected that duplicate names will exist
@@ -11,6 +12,10 @@ class Guest < ActiveRecord::Base
   @@valid_genders = ['female', 'male'].sort
   validates :gender, inclusion: { in: @@valid_genders }
 
+  # rating must be in range, but is not required
+  @@valid_ratings = (1..5)
+  validates :rating, inclusion: { in: @@valid_ratings }, allow_nil: true
+
   has_many :photos
   has_and_belongs_to_many :events
   has_and_belongs_to_many :guestlists
@@ -18,5 +23,13 @@ class Guest < ActiveRecord::Base
 
   def self.genders
     @@valid_genders
+  end
+
+  def self.ratings
+    @@valid_ratings
+  end
+
+  def is_five_star?
+    self.rating == 5
   end
 end
