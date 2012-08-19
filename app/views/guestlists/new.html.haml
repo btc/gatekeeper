@@ -1,5 +1,10 @@
-%h1 New guestlist
+= render 'back'
+
+.page-header
+  %h1
+    new guest list
+    %small
+      = link_to 'cancel', guestlists_path
 
 = render 'form'
 
-= link_to 'Back', guestlists_path

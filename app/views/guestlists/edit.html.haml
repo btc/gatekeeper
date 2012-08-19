@@ -1,7 +1,10 @@
-%h1 Editing guestlist
+= render 'back'
 
-= render 'form'
+.page-header
+  %h1
+    editing brian's opening night guest list
+    %small
+      = link_to @guestlist do
+        cancel
 
-= link_to 'Show', @guestlist
-\|
-= link_to 'Back', guestlists_path
+=render 'form'

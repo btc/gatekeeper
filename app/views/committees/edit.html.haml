@@ -1,7 +1,10 @@
-%h1 Editing committee
+= render 'back'
+
+.page-header
+  %h1
+    brandon's committee
+    %small
+      = link_to @committee do 
+        cancel
 
 = render 'form'
-
-= link_to 'Show', @committee
-\|
-= link_to 'Back', committees_path

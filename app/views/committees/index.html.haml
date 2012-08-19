@@ -1,17 +1,22 @@
-%h1 Listing committees
+= link_to new_committee_path do
+  %button.btn.btn-primary
+    create new committee
 
-%table
-  %tr
+%table.table.table-condensed
+  %caption
+    %h1 all committees
+  %thead
     %th
     %th
     %th
 
-  - @committees.each do |committee|
-    %tr
-      %td= link_to 'Show', committee
-      %td= link_to 'Edit', edit_committee_path(committee)
-      %td= link_to 'Destroy', committee, :confirm => 'Are you sure?', :method => :delete
+  %tbody
+    - @committees.each do |committee|
+      %tr
+        %td
+          = link_to 'Show', committee, class: 'btn'
+          = link_to 'Edit', edit_committee_path(committee), class: 'btn'
+          = link_to 'Destroy', committee, class: 'btn btn-danger',
+             :confirm => 'Are you sure?', :method => :delete
 
-%br
 
-= link_to 'New Committee', new_committee_path

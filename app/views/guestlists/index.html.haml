@@ -1,17 +1,25 @@
-%h1 Listing guestlists
+= link_to new_guestlist_path do
+  %button.btn.btn-primary
+    new guest list
 
-%table
-  %tr
+
+
+
+%table.table.table-condensed
+  %caption
+    %h1 guest lists
+  %thead
     %th
     %th
     %th
 
-  - @guestlists.each do |guestlist|
-    %tr
-      %td= link_to 'Show', guestlist
-      %td= link_to 'Edit', edit_guestlist_path(guestlist)
-      %td= link_to 'Destroy', guestlist, :confirm => 'Are you sure?', :method => :delete
+  %tbody
+    - @guestlists.each do |guestlist|
+      %tr
+        %td
+          = link_to 'Show', guestlist, class: 'btn'
+          = link_to 'Edit', edit_guestlist_path(guestlist),  class: 'btn'
+          = link_to 'Destroy', guestlist, class: 'btn btn-danger', 
+            :confirm => 'Are you sure?', :method => :delete
 
-%br
 
-= link_to 'New Guestlist', new_guestlist_path
