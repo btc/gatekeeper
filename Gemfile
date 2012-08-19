@@ -11,6 +11,7 @@ gem 'rspec-rails', :group => [:test, :development]
 group :development do
   gem 'ruby_gntp'                         # notifications (growl)
   gem 'guard-livereload'                  # must install browser extension
+  gem 'guard-rails'                       # run rails server through guard
 end
 
 gem 'guard-spork', :group => [:test, :development]

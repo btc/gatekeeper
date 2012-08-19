@@ -43,3 +43,8 @@ guard 'livereload' do
   # Rails Assets Pipeline
   watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
+
+guard 'rails', force_run: true, port: 3000, server: :thin do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
