@@ -1,3 +1,7 @@
+DEPENDENCIES
+============
+requires imagemagick for paperclip!
+
 vern is a classifieds website build using ruby on rails and various open source
 libraries.
 
