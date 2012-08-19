@@ -1,14 +1,16 @@
-%h1 Listing guests
+= link_to new_guest_path do
+  %button.btn.btn-primary
+    create new guest
 
-%table
-  %tr
-    %th First name
-    %th Last name
-    %th Email
-    %th Phone number
-    %th
-    %th
-    %th
+%table.table.table-condensed
+  %caption
+    %h1 all guests
+  %thead
+    %th first name
+    %th last name
+    %th email
+    %th phone number
+    %th actions
 
   - @guests.each do |guest|
     %tr
@@ -16,10 +18,10 @@
       %td= guest.last_name
       %td= guest.email
       %td= guest.phone_number
-      %td= link_to 'Show', guest
-      %td= link_to 'Edit', edit_guest_path(guest)
-      %td= link_to 'Destroy', guest, :confirm => 'Are you sure?', :method => :delete
+      %td
+        = link_to 'Show', guest, class: 'btn'
+        = link_to 'Edit', edit_guest_path(guest), class: 'btn'
+        = link_to 'Destroy', guest, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
 
 %br
 
-= link_to 'New Guest', new_guest_path
