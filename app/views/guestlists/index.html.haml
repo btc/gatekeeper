@@ -7,7 +7,7 @@
 
 %table.table.table-condensed
   %caption
-    %h1 guest lists
+    %h1 all guest lists
   %thead
     %th
     %th
@@ -19,7 +19,7 @@
         %td
           = link_to 'Show', guestlist, class: 'btn'
           = link_to 'Edit', edit_guestlist_path(guestlist),  class: 'btn'
-          = link_to 'Destroy', guestlist, class: 'btn btn-danger', 
+          = link_to 'Destroy', guestlist, class: 'btn btn-danger',
             :confirm => 'Are you sure?', :method => :delete
 
 
