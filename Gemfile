@@ -47,3 +47,5 @@ gem 'cancan'
 gem 'coffee-filter'
 
 gem 'paperclip'
+
+gem 'cocoon'

@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap
+//= require cocoon
 //  APPLICATION FUNCTIONALITY
 //= require guests
 //= require webcam

@@ -84,10 +84,14 @@ describe Guest do
   end
 
   it { should have_many(:photos) }
+  it { should have_many(:notes) }
   it { should have_and_belong_to_many(:events) }
   it { should have_and_belong_to_many(:guestlists) }
   it { should have_one(:user) }
 
   it { should accept_nested_attributes_for(:photos) }
+  it { should accept_nested_attributes_for(:notes) }
 
+  it { should allow_mass_assignment_of :notes_attributes }
+  it 'should allow allow_mass_assignment_of photos_attributes'
 end

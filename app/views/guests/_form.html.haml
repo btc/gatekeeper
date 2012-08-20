@@ -62,8 +62,20 @@
         = f.input :rating, collection: Guest.ratings, as: :select
         = f.input :phone_number
 
-  .form-actions
-    = f.button :submit
+    %hr
+    .row-fluid
+      .span12
+        %h6 notes
+        #notes
+          = f.simple_fields_for :notes do |note|
+            = render 'note_fields', f: note
+          .links
+            = link_to_add_association f, :notes do
+              %button.btn.btn-mini
+                add note
+
+  .submit
+    = f.button :submit, class: 'btn-primary btn-large navbar-fixed-bottom'
 
   :coffeescript
     webcamOptions =

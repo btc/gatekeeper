@@ -1,6 +1,7 @@
 class Guest < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name,
-    :phone_number, :gender, :rating, :photos_attributes,
+    :phone_number, :gender, :rating,
+    :photos_attributes, :notes_attributes,
     :webcam_photo_id # webcam_photo_id needed to update webcam photo in form
 
   # validate presence but NOT inclusion.
@@ -18,10 +19,13 @@ class Guest < ActiveRecord::Base
   validates :rating, inclusion: { in: @@valid_ratings }, allow_nil: true
 
   has_many :photos
+  has_many :notes
   has_and_belongs_to_many :events
   has_and_belongs_to_many :guestlists
   has_one :user
 
+  accepts_nested_attributes_for :notes,
+    reject_if: proc { |attributes| attributes['body'].strip.empty? }
   accepts_nested_attributes_for :photos,
     reject_if: proc { |attributes| attributes['image'].nil? }
 
