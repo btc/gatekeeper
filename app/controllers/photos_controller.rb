@@ -110,6 +110,23 @@ class PhotosController < ApplicationController
     end
   end
 
+  def link
+    respond_to do |format|
+      format.json do
+        @photo = Photo.find_by_id params[:id]
+
+        @response = case
+        when @photo.nil?
+          nil
+        else
+          { url: @photo.image.url(:medium) }
+        end
+
+        render json: @response
+      end
+    end
+  end
+
   private
 
   def webcam_upload_path # is used in upload and create

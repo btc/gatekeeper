@@ -43,5 +43,9 @@ describe PhotosController do
       post('photos/upload').should route_to('photos#upload')
     end
 
+    it 'routes to #link' do
+      get('photos/link').should route_to('photos#link')
+    end
+
   end
 end

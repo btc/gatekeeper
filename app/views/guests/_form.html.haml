@@ -1,13 +1,92 @@
-= simple_form_for(@guest) do |f|
+-# MODAL
+.modal.hide#webcamModal
+  .modal-header
+    .row-fluid
+      -# EDIT CAM SETTINGS
+      %button.btn#js-webcam-configure(onclick='webcam.configure();')
+        %i.icon-cog
+      %button.close.pull-right(data-dismiss='modal') &times;
+  .modal-body
+    -# CAM WRAPPER
+    #webcam
+  .modal-footer
+    -# CONTROLS
+    .row-fluid.webcam-controls
+
+      %button.btn.btn-danger#js-snap(onclick='webcam.snap();')
+        %i.icon-camera.icon-white
+
+      %button.btn#js-webcam-reset(onclick='webcam.reset();')
+        %i.icon-refresh
+
+      %button.btn.btn-primary#js-save-photo
+        save
+        %i.icon-ok.icon-white
+
+-# FORM
+= simple_form_for(@guest, html: { class: 'form-horizontal' }) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :first_name
-    = f.input :last_name
-    = f.input :gender, collection: Guest.genders, as: :radio
-    = f.input :rating, collection: Guest.ratings, as: :radio
-    = f.input :email
-    = f.input :phone_number, label: 'Phone number (optional)'
+    .row-fluid
+      .span6
+        -# HIDDEN FIELD TO LINK WEBCAM PHOTO TO GUEST
+        = f.hidden_field :webcam_photo_id
+
+        -# REQUIRED FIELDS BEGIN
+        %h6 required
+        = f.input :first_name
+        = f.input :last_name
+        = f.input :gender, collection: Guest.genders, as: :radio
+        -# REQUIRED FIELDS END
+
+      .span6
+        -# PHOTO STUFF
+        .photo-stuff
+          %h6 snap a webcam photo
+          %a.thumbnail.avatar.js-init-webcam(data-toggle='modal'
+            href='#webcamModal')
+            #avatar-placeholder
+              - unless @guest.photos.empty?
+                = image_tag @guest.last_photo.image.url(:medium)
+              - else
+                = image_tag 'placeholder_avatar.gif'
+            %span.btn.btn-mini.btn-inverse
+              %i.icon-camera.icon-white
+
+    .row-fluid
+      .span6
+        %h6 additional
+        = f.input :email
+        -# rating requires permissions TODO
+        = f.input :rating, collection: Guest.ratings, as: :select
+        = f.input :phone_number
 
   .form-actions
     = f.button :submit
+
+  :coffeescript
+    webcamOptions =
+      api_url: "#{photos_upload_path}"
+      quality: 100
+      swf_path: '/webcam.swf'
+      play_sound: false
+      sound_path: '/shutter.mp3'
+      set_stealth: false
+      div_id: '#webcam'
+      width: 453
+      height: 340
+      serverWidth: 453
+      serverHeight: 340
+    webcamControls =
+      displayWebcam: '.js-init-webcam'
+      takePicture: '#js-snap'
+      savePhoto: '#js-save-photo'
+      submitForm: 'js-submit-form'
+      reset: '#js-webcam-reset'
+    new_guest_form = new window.VIP.GuestForm
+      modal: '#webcamModal'
+      webcamOptions: webcamOptions
+      webcamControls: webcamControls
+
+

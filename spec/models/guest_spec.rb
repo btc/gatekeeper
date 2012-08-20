@@ -78,9 +78,16 @@ describe Guest do
     @guest.is_five_star?.should eq(true)
   end
 
+  it 'last_photo returns nil if no photo present' do
+    @guest.photos = []
+    @guest.last_photo.should eq(nil)
+  end
+
   it { should have_many(:photos) }
   it { should have_and_belong_to_many(:events) }
   it { should have_and_belong_to_many(:guestlists) }
   it { should have_one(:user) }
+
+  it { should accept_nested_attributes_for(:photos) }
 
 end

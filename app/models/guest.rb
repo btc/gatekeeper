@@ -1,6 +1,7 @@
 class Guest < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name,
-    :phone_number, :gender, :rating
+    :phone_number, :gender, :rating, :photos_attributes,
+    :webcam_photo_id # webcam_photo_id needed to update webcam photo in form
 
   # validate presence but NOT inclusion.
   # it is acceptable and expected that duplicate names will exist
@@ -21,6 +22,12 @@ class Guest < ActiveRecord::Base
   has_and_belongs_to_many :guestlists
   has_one :user
 
+  accepts_nested_attributes_for :photos,
+    reject_if: proc { |attributes| attributes['image'].nil? }
+
+  # dummy method used to capture webcam photo id from guest form
+  attr_accessor :webcam_photo_id
+
   def self.genders
     @@valid_genders
   end
@@ -31,5 +38,10 @@ class Guest < ActiveRecord::Base
 
   def is_five_star?
     self.rating == 5
+  end
+
+  # returns most recently associated photo
+  def last_photo
+    self.photos.order('created_at').last
   end
 end

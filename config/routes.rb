@@ -3,6 +3,7 @@ Vern::Application.routes.draw do
   get 'photos/webcam'
   post 'photos/upload'
   post 'photos/webcam_create'
+  get 'photos/link'       # presently* used to retrieve url for photo given id
 
   scope 'api' do
     resources :photos

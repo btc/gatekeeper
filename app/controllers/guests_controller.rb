@@ -43,6 +43,8 @@ class GuestsController < ApplicationController
   def create
     @guest = Guest.new(params[:guest])
 
+    append_webcam_photo(params)
+
     respond_to do |format|
       if @guest.save
         format.html { redirect_to @guest, notice: 'Guest was successfully created.' }
@@ -58,6 +60,8 @@ class GuestsController < ApplicationController
   # PUT /guests/1.json
   def update
     @guest = Guest.find(params[:id])
+
+    append_webcam_photo(params)
 
     respond_to do |format|
       if @guest.update_attributes(params[:guest])
@@ -79,6 +83,15 @@ class GuestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to guests_url }
       format.json { head :no_content }
+    end
+  end
+
+  private
+  # if webcam id was submitted in hidden field, apply it to the guest object
+  def append_webcam_photo(params)
+    if params[:guest][:webcam_photo_id].present?
+      @photo = Photo.find_by_id(params[:guest][:webcam_photo_id])
+      @guest.photos << @photo if @photo.present?
     end
   end
 end

@@ -15,4 +15,6 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require guests
+//= require webcam
+//= require guest_form
 
