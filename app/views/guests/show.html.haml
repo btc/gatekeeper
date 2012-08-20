@@ -18,7 +18,16 @@
 %p
   %b Phone number:
   = @guest.phone_number
+%p
+  %b Photos:
+  %ul.row-fluid.thumbnails
+  - @guest.photos.each do |photo|
+    %li.span3.thumbnail
+      = link_to photo do
+        = image_tag photo.image.url(:medium)
 
-= link_to 'Edit', edit_guest_path(@guest)
-\|
-= link_to 'Back', guests_path
+.row-fluid
+  .span12
+    = link_to 'Edit', edit_guest_path(@guest)
+    \|
+    = link_to 'Back', guests_path
