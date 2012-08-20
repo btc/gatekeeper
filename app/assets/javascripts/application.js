@@ -10,11 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//  THINGS REQUIRED BY THE APPLICATION
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap
+//  APPLICATION FUNCTIONALITY
 //= require guests
 //= require webcam
 //= require guest_form
-
