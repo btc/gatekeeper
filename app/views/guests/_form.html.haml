@@ -71,7 +71,8 @@
             = render 'note_fields', f: note
           .links
             = link_to_add_association f, :notes do
-              %button.btn.btn-mini
+              %button.btn
+                %i.icon-plus
                 add note
 
   .submit

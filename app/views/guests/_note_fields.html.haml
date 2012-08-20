@@ -3,6 +3,9 @@
     .span6
       = f.text_area :body, label: false, class: 'note-body span12'
     .span6
-      = link_to_remove_association "remove note", f,
-        confirm: 'Are you sure? This action cannot be undone', as: :button
+      = link_to_remove_association f, confirm: 'Are you sure? This action cannot be undone' do
+        %button.btn
+          %i.icon-trash
+
+
       = f.error :body, class: 'alert alert-error'
