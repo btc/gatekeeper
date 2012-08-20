@@ -47,7 +47,7 @@
           %a.thumbnail.avatar.js-init-webcam(data-toggle='modal'
             href='#webcamModal')
             #avatar-placeholder
-              - unless @guest.photos.empty?
+              - if @guest.last_photo.present?
                 = image_tag @guest.last_photo.image.url(:medium)
               - else
                 = image_tag 'placeholder_avatar.gif'
@@ -61,6 +61,19 @@
         -# rating requires permissions TODO
         = f.input :rating, collection: Guest.ratings, as: :select
         = f.input :phone_number
+
+    %hr
+    .row-fluid
+      .span12
+        %h6 upload images on your computer
+        #photos
+          = f.simple_fields_for :photos do |photo|
+            = render 'photo_fields', f: photo
+          .links
+            = link_to_add_association f, :photos do
+              %button.btn
+                %i.icon-picture
+                add photo
 
     %hr
     .row-fluid
