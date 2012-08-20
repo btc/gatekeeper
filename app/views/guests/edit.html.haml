@@ -1,4 +1,11 @@
-%h1 Editing guest
+= render 'back'
+
+.page-header
+  %h1 
+    editing guest
+    %small
+      = link_to @guests do
+        cancel
 
 = render 'form'
 

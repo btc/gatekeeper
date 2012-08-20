@@ -1,19 +1,29 @@
-%h1 Listing photos
+= link_to new_photo_path do
+  %button.btn.btn-primary
+    %i.icon-upload.icon-white
+    upload new photo
 
-%table
-  %tr
-    %th
-    %th
-    %th
+= link_to photos_webcam_path do
+  %button.btn
+    %i.icon-camera
+    take new photo
+ 
+%table.table.table-condensed
+  %caption
+    %h1 all photos
+  %thead
+    %th picture
+    %th actions
+    %th 
 
-  - @photos.each do |photo|
-    %tr
-      %td= image_tag photo.image.url(:thumb)
+  %tbody
+    - @photos.each do |photo|
+      %tr
+        %td
+          = link_to photo do
+            = image_tag photo.image.url(:thumb)
 
-      %td= link_to 'Show', photo
-      %td= link_to 'Edit', edit_photo_path(photo)
-      %td= link_to 'Destroy', photo, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Photo', new_photo_path
+        %td
+          = link_to 'Edit', edit_photo_path(photo), class: 'btn'
+          = link_to 'Destroy', photo, class: 'btn btn-danger',
+            :confirm => 'Are you sure?', :method => :delete
