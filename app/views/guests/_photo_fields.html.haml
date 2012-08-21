@@ -1,14 +1,11 @@
-.nested-fields
-  .row-fluid
-    .span6
-      - if f.object.image.present?
-        = image_tag f.object.image.url
-      - else
+- unless f.object.image.present?
+  .nested-fields
+    .row-fluid
+      .span6
         = f.file_field :image, label: false, class: 'note-body span12'
-    .span6
-      = link_to_remove_association f do
-        %button.btn
-          %i.icon-trash
+      .span6
+        = link_to_remove_association f do
+          %button.btn
+            %i.icon-trash
 
-
-      = f.error :body, class: 'alert alert-error'
+        = f.error :body, class: 'alert alert-error'
