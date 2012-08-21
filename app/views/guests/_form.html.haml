@@ -35,7 +35,7 @@
 
         -# REQUIRED FIELDS BEGIN
         %h6 required
-        = f.input :first_name
+        = f.input :first_name, autofocus: true
         = f.input :last_name
         = f.input :gender, collection: Guest.genders, as: :radio_buttons
         -# REQUIRED FIELDS END
