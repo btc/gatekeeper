@@ -32,6 +32,8 @@ class Guest < ActiveRecord::Base
   # dummy method used to capture webcam photo id from guest form
   attr_accessor :webcam_photo_id
 
+  scope :by_first_last_gender, order("LOWER(first_name) ASC, LOWER(last_name) ASC, gender ASC")
+
   def self.genders
     @@valid_genders
   end
