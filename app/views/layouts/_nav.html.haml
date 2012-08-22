@@ -7,12 +7,17 @@
         抚绥
 
       %ul.nav.pull-right.dropdown
-        %li
-          = link_to new_user_session_path do
-            sign in
-        %li
-          = link_to new_user_registration_path do
-            register
+        - if user_signed_in?
+          %li
+            = link_to destroy_user_session_path, method: :delete do
+              log out
+        - else
+          %li
+            = link_to new_user_session_path do
+              sign in
+          %li
+            = link_to new_user_registration_path do
+              register
 
 
 
