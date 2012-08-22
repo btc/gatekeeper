@@ -2,30 +2,28 @@
   %button.btn.btn-primary
     create new guest
 
-%table.table.table-condensed
+-# bootstrap update with fix row-hover issue. ignore for now
+%table.table.table-borderless
   %caption
     %h1 all guests (#{Guest.all.length})
-  %thead
-    %th rating
-    %th first name
-    %th last name
-    %th gender
-    %th email
-    %th phone number
-    %th actions
 
-  - @guests.each do |guest|
-    %tr
-      %td= guest.rating
-      %td= guest.first_name
-      %td= guest.last_name
-      %td= guest.gender
-      %td= guest.email
-      %td= guest.phone_number
-      %td
-        = link_to 'Show', guest, class: 'btn'
-        = link_to 'Edit', edit_guest_path(guest), class: 'btn'
-        = link_to 'Destroy', guest, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
+  - @guests.each_with_index do |guest, i|
+    - if i.modulo(3) == 0
+      %tr
+    %td
+      .guest-wrapper
+        .row-fluid
+          = link_to guest do
+            .span6
+              = image_tag url_for_profile_pic(guest, :thumb), width: '100'
+            .span6
+              %div
+                = guest.full_name
+                = "( #{guest.gender[0]} )"
+              - if can? :view_ratings, Guest
+                %div
+                  = guest.rating
 
-%br
-
+/         = link_to 'Show', guest, class: 'btn'
+/         = link_to 'Edit', edit_guest_path(guest), class: 'btn'
+/         = link_to 'Destroy', guest, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
