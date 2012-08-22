@@ -6,18 +6,22 @@
         -# bring peace and justice to country
         抚绥
 
-      %ul.nav.pull-right.dropdown
-        - if user_signed_in?
-          %li
-            = link_to destroy_user_session_path, method: :delete do
-              log out
-        - else
+      - unless user_signed_in?
+        %ul.nav.pull-right
           %li
             = link_to new_user_session_path do
               sign in
+          %li.divider-vertical
           %li
             = link_to new_user_registration_path do
               register
+
+      - if user_signed_in?
+        %ul.nav.pull-right
+          %li.divider-vertical
+          %li
+            = link_to destroy_user_session_path, method: :delete do
+              log out
 
 
 
