@@ -1,6 +1,18 @@
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
+
       %a.brand
         -# bring peace and justice to country
         抚绥
+
+      %ul.nav.pull-right.dropdown
+        %li
+          = link_to new_user_session_path do
+            sign in
+        %li
+          = link_to new_user_registration_path do
+            register
+
+
+
