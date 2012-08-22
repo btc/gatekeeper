@@ -46,6 +46,6 @@ class Guest < ActiveRecord::Base
 
   # returns most recently associated photo
   def last_photo
-    self.photos.order('created_at').last
+    self.photos.last
   end
 end
