@@ -39,10 +39,10 @@
   .row-fluid
     .span6
       .form-actions
-        = f.button :submit, "Update"
+        = f.button :submit, "Update", class: 'btn-large'
 
-.row-fluid
-  .alert.alert-error.span3
+.row
+  .alert.alert-error.span3.offset9
     %p
       %h4 danger, danger!
 
@@ -54,4 +54,4 @@
     registration_path(resource_name),
     data: { confirm: 'Are you sure? Last warning. This cannot be reversed' },
     :method => :delete,
-    class: 'btn btn-danger btn-large'
+    class: 'btn btn-danger btn-mini'
