@@ -34,6 +34,10 @@ guard 'rspec', :cli => "--drb", :version => 2 do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
+guard 'rails', force_run: true, port: 3000, server: :thin do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
 
 guard 'livereload' do
   watch(%r{app/views/.+\.(erb|haml|slim)})
@@ -44,7 +48,3 @@ guard 'livereload' do
   watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
 
-guard 'rails', force_run: true, port: 3000, server: :thin do
-  watch('Gemfile.lock')
-  watch(%r{^(config|lib)/.*})
-end
