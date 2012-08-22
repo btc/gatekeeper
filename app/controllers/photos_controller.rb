@@ -1,6 +1,10 @@
 class PhotosController < ApplicationController
   layout 'resources'
-  load_and_authorize_resource
+
+  # webcam upload actions are exceptions to load_and_authorize_resource rule
+  # private actions need not be authorized (is this obvious?)
+  load_and_authorize_resource except: [:link, :webcam_create, :upload]
+
   # GET /photos
   # GET /photos.json
   def index
@@ -88,6 +92,7 @@ class PhotosController < ApplicationController
   # paperclip (webcam_create) creates copies, so these uploads should be
   # deleted periodically
   def upload
+    authorize! :upload_webcam, Photo
     File.open(webcam_upload_path, 'w') do |f|
       # must force encoding else ASCII conflict
       f.write request.raw_post.force_encoding('UTF-8')
@@ -97,6 +102,7 @@ class PhotosController < ApplicationController
   end
 
   def webcam_create
+    authorize! :upload_webcam, Photo
     @photo = Photo.new
     @photo.image = File.new(webcam_upload_path)
 
@@ -112,6 +118,7 @@ class PhotosController < ApplicationController
   end
 
   def link
+    authorize! :upload_webcam, Photo
     respond_to do |format|
       format.json do
         @photo = Photo.find_by_id params[:id]
@@ -128,6 +135,7 @@ class PhotosController < ApplicationController
     end
   end
 
+  # auth not required for private actions
   private
 
   def webcam_upload_path # is used in upload and create
