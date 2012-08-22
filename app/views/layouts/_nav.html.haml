@@ -18,6 +18,10 @@
 
       - if user_signed_in?
         %ul.nav.pull-right
+          %li
+            = link_to edit_user_registration_path do
+              edit account
+
           %li.divider-vertical
           %li
             = link_to destroy_user_session_path, method: :delete do
