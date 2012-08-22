@@ -10,6 +10,8 @@ class Ability
 
     # every logged in user can go home
     can :go, :home
+    # all users can create guests
+    can :create, Guest
 
     # QUICK DOCUMENTATION
     # ===================
