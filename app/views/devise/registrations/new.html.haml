@@ -16,13 +16,29 @@
       = f.error_notification
 
       = f.input :email, :label => false do
-        = f.input_field :email, autofocus: true, placeholder: 'email address'
+        = f.input_field :email, placeholder: 'email address',
+          'data-title' => 'enter your email address',
+          'data-content' => 'use your @zen.tt address if you have one',
+          'data-placement' => 'left',
+          'data-delay' => 100,
+          'data-trigger' => 'focus',
+          rel: 'popover'
 
       = f.input :password, :label => false do
-        = f.input_field :password, placeholder: 'password'
+        = f.input_field :password, placeholder: 'password',
+          'data-title' => 'pick a password',
+          'data-content' => 'pick something easy to remember',
+          'data-placement' => 'left',
+          'data-trigger' => 'focus',
+          rel: 'popover'
 
       = f.input :password_confirmation, :label => false do
-        = f.input_field :password_confirmation, placeholder: 'confirm password'
+        = f.input_field :password_confirmation, placeholder: 'confirm password',
+          'data-title' => 'confirm your password',
+          'data-content' => 'almost there!',
+          'data-placement' => 'left',
+          'data-trigger' => 'focus',
+          rel: 'popover'
 
       = f.button :submit, "Sign up", :class => 'btn-success'
 
