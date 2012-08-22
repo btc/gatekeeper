@@ -38,6 +38,9 @@ Spork.each_run do
     # include devise helpers to do controller testing
     config.include  Devise::TestHelpers,  :type => :controller
     config.extend   ControllerMacros,     :type => :controller
+
+    # don't run tests that require auth
+    config.filter_run_excluding auth: true
   end
 
   FactoryGirl.reload
