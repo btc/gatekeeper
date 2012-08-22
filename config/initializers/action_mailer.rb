@@ -1,6 +1,5 @@
 Vern::Application.configure do
 
-  config.action_mailer.default_url_options = { :host => 'vip.zen.tt' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default from: 'no-reply@zen.tt'
   config.action_mailer.smtp_settings = {
