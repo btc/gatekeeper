@@ -1,5 +1,6 @@
 class GuestlistsController < ApplicationController
   layout 'resources'
+  load_and_authorize_resource
   # GET /guestlists
   # GET /guestlists.json
   def index

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   layout 'resources'
+  load_and_authorize_resource
   # GET /events
   # GET /events.json
   def index
