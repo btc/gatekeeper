@@ -48,4 +48,8 @@ class Guest < ActiveRecord::Base
   def last_photo
     self.photos.last
   end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}".titlecase
+  end
 end
