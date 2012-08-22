@@ -7,6 +7,7 @@ class Ability
     # Do not attempt to use the line below. Users who are not logged in
     # should not have access to any functions inside the application.
     # user ||= User.new # guest user (not logged in)
+    # - brianhc
 
     # every logged in user can go home
     can :go, :home
