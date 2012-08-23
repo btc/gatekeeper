@@ -21,7 +21,7 @@ class Ability
 =begin
     if user.role? :boss
       can :rate, Guest
-      can :view_ratings, Guest
+      can :view_rating, Guest
     end
 =end
 
