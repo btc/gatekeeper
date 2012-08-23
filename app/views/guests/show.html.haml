@@ -1,33 +1,48 @@
-%p#notice= notice
+.row-fluid
+  = link_to guests_path do
+    %i.icon-arrow-left
+    back to all guests
+  .pull-right
+    = link_to edit_guest_path(@guest) do
+      %button.btn.btn-info{ class: ('disabled' unless can?(:update, @guest)) }
+        edit profile
+%hr
 
-%p
-  %b First name:
-  = @guest.first_name
-%p
-  %b Last name:
-  = @guest.last_name
-%p
-  %b Gender:
-  = @guest.gender
-%p
-  %b Rating:
-  = @guest.rating
-%p
-  %b Email:
-  = @guest.email
-%p
-  %b Phone number:
-  = @guest.phone_number
-%p
-  %b Photos:
-  %ul.row-fluid.thumbnails
-  - @guest.photos.each do |photo|
-    %li.span3.thumbnail
-      = link_to photo do
-        = image_tag photo.image.url(:medium)
+-# photo picture, gender, rating (permission)
+.row-fluid
+  .span2.thumbnail= image_tag url_for_profile_pic(@guest, :thumb), width: '100'
+  .span10
+    .page-header
+      %h2
+        = @guest.full_name
+        %small= @guest.gender[0]
+
+      - if can? :view_rating, @guest
+        - case @guest.rating
+        - when Numeric
+          = raw(stars(@guest.rating))
+        - else
+          %small unrated
 
 .row-fluid
-  .span12
-    = link_to 'Edit', edit_guest_path(@guest)
-    \|
-    = link_to 'Back', guests_path
+  - if can? :view_contact_info, @guest
+    -# contact info
+    .span6.thumbnail
+      %table.table
+        %caption.pull-left
+          %h3 contact info
+        %tr
+          %td email
+          %td= mail_to @guest.email
+        %tr
+          %td phone
+          %td= @guest.phone_number if @guest.phone_number
+
+  - if can? :view_photos, @guest
+    .span6.thumbnail
+      %h3 photos
+      %ul.thumbnails
+        - @guest.photos.each do |photo|
+          %li.span3.thumbnail
+            = link_to photo do
+              = image_tag photo.image.url(:medium)
