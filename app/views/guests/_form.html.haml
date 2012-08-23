@@ -57,8 +57,12 @@
     .row-fluid
       .span6
         %h6 additional
+        - if can? :manage_birth_year, @guest
+          = f.input :birthday
+        - else
+          = f.input :birthday, discard_year: true
+
         = f.input :email
-        -# rating requires permissions TODO
         - if can? :update_rating, @guest
           = f.input :rating, collection: Guest.ratings, as: :select
         = f.input :phone_number

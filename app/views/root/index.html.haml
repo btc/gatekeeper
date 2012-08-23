@@ -1,2 +1,27 @@
-%h1 Root#index
-%p Find me in app/views/root/index.html.haml
+#root-wrapper
+  .row-fluid
+    .span9#activity
+      .page-header
+        %i.icon-globe
+        lastest activity
+      .well
+        %h6 coming soon
+
+    .span3
+      #birthdays
+        .page-header
+          %i.icon-calendar
+          upcoming birthdays
+        - day = Date.today.day
+        - @birthday_guests.each do |guest|
+          - if day != guest.birthday.day
+            .row-fluid
+              %h6= guest.birthday.strftime('%A %e %B')
+            - day = guest.birthday.day
+          .row-fluid
+            = link_to guest_path(guest) do
+              = guest.full_name
+            <br>
+            - if can? :view_rating, guest
+              = stars(guest.rating)
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823092930) do
+ActiveRecord::Schema.define(:version => 20120823103239) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20120823092930) do
     t.string   "gender"
     t.integer  "rating"
     t.integer  "creator_id"
+    t.date     "birthday"
   end
 
   create_table "notes", :force => true do |t|

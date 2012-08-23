@@ -1,8 +1,10 @@
 class Guest < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name,
-    :phone_number, :gender, :rating,
+    :phone_number, :gender, :rating, :birthday,
     :photos_attributes, :notes_attributes,
     :webcam_photo_id # webcam_photo_id needed to update webcam photo in form
+
+  acts_as_birthday :birthday
 
   # validate presence but NOT inclusion.
   # it is acceptable and expected that duplicate names will exist
@@ -58,6 +60,24 @@ class Guest < ActiveRecord::Base
     guests
   end
 
+  def self.find_ordered_birthdays_for_the_next_month
+    # fetch guests whose birthdays fall within the period
+    within_range = Guest.find_birthdays_for Date.today, Date.today.next_month
+
+    # sort them first by splitting the months apart
+    separated_by_month = within_range.partition do |g|
+      g.birthday.month == Date.today.month
+    end
+
+    # sort by day within each month
+    separated_by_month.each do |arr|
+      arr.sort_by! { |g| g.birthday.day }
+    end
+
+    # merge the two arrays to return
+    separated_by_month.flatten!
+  end
+
   def is_five_star?
     self.rating == 5
   end
@@ -70,4 +90,6 @@ class Guest < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}".titlecase
   end
+
+
 end

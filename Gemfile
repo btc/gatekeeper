@@ -49,3 +49,7 @@ gem 'coffee-filter'
 gem 'paperclip'
 
 gem 'cocoon'
+
+
+gem 'birthday'                            # ActiveRecord::Base scopes
+gem 'chronic'                             # NL parsing of Dates
