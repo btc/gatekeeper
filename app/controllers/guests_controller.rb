@@ -13,7 +13,6 @@ class GuestsController < ApplicationController
                 Guest.by_first_last_gender.all
               end
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @guests }
@@ -51,6 +50,8 @@ class GuestsController < ApplicationController
   # POST /guests.json
   def create
     @guest = Guest.new(params[:guest])
+    @guest.creator = current_user
+    # assign current_user as creator
 
     append_webcam_photo(params)
 

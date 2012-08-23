@@ -88,6 +88,7 @@ describe Guest do
   it { should have_and_belong_to_many(:events) }
   it { should have_and_belong_to_many(:guestlists) }
   it { should have_one(:user) }
+  it { should belong_to(:creator) }
 
   it { should accept_nested_attributes_for(:photos) }
   it { should accept_nested_attributes_for(:notes) }

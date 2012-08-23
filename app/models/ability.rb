@@ -20,6 +20,10 @@ class Ability
     can :view_contact_info, Guest
     can :view_photos, Guest
 
+    can :update, Guest do |guest|
+      guest.creator == user
+    end
+
 =begin
     if user.role? :boss
       can :rate, Guest
