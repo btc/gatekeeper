@@ -12,6 +12,6 @@
  *= require normalize
  *= require devise
  *= require bootstrap_and_overrides
- *= require guests
  *= require body
+ *= require guests
  */
