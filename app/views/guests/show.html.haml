@@ -25,17 +25,23 @@
           %small unrated
 
 .row-fluid
-  - if can? :view_contact_info, @guest
-    -# contact info
-    .span6.thumbnail
-      %table.table
-        %caption.pull-left
-          %h3 contact info
+  .span6.thumbnail
+    %table.table
+      - if can? :view_contact_info, @guest
         %tr
-          %td email
+          %td
+            %i.icon-gift
+            birthday
+          %td= @guest.birthday.try(:strftime, '%e %B')
+        %tr
+          %td
+            %i.icon-envelope
+            email
           %td= mail_to @guest.email
         %tr
-          %td phone
+          %td
+            %i.icon-telephone
+            phone
           %td= @guest.phone_number if @guest.phone_number
 
   - if can? :view_photos, @guest
