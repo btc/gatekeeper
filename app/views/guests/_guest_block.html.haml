@@ -1,0 +1,11 @@
+.guest-wrapper
+  .row-fluid
+    .span4.thumbnail
+      = link_to guest do
+        = image_tag url_for_profile_pic(guest, :thumb), width: '100'
+    .span8
+      %h5
+        = link_to guest do
+          = guest.full_name
+      - if can? :view_rating, guest
+        %p= stars(guest.rating)

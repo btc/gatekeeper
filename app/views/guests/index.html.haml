@@ -1,13 +1,15 @@
-= link_to new_guest_path do
-  %button.btn.btn-primary
-    create new guest
+.row-fluid
+  .span6
+    = link_to new_guest_path do
+      %button.btn.btn-primary
+        create new guest
 
-%form.pull-right
-  %input(type='text' name='q' placeholder='lookup guest' autofocus='true')
+  .span6
+    %form.pull-right
+      %input(type='text' name='q' placeholder='lookup guest' autofocus='true')
 
--# bootstrap update with fix row-hover issue. ignore for now
-%table.table.table-borderless
-  %caption
+#guest-index-results
+  .results-header
     %h3
       - if @q.present?
         = "displaying guests whose names match '#{@q}'"
@@ -17,22 +19,12 @@
       - else
         all guests
       %small (#{@guests.length})
+  %hr
 
   - @guests.each_with_index do |guest, i|
     - if i.modulo(3) == 0
-      %tr
-    %td
-      .guest-wrapper
-        .row-fluid
-          = link_to guest do
-            .span5
-              = image_tag url_for_profile_pic(guest, :thumb), width: '100'
-            .span7
-              %div
-                %h5= guest.full_name
-              - if can? :view_rating, guest
-                = stars(guest.rating)
-
-/         = link_to 'Show', guest, class: 'btn'
-/         = link_to 'Edit', edit_guest_path(guest), class: 'btn'
-/         = link_to 'Destroy', guest, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
+      <div class='row-fluid'>
+    .span4
+      = render 'guest_block', guest: guest
+    - if i.modulo(3) == 2
+      </div>
