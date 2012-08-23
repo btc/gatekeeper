@@ -2,10 +2,18 @@
   %button.btn.btn-primary
     create new guest
 
+%form.pull-right
+  %input(type='text' name='q' placeholder='lookup guest')
+
 -# bootstrap update with fix row-hover issue. ignore for now
 %table.table.table-borderless
   %caption
-    %h1 all guests (#{Guest.all.length})
+    %h1
+      - if @q.present?
+        = "displaying results for '#{@q}'"
+      - else
+        all guests
+      (#{@guests.length})
 
   - @guests.each_with_index do |guest, i|
     - if i.modulo(3) == 0

@@ -4,7 +4,15 @@ class GuestsController < ApplicationController
   # GET /guests
   # GET /guests.json
   def index
-    @guests = Guest.by_first_last_gender.all
+
+    @guests = case
+              when params[:q].present?
+                @q = params[:q]
+                Guest.by_first_last_gender.full_name_search @q
+              else
+                Guest.by_first_last_gender.all
+              end
+
 
     respond_to do |format|
       format.html # index.html.erb

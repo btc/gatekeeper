@@ -42,6 +42,21 @@ class Guest < ActiveRecord::Base
     @@valid_ratings
   end
 
+  def self.full_name_search(string)
+    guests = self.all
+    tokens = string.downcase.split
+    guests.select! do |guest|
+      keep = true
+      tokens.each do |token|
+        unless guest.first_name.downcase.include?(token) || guest.last_name.downcase.include?(token)
+          keep = false
+        end
+      end
+      keep
+    end
+    guests
+  end
+
   def is_five_star?
     self.rating == 5
   end
