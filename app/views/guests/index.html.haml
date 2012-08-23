@@ -8,12 +8,16 @@
 -# bootstrap update with fix row-hover issue. ignore for now
 %table.table.table-borderless
   %caption
-    %h1
+    %h3
       - if @q.present?
-        = "displaying results for '#{@q}'"
+        = "displaying guests whose names match '#{@q}'"
+        .pull-right
+          %a.btn{ href: guests_path }
+            %small display all guests
       - else
         all guests
-      (#{@guests.length})
+      %small (#{@guests.length})
+
 
   - @guests.each_with_index do |guest, i|
     - if i.modulo(3) == 0
