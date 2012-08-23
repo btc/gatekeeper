@@ -10,12 +10,13 @@
 
 #guest-index-results
   .results-header
+    - if @q.present?
+      .pull-right
+        %a.btn{ href: guests_path }
+          %small display all guests
     %h3
       - if @q.present?
         = "displaying guests whose names match '#{@q}'"
-        .pull-right
-          %a.btn{ href: guests_path }
-            %small display all guests
       - else
         all guests
       %small (#{@guests.length})
