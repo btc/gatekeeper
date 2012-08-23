@@ -59,7 +59,8 @@
         %h6 additional
         = f.input :email
         -# rating requires permissions TODO
-        = f.input :rating, collection: Guest.ratings, as: :select
+        - if can? :update_rating, @guest
+          = f.input :rating, collection: Guest.ratings, as: :select
         = f.input :phone_number
 
     %hr

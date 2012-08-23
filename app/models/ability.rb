@@ -26,6 +26,7 @@ class Ability
       can :view_contact_info, Guest
       can :view_photos, Guest
       can :view_rating, Guest
+      can :update_rating, Guest
     end
 =end
 
