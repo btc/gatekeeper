@@ -57,10 +57,9 @@
     .row-fluid
       .span6
         %h6 additional
-        - if can? :manage_birth_year, @guest
-          = f.input :birthday
-        - else
-          = f.input :birthday, discard_year: true
+        = f.input :birthday, as: 'string', discard_year: true,
+          hint: "eg. 'march 13', 'next friday', '30 aug 61'",
+          input_html: { value: @guest.birthday.strftime('%e %B') }
 
         = f.input :email
         - if can? :update_rating, @guest
