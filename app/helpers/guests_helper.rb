@@ -7,4 +7,15 @@ module GuestsHelper
     end
   end
 
+  def stars(rating)
+    return nil if rating.blank?
+
+    star = "<i class='icon icon-star'></i>"
+    stars = ''
+    rating.times do
+      stars << star
+    end
+
+    raw(stars)
+  end
 end

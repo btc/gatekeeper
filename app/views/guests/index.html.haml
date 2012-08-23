@@ -25,12 +25,11 @@
       .guest-wrapper
         .row-fluid
           = link_to guest do
-            .span6
+            .span5
               = image_tag url_for_profile_pic(guest, :thumb), width: '100'
-            .span6
+            .span7
               %div
-                = guest.full_name
-                = "( #{guest.gender[0]} )"
+                %h5= guest.full_name
               - if can? :view_rating, guest
                 = stars(guest.rating)
 
