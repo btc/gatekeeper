@@ -17,10 +17,14 @@ class Ability
     # attribute-specific permissions are handled at view-level
     can :read, Guest
     can :create, Guest # all users can create guests
+    can :view_contact_info, Guest
+    can :view_photos, Guest
 
 =begin
     if user.role? :boss
       can :rate, Guest
+      can :view_contact_info, Guest
+      can :view_photos, Guest
       can :view_rating, Guest
     end
 =end
