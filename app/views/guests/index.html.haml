@@ -18,7 +18,6 @@
         all guests
       %small (#{@guests.length})
 
-
   - @guests.each_with_index do |guest, i|
     - if i.modulo(3) == 0
       %tr
@@ -32,9 +31,8 @@
               %div
                 = guest.full_name
                 = "( #{guest.gender[0]} )"
-              - if can? :view_ratings, Guest
-                %div
-                  = guest.rating
+              - if can? :view_rating, guest
+                = stars(guest.rating)
 
 /         = link_to 'Show', guest, class: 'btn'
 /         = link_to 'Edit', edit_guest_path(guest), class: 'btn'
