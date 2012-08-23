@@ -9,10 +9,21 @@ class Ability
     # user ||= User.new # guest user (not logged in)
     # - brianhc
 
-    # every logged in user can go home
-    can :go, :home
-    # all users can create guests
-    can :create, Guest
+    can :go, :home # every logged in user can go home
+
+    can :upload_webcam, Photo #temp to take webcam photo TODO fix
+
+    # all users can view guests;
+    # attribute-specific permissions are handled at view-level
+    can :read, Guest
+    can :create, Guest # all users can create guests
+
+=begin
+    if user.role? :boss
+      can :rate, Guest
+      can :view_ratings, Guest
+    end
+=end
 
     # QUICK DOCUMENTATION
     # ===================
