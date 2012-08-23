@@ -10,7 +10,13 @@ module GuestsHelper
   def stars(rating)
     return nil if rating.blank?
 
-    star = "<i class='icon icon-star'></i>"
+    star  = case rating
+            when 5
+              "<i class='icon icon-star'></i>"
+            else
+              "<i class='icon icon-star-empty'></i>"
+            end
+
     stars = ''
     rating.times do
       stars << star
