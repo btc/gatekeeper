@@ -6,7 +6,7 @@
 
   .span6
     %form.pull-right
-      %input(type='text' name='q' placeholder='lookup guest' autofocus='true')
+      %input{ value: @q }(type='text' name='q' placeholder='lookup guest' autofocus='true')
 
 #guest-index-results
   .results-header
