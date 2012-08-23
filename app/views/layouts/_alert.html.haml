@@ -1,6 +1,6 @@
 -if flash[:alert].present?
   .row-fluid
-    .span4
-    .span4.alert.fade.in.alert-info#global-alert
-      <a class="close" data-dismiss="alert" href="#">&times;</a>
-      = flash[:alert]
+    .alert.fade.in.alert-info#global-alert
+      .close(data-dismiss='alert' href='#') &times;
+      %h2
+        = flash[:alert]
