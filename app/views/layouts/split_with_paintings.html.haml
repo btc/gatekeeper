@@ -1,0 +1,22 @@
+!!! 5
+%html
+  = render 'layouts/head'
+
+  %body.page_classes
+    = render 'layouts/nav'
+
+    .container
+      = render 'layouts/alert'
+      .row-fluid
+        .span6.thumbnail
+          - paintings = ['paintings.png', 'paintings2.png']
+          = image_tag paintings[rand(paintings.length)]
+
+        .span6
+          .page-header
+            %h1
+              = yield :page_header
+              %small= yield :page_subheader
+
+          = yield
+

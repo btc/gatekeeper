@@ -1,21 +1,16 @@
-.row-fluid
+= content_for :page_header do
+  sign in
 
-  .span6.thumbnail
-    = image_tag 'paintings.png'
+= content_for :page_subheader do
+  zen operations
 
-  .span6
-    .page-header
-      %h1
-        sign in
-        %small zen operations
+= simple_form_for(resource,
+  :class => 'form-horizontal',
+  :as => resource_name, :url => session_path(resource_name)) do |f|
+  .form-inputs
+    = f.input :email, :autofocus => true
+    = f.input :password
+    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+  = f.button :submit, "Sign in", class: 'btn-success'
 
-    = simple_form_for(resource,
-      :class => 'form-horizontal',
-      :as => resource_name, :url => session_path(resource_name)) do |f|
-      .form-inputs
-        = f.input :email, :autofocus => true
-        = f.input :password
-        = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-      = f.button :submit, "Sign in", class: 'btn-success'
-
-    = render "devise/shared/links"
+= render "devise/shared/links"

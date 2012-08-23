@@ -1,45 +1,40 @@
-.row-fluid
+= content_for :page_header do
+  create a new account
 
-  .span6.thumbnail
-    = image_tag 'paintings.png'
+= content_for :page_subheader do
+  zen operations
 
-  .span6
-    .page-header
-      %h1
-        create a new account
-        %small zen operations
+- # TODO validate email address format
+= simple_form_for(resource,
+  :as => resource_name,
+  :url => registration_path(resource_name)) do |f|
+  = f.error_notification
 
-    - # TODO validate email address format
-    = simple_form_for(resource,
-      :as => resource_name,
-      :url => registration_path(resource_name)) do |f|
-      = f.error_notification
+  = f.input :email, :label => false do
+    = f.input_field :email, placeholder: 'email address',
+      'data-title' => 'enter your email address',
+      'data-content' => 'use your @zen.tt address if you have one',
+      'data-placement' => 'left',
+      'data-delay' => 100,
+      'data-trigger' => 'focus',
+      rel: 'popover'
 
-      = f.input :email, :label => false do
-        = f.input_field :email, placeholder: 'email address',
-          'data-title' => 'enter your email address',
-          'data-content' => 'use your @zen.tt address if you have one',
-          'data-placement' => 'left',
-          'data-delay' => 100,
-          'data-trigger' => 'focus',
-          rel: 'popover'
+  = f.input :password, :label => false do
+    = f.input_field :password, placeholder: 'password',
+      'data-title' => 'pick a password',
+      'data-content' => 'pick something easy to remember',
+      'data-placement' => 'left',
+      'data-trigger' => 'focus',
+      rel: 'popover'
 
-      = f.input :password, :label => false do
-        = f.input_field :password, placeholder: 'password',
-          'data-title' => 'pick a password',
-          'data-content' => 'pick something easy to remember',
-          'data-placement' => 'left',
-          'data-trigger' => 'focus',
-          rel: 'popover'
+  = f.input :password_confirmation, :label => false do
+    = f.input_field :password_confirmation, placeholder: 'confirm password',
+      'data-title' => 'confirm your password',
+      'data-content' => 'almost there!',
+      'data-placement' => 'left',
+      'data-trigger' => 'focus',
+      rel: 'popover'
 
-      = f.input :password_confirmation, :label => false do
-        = f.input_field :password_confirmation, placeholder: 'confirm password',
-          'data-title' => 'confirm your password',
-          'data-content' => 'almost there!',
-          'data-placement' => 'left',
-          'data-trigger' => 'focus',
-          rel: 'popover'
+  = f.button :submit, "Sign up", :class => 'btn-success'
 
-      = f.button :submit, "Sign up", :class => 'btn-success'
-
-    = render "devise/shared/links"
+= render "devise/shared/links"

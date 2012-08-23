@@ -64,5 +64,12 @@ module Vern
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.to_prepare do
+      Devise::SessionsController.layout 'split_with_paintings'
+      # Devise::RegistrationsController layout is handled at controller level
+      Devise::ConfirmationsController.layout 'split_with_paintings'
+      Devise::PasswordsController.layout 'split_with_paintings'
+    end
   end
 end
