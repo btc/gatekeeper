@@ -12,7 +12,7 @@
         .page-header
           %i.icon-calendar
           upcoming birthdays
-        - day = Date.today.day
+        - day = Date.today.day << 1
         - @birthday_guests.each do |guest|
           - if day != guest.birthday.day
             .row-fluid
@@ -24,4 +24,5 @@
             <br>
             - if can? :view_rating, guest
               = stars(guest.rating)
+
 
