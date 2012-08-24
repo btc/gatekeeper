@@ -96,27 +96,28 @@
     = f.button :submit, class: 'btn-primary btn-large span12'
 
   :coffeescript
-    webcamOptions =
-      api_url: "#{photos_upload_path}"
-      quality: 100
-      swf_path: '/webcam.swf'
-      play_sound: false
-      sound_path: '/shutter.mp3'
-      set_stealth: false
-      div_id: '#webcam'
-      width: 453
-      height: 340
-      serverWidth: 453
-      serverHeight: 340
-    webcamControls =
-      displayWebcam: '.js-init-webcam'
-      takePicture: '#js-snap'
-      savePhoto: '#js-save-photo'
-      submitForm: 'js-submit-form'
-      reset: '#js-webcam-reset'
-    new_guest_form = new window.VIP.GuestForm
-      modal: '#webcamModal'
-      webcamOptions: webcamOptions
-      webcamControls: webcamControls
+    jQuery ->
+      webcamOptions =
+        api_url: "#{photos_upload_path}"
+        quality: 100
+        swf_path: '/webcam.swf'
+        play_sound: false
+        sound_path: '/shutter.mp3'
+        set_stealth: false
+        div_id: '#webcam'
+        width: 453
+        height: 340
+        serverWidth: 453
+        serverHeight: 340
+      webcamControls =
+        displayWebcam: '.js-init-webcam'
+        takePicture: '#js-snap'
+        savePhoto: '#js-save-photo'
+        submitForm: 'js-submit-form'
+        reset: '#js-webcam-reset'
+      new_guest_form = new window.VIP.GuestForm
+        modal: '#webcamModal'
+        webcamOptions: webcamOptions
+        webcamControls: webcamControls
 
 
