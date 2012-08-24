@@ -57,9 +57,16 @@
     .row-fluid
       .span6
         %h6 additional
-        = f.input :birthday, as: 'string', discard_year: true,
-          hint: "eg. 'march 13', 'next friday', '30 aug 61'",
-          input_html: { value: @guest.birthday.strftime('%e %B') }
+        = f.input :birthday do
+          = f.input_field :birthday, value: @guest.birthday.try(:strftime, '%e %B'),
+            as: :string,
+            'data-title' => 'pro-tip:',
+            'data-content' => render('shared/date_hint_popover'),
+            'data-placement' => 'right',
+            'data-delay' => 0,
+            'data-trigger' => 'focus',
+            rel: 'popover'
+
 
         = f.input :email
         - if can? :update_rating, @guest

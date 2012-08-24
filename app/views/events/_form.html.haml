@@ -5,6 +5,18 @@
     = f.input :title
     = f.input :date
 
+    = f.input :date do
+      = f.input_field :date, value: @event.date.try(:strftime, '%A %e %B %Y'),
+        as: :string,
+        'data-title' => 'pro-tip:',
+        'data-content' => render('shared/date_hint_popover'),
+        'data-placement' => 'right',
+        'data-delay' => 0,
+        'data-trigger' => 'focus',
+        rel: 'popover'
+
+
+
   .form-actions
     %button.btn.btn-primary
       create event

@@ -4,5 +4,5 @@
   %h1
     = @event.title
     %small
-      = @event.date
+      = @event.date.try(:strftime, '%A %e %B %Y')
       = link_to 'Edit', edit_event_path(@event)

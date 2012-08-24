@@ -1,3 +1,5 @@
+require 'chronic' # NL date parsing
+
 class Guest < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name,
     :phone_number, :gender, :rating, :birthday,
@@ -5,6 +7,8 @@ class Guest < ActiveRecord::Base
     :webcam_photo_id # webcam_photo_id needed to update webcam photo in form
 
   acts_as_birthday :birthday
+
+  before_save :parse_birthday
 
   # validate presence but NOT inclusion.
   # it is acceptable and expected that duplicate names will exist
@@ -76,6 +80,12 @@ class Guest < ActiveRecord::Base
 
     # merge the two arrays to return
     separated_by_month.flatten!
+  end
+
+  def parse_birthday
+    if self.birthday_before_type_cast
+      self.birthday = Chronic.parse(self.birthday_before_type_cast, context: :past)
+    end
   end
 
   def is_five_star?
