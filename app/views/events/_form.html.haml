@@ -2,8 +2,7 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :title
-    = f.input :date
+    = f.input :title, autofocus: true
 
     = f.input :date do
       = f.input_field :date, value: @event.date.try(:strftime, '%A %e %B %Y'),
