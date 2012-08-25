@@ -52,3 +52,6 @@ gem 'cocoon'
 
 gem 'birthday'                            # ActiveRecord::Base scopes
 gem 'chronic'                             # NL parsing of Dates
+
+gem 'capistrano'
+gem 'unicorn'
