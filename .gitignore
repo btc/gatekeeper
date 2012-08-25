@@ -20,3 +20,5 @@
 /public/system/
 config/database.yml
 /public/webcamtemp/*.jpg
+
+/public/assets
