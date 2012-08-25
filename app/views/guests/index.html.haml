@@ -5,8 +5,14 @@
         create new guest
 
   .span6
-    %form.pull-right
-      %input(type='text' name='q' placeholder='lookup guest' autofocus='true')
+    %form.pull-right.form-search
+      .input-append
+        %input.search-query(type='text'
+          name='q'
+          placeholder='lookup guest'
+          autofocus='true')
+        %button.btn(type='submit')
+          %i.icon-search
 
 #guest-index-results
   .results-header
