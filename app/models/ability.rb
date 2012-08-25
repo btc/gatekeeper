@@ -19,7 +19,8 @@ class Ability
     can :create, Guest # all users can create guests
 
     can :update, Guest do |guest|
-      guest.creator == user
+      true # anyone can update
+      # guest.creator == user
     end
 
     can :view_contact_info, Guest
