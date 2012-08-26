@@ -5,21 +5,44 @@
     }
 }
 
-.form-inputs {
-    .avatar {
-        // preview in thumbnail on guest form
-        text-align: center;
+.guest-form {
+    margin-bottom: 200px;
+    .submit-button {
+        margin-top: 200px;
+
+        .affix {
+            top: 60px;
+        }
     }
-    .btn {
-        // space between photo preview and button
-        margin-top: 5px;
+
+    .form-inputs {
+        .avatar {
+            // preview in thumbnail on guest form
+            text-align: center;
+        }
+
+        .btn {
+            // space between photo preview and button
+            margin-top: 5px;
+        }
+
+        #photo-picker-wrapper {
+            margin-top: 15px;
+        }
+
+        #notes-wrapper {
+            margin-top: 15px;
+
+            .note-body {
+                height: 56px;
+                margin-bottom: 5px;
+            }
+        }
+
     }
-    .note-body {
-        height: 56px;
-        margin-bottom: 5px;
-    }
-    margin-bottom: 20px;
 }
+
+
 .submit {
     .navbar-fixed-bottom {
         height: 60px;
