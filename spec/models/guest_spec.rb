@@ -83,6 +83,13 @@ describe Guest do
     @guest.last_photo.should eq(nil)
   end
 
+  it 'should be able to be assigned a creator' do
+    u = FactoryGirl.create(:user)
+    @guest.creator = u
+    @guest.save
+    @guest.creator.should eq(u)
+  end
+
   it { should have_many(:photos) }
   it { should have_many(:notes) }
   it { should have_and_belong_to_many(:events) }

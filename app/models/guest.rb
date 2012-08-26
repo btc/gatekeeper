@@ -29,7 +29,7 @@ class Guest < ActiveRecord::Base
   has_and_belongs_to_many :events
   has_and_belongs_to_many :guestlists
   has_one :user
-  has_one :creator, class_name: 'User'
+  belongs_to :creator, class_name: 'User'
 
   accepts_nested_attributes_for :notes,
     reject_if: proc { |attributes| attributes['body'].strip.empty? }
