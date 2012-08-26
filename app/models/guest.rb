@@ -31,6 +31,8 @@ class Guest < ActiveRecord::Base
   has_one :user
   belongs_to :creator, class_name: 'User'
 
+  has_paper_trail
+
   accepts_nested_attributes_for :notes,
     reject_if: proc { |attributes| attributes['body'].strip.empty? }
   accepts_nested_attributes_for :photos,
