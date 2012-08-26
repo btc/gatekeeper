@@ -10,7 +10,7 @@ describe "guests/show" do
     ))
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes in <p>", auth: true do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/First Name/)

@@ -10,7 +10,7 @@ describe "guests/edit" do
     ))
   end
 
-  it "renders the edit guest form" do
+  it "renders the edit guest form", auth: true do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
