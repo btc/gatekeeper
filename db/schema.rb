@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826094228) do
+ActiveRecord::Schema.define(:version => 20120826101733) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20120826094228) do
     t.integer "guest_id"
   end
 
+  create_table "guest_lists", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "owner_id"
+    t.integer  "event_id"
+    t.date     "date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "guests", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -59,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20120826094228) do
     t.integer  "event_id"
     t.integer  "plus",          :default => 0
     t.boolean  "redeemed",      :default => false
-    t.date     "date"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
   end

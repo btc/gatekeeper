@@ -12,6 +12,7 @@ Vern::Application.routes.draw do
     resources :committees
     resources :events
     resources :invitations
+    resources :guest_lists
   end
 
   devise_for :users,
