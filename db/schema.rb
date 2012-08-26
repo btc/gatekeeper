@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826075724) do
+ActiveRecord::Schema.define(:version => 20120826094228) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(:version => 20120826075724) do
     t.integer  "rating"
     t.integer  "creator_id"
     t.date     "birthday"
+  end
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "guest_id"
+    t.integer  "guest_list_id"
+    t.integer  "event_id"
+    t.integer  "plus",          :default => 0
+    t.boolean  "redeemed",      :default => false
+    t.date     "date"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "notes", :force => true do |t|

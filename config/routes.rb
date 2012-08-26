@@ -1,5 +1,6 @@
 Vern::Application.routes.draw do
 
+
   get 'photos/webcam'
   post 'photos/upload'
   post 'photos/webcam_create'
@@ -11,6 +12,7 @@ Vern::Application.routes.draw do
     resources :committees
     resources :guestlists
     resources :events
+    resources :invitations
   end
 
   devise_for :users,
