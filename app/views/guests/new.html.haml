@@ -1,9 +1,26 @@
-= render 'back'
+.hero-unit
+  = render 'back'
+  .page-header
+    %h1
+      new guest
+      %small
+        = link_to 'cancel', guests_path
 
-.page-header
-  %h1
-    new guest
-    %small
-      = link_to 'cancel', guests_path
+  -# FORM
+  = simple_form_for(@guest, html: { class: 'form-horizontal' }) do |f|
+    = f.error_notification
 
-= render 'form'
+    .form-inputs
+      .row-fluid
+        .span6
+          -# HIDDEN FIELD TO LINK WEBCAM PHOTO TO GUEST
+          = f.hidden_field :webcam_photo_id
+
+          -# REQUIRED FIELDS BEGIN
+          = f.input :first_name, autofocus: true
+          = f.input :last_name
+          = f.input :gender, collection: Guest.genders, as: :radio_buttons
+          -# REQUIRED FIELDS END
+    .form-actions
+      %button.btn.btn-primary
+        create guest
