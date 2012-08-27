@@ -55,3 +55,5 @@ gem 'chronic'                             # NL parsing of Dates
 
 gem 'capistrano'
 gem 'unicorn'
+
+gem 'paper_trail'

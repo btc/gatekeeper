@@ -141,6 +141,9 @@ GEM
       net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
+    paper_trail (2.6.3)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     paperclip (3.1.4)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -264,6 +267,7 @@ DEPENDENCIES
   guard-spork
   haml-rails
   jquery-rails
+  paper_trail
   paperclip
   pg
   rails (= 3.2.6)
