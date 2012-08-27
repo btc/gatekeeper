@@ -22,3 +22,4 @@ config/database.yml
 /public/webcamtemp/*.jpg
 
 /public/assets
+tag_message.txt
