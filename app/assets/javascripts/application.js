@@ -13,6 +13,7 @@
 //  THINGS REQUIRED BY THE APPLICATION
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require twitter/bootstrap
 //= require bootstrap
 //= require cocoon
