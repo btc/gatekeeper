@@ -1,45 +1,49 @@
-= render 'webcam_modal'
+-# MODAL
+.modal.hide#webcamModal
+  .modal-header
+    .row-fluid
+      -# EDIT CAM SETTINGS
+      %button.btn#js-webcam-configure(onclick='webcam.configure();')
+        %i.icon-cog
+      %button.close.pull-right(data-dismiss='modal') &times;
+  .modal-body
+    -# CAM WRAPPER
+    #webcam
+  .modal-footer
+    -# CONTROLS
+    .row-fluid.webcam-controls
+
+      %button.btn.btn-danger#js-snap(onclick='webcam.snap();')
+        %i.icon-camera.icon-white
+
+      %button.btn#js-webcam-reset(onclick='webcam.reset();')
+        %i.icon-refresh
+
+      %button.btn.btn-primary#js-save-photo
+        save
+        %i.icon-ok.icon-white
 
 -# FORM
-= simple_form_for(@guest, html: { class: 'guest-form form-horizontal' }) do |f|
+= simple_form_for(@guest, html: { class: 'form-horizontal' }) do |f|
   = f.error_notification
 
-  .row-fluid
-    .form-inputs.span6
-      -# HIDDEN FIELD TO LINK WEBCAM PHOTO TO GUEST
-      = f.hidden_field :webcam_photo_id
+  .form-inputs
+    .row-fluid
+      .span6
+        -# HIDDEN FIELD TO LINK WEBCAM PHOTO TO GUEST
+        = f.hidden_field :webcam_photo_id
 
-      -# REQUIRED FIELDS BEGIN
-      .page-header
-        %h4 required
+        -# REQUIRED FIELDS BEGIN
+        %h6 required
+        = f.input :first_name, autofocus: true
+        = f.input :last_name
+        = f.input :gender, collection: Guest.genders, as: :radio_buttons
+        -# REQUIRED FIELDS END
 
-      = f.input :first_name, autofocus: true
-      = f.input :last_name
-      = f.input :gender, collection: Guest.genders, as: :radio_buttons
-      -# REQUIRED FIELDS END
-
-      .page-header
-        %h4 additional
-
-      = f.input :birthday do
-        = f.input_field :birthday, value: @guest.birthday.try(:strftime, '%e %B'),
-          as: :string,
-          'data-title' => raw("<i class='icon-gift'></i> birthday"),
-          'data-content' => render('shared/date_hint_popover'),
-          'data-placement' => 'left',
-          'data-delay' => 0,
-          'data-trigger' => 'focus',
-          'selector' => '#notes-wrapper',
-          rel: 'popover'
-      = f.input :email
-      - if can? :update_rating, @guest
-        = f.input :rating, collection: Guest.ratings, as: :select
-      = f.input :phone_number
-
-      .row-fluid
-        .span5
-          Snap a webcam photo
-        .span7
+      .span6
+        -# PHOTO STUFF
+        .photo-stuff
+          %h6 snap a webcam photo
           %a.thumbnail.avatar.js-init-webcam(data-toggle='modal'
             href='#webcamModal')
             #avatar-placeholder
@@ -50,44 +54,56 @@
             %span.btn.btn-mini.btn-inverse
               %i.icon-camera.icon-white
 
-      .row-fluid#photo-picker-wrapper
-        .span5
-          upload images on your computer
-        .span7
-          #photos
-            = f.simple_fields_for :photos do |photo|
-              = render 'photo_fields', f: photo
+    .row-fluid
+      .span6
+        %h6 additional
+        = f.input :birthday do
+          = f.input_field :birthday, value: @guest.birthday.try(:strftime, '%e %B'),
+            as: :string,
+            'data-title' => 'pro-tip:',
+            'data-content' => render('shared/date_hint_popover'),
+            'data-placement' => 'right',
+            'data-delay' => 0,
+            'data-trigger' => 'focus',
+            rel: 'popover'
+
+
+        = f.input :email
+        - if can? :update_rating, @guest
+          = f.input :rating, collection: Guest.ratings, as: :select
+        = f.input :phone_number
+
+    %hr
+    .row-fluid
+      .span12
+        %h6 upload images on your computer
+        #photos
+          = f.simple_fields_for :photos do |photo|
+            = render 'photo_fields', f: photo
           .links
             = link_to_add_association f, :photos do
               %button.btn
                 %i.icon-picture
+                add photo
 
-      .row-fluid#notes-wrapper
-        .span5
-          add notes
-        .span7
-          #notes
-            = f.simple_fields_for :notes do |note|
-              = render 'note_fields', f: note
-            .links
-              = link_to_add_association f, :notes do
-                %button.btn
-                  %i.icon-edit
+    %hr
+    .row-fluid
+      .span12
+        %h6 notes
+        #notes
+          = f.simple_fields_for :notes do |note|
+            = render 'note_fields', f: note
+          .links
+            = link_to_add_association f, :notes do
+              %button.btn
+                %i.icon-plus
+                add note
 
-
-    .span6
-      .submit-button
-        %div(data-spy='affix' data-offset-top='330')
-          = f.button :submit, class: 'btn-primary btn-large'
-
-
+  .row-fluid.submit
+    = f.button :submit, class: 'btn-primary btn-large span12'
 
   :coffeescript
     jQuery ->
-      $('.submit .affix').affix
-        offset:
-            x: 10
-            y: 20
       webcamOptions =
         api_url: "#{photos_upload_path}"
         quality: 100

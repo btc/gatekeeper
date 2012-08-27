@@ -1,9 +1,9 @@
 - unless f.object.image.present?
   .nested-fields
     .row-fluid
-      .span9
+      .span6
         = f.file_field :image, label: false, class: 'note-body span12'
-      .span2
+      .span6
         = link_to_remove_association f do
           %button.btn
             %i.icon-trash
