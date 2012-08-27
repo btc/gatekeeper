@@ -50,8 +50,10 @@ class GuestsController < ApplicationController
   # POST /guests.json
   def create
     @guest = Guest.new(params[:guest])
-    @guest.creator = current_user
     # assign current_user as creator
+    @guest.creator = current_user
+    # try to parse so that it gets saved in the case that form does not get submitted
+    @guest.parse_birthday
 
     append_webcam_photo(params)
 
