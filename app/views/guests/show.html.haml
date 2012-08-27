@@ -1,11 +1,9 @@
 .row-fluid
-  = link_to guests_path do
-    %i.icon-arrow-left
-    back to all guests
+  = render 'back'
   .pull-right
     = link_to edit_guest_path(@guest) do
-      %button.btn.btn-info{ class: ('disabled' unless can?(:update, @guest)) }
-        edit profile
+      %button.btn.btn{ class: ('disabled' unless can?(:update, @guest)) }
+        edit profile / add info
 %hr
 
 -# photo picture, gender, rating (permission)
