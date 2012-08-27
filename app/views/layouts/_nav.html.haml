@@ -17,6 +17,26 @@
               register
 
       - if user_signed_in?
+        %ul.nav
+          -# GUESTS
+          %li.divider-vertical
+          %li.dropdown
+            %a.dropdown-toggle(role="button" data-toggle="dropdown" data-target="#" href='#')
+              create and manage
+              <b class="caret"></b>
+            %ul.dropdown-menu(role='menu')
+              %li.nav-header
+                guests
+              %li
+                = link_to new_guest_path do
+                  %i.icon-plus
+                  create new guest
+              %li
+                = link_to guests_path do
+                  %i.icon-user
+                  %i.icon-user
+                  guests
+
         %ul.nav.pull-right
           %li.dropdown
             %a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target="#" href='#')
@@ -33,3 +53,7 @@
                   %i.icon-fire
                   log out
 
+          %li.divider-vertical
+          %li
+            = link_to root_path do
+              %i.icon-home
