@@ -40,17 +40,6 @@ ActiveRecord::Schema.define(:version => 20120826075724) do
     t.integer "guest_id"
   end
 
-  create_table "guestlists", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-  end
-
-  create_table "guestlists_guests", :id => false, :force => true do |t|
-    t.integer "guestlist_id"
-    t.integer "guest_id"
-  end
-
   create_table "guests", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"

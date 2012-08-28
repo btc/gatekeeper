@@ -9,7 +9,6 @@ Vern::Application.routes.draw do
     resources :photos
     resources :guests
     resources :committees
-    resources :guestlists
     resources :events
   end
 

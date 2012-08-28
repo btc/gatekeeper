@@ -42,14 +42,6 @@
                   %i.icon-star
                   committees
 
-            - if can? :manage, Guestlist
-              %li
-                %a.pull-right{ href: new_guestlist_path }
-                  %i.icon-plus.icon-white
-                = link_to guestlists_path do
-                  %i.icon-list-alt
-                  guest lists
-
             - if can? :manage, Event
               %li
                 %a.pull-right{ href: new_event_path }
