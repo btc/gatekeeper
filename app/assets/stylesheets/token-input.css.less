@@ -23,6 +23,21 @@ ul.token-input-list li {
     list-style-type: none;
 }
 
+// show the guest list owner in diff color
+ul.token-input-list li:first-child {
+    color: @successText;
+}
+
+// make sure selected behavior does not change
+ul.token-input-list li.token-input-selected-token:first-child {
+    color: @white;
+}
+
+ul.token-input-list li {
+    list-style-type: none;
+}
+
+
 ul.token-input-list li input {
     border: 0;
     width: 350px;
