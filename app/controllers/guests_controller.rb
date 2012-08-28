@@ -98,6 +98,17 @@ class GuestsController < ApplicationController
     end
   end
 
+  # TODO manage permissions
+  def full_name_search
+    respond_to do |format|
+      format.json do
+        @guests = Guest.full_name_search params[:q]
+        @guests.map! { |g| { id: g.id, name: g.full_name } }
+        render json: @guests
+      end
+    end
+  end
+
   private
   # if webcam id was submitted in hidden field, apply it to the guest object
   def append_webcam_photo(params)
