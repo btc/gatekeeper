@@ -12,6 +12,7 @@ describe GuestList do
   it { should validate_presence_of :date }
   it { should validate_presence_of :owner }
   it { should validate_presence_of :creator }
+  it 'should validate uniqueness of owner for specific date'
   it { should_not validate_presence_of :event }
 
   it { should have_db_column :date }
