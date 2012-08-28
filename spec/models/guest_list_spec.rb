@@ -4,7 +4,7 @@ describe GuestList do
   it { should belong_to(:creator).class_name('User') }
   it { should belong_to(:owner).class_name('Guest') }
   it { should belong_to(:event) }
-  it { should have_many(:invitations) }
+  it { should have_many(:invitations).dependent(:destroy) }
   it { should have_many(:guests).through(:invitations) }
 
   it 'should have many notes' # TODO notes polymorphic association
