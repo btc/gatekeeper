@@ -2,7 +2,7 @@
   .navbar-inner
     .container
       %ul.nav
-        %li
+        %li{ active_if(root_path) }
           %a{ href: root_path }
             -# bring peace and justice to country
             %i.icon-home
@@ -22,11 +22,11 @@
         %ul.nav
           -# GUESTS
           %li.divider-vertical
-          %li
+          %li{ active_if(guests_path) }
             = link_to guests_path do
               %i.icon-user
               guests
-          %li
+          %li{ active_if(new_guest_path) }
             = link_to new_guest_path do
               %i.icon-plus
               %i.icon-user
