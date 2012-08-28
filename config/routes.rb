@@ -8,7 +8,9 @@ Vern::Application.routes.draw do
 
   scope 'api' do
     resources :photos
-    resources :guests
+    resources :guests do
+      get 'full_name_search', on: :collection
+    end
     resources :committees
     resources :events
     resources :invitations
