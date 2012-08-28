@@ -51,9 +51,11 @@ class Guest < ActiveRecord::Base
     @@valid_ratings
   end
 
-  def self.full_name_search(string)
+  def self.full_name_search(str)
     guests = self.all
     tokens = string.downcase.split
+    return guests if str.nil? || str.empty?
+    tokens = str.downcase.split
     guests.select! do |guest|
       keep = true
       tokens.each do |token|
