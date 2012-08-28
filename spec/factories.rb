@@ -17,4 +17,9 @@ FactoryGirl.define do
     user FactoryGirl.create(:user)
   end
 
+  factory :guest do
+    first_name 'brian'
+    last_name 'lara'
+    gender 'male'
+  end
 end
