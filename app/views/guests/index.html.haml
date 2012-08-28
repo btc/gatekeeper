@@ -1,18 +1,17 @@
 .row-fluid
   .span6
-    = link_to new_guest_path do
-      %button.btn.btn-primary
-        create new guest
+    = link_to new_guest_path,
+      id: 'new-guest-button', class: 'btn btn-block' do
+      create new guest
 
-  .span6
-    %form.pull-right.form-search
-      .input-append
-        %input.search-query(type='text'
-          name='q'
-          placeholder='lookup guest'
-          autofocus='true')
-        %button.btn(type='submit')
-          %i.icon-search
+  %form.form-search.span6
+    .input-append
+      %input.search-query(type='text'
+        name='q'
+        placeholder='lookup guest'
+        autofocus='true')
+      %button.btn(type='submit')
+        %i.icon-search
 
 #guest-index-results
   .results-header
