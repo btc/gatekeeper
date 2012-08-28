@@ -26,4 +26,23 @@ describe GuestList do
   it { should allow_mass_assignment_of :event_id }
 
   it { should accept_nested_attributes_for(:invitations) }
+
+  before :each do
+    @guest_list = GuestList.new
+    @guest_list.creator = FactoryGirl.create(:user)
+    @guest_list.date = Date.today
+    @guest_list.owner = FactoryGirl.create(:guest)
+  end
+
+  it 'should be not be valid if no owner is present' do
+    @guest_list.owner = nil
+    @guest_list.valid?.should eq(false)
+  end
+
+  it 'should be able to be assigned an owner' do
+    @guest_list.owner = nil
+    @guest = FactoryGirl.create(:guest)
+    @guest_list.owner = @guest
+    @guest_list.owner.should eq(@guest)
+  end
 end
