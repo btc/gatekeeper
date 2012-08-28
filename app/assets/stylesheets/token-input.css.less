@@ -1,11 +1,13 @@
 @import "twitter/bootstrap/bootstrap";
 
+@tokenInputWidth: auto;
+
 /* Example tokeninput style #1: Token vertical list*/
 ul.token-input-list {
     overflow: hidden;
     height: auto !important;
     height: 1%;
-    width: 400px;
+    width: @tokenInputWidth;
     border: 1px solid @inputBorder;
     border-radius: @inputBorderRadius;
     cursor: text;
@@ -65,7 +67,7 @@ li.token-input-selected-token span {
 
 div.token-input-dropdown {
     position: absolute;
-    width: 400px;
+    width: @tokenInputWidth;
     background-color: @dropdownBackground;
     overflow: hidden;
     border-left: 1px solid @dropdownBorder;
