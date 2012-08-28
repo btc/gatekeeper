@@ -1,10 +1,12 @@
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
-
-      %a.brand{ href: root_path }
-        -# bring peace and justice to country
-        抚绥
+      %ul.nav
+        %li
+          %a{ href: root_path }
+            -# bring peace and justice to country
+            %i.icon-home
+            抚绥
 
       - unless user_signed_in?
         %ul.nav.pull-right
@@ -20,27 +22,19 @@
         %ul.nav
           -# GUESTS
           %li.divider-vertical
-          %li.dropdown
-            %a.dropdown-toggle(role="button" data-toggle="dropdown" data-target="#" href='#')
-              create and manage
-              <b class="caret"></b>
-            %ul.dropdown-menu(role='menu')
-              %li.nav-header
-                guests
-              %li
-                = link_to new_guest_path do
-                  %i.icon-plus
-                  create new guest
-              %li
-                = link_to guests_path do
-                  %i.icon-user
-                  %i.icon-user
-                  guests
+          %li
+            = link_to guests_path do
+              %i.icon-user
+              guests
+          %li
+            = link_to new_guest_path do
+              %i.icon-plus
+              new guest
 
         %ul.nav.pull-right
           %li.dropdown
             %a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target="#" href='#')
-              = current_user.email
+              %i.icon-cog
               <b class="caret"></b>
             %ul.dropdown-menu(role='menu' aria-labelledby="dLabel")
               %li
@@ -49,11 +43,7 @@
                   change email address or password
               %li.divider
               %li
+                -# currently works by way of get due to bootstrap bug
                 = link_to destroy_user_session_path, method: :delete do
                   %i.icon-fire
                   log out
-
-          %li.divider-vertical
-          %li
-            = link_to root_path do
-              %i.icon-home
