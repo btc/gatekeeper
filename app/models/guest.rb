@@ -52,7 +52,6 @@ class Guest < ActiveRecord::Base
 
   def self.full_name_search(str)
     guests = self.all
-    tokens = string.downcase.split
     return guests if str.nil? || str.empty?
     tokens = str.downcase.split
     guests.select! do |guest|
