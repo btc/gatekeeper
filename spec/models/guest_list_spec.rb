@@ -25,8 +25,6 @@ describe GuestList do
   it { should allow_mass_assignment_of :owner_id }
   it { should allow_mass_assignment_of :event_id }
 
-  it { should accept_nested_attributes_for(:invitations) }
-
   before :each do
     @guest_list = GuestList.new
     @guest_list.creator = FactoryGirl.create(:user)
