@@ -85,6 +85,11 @@ class Guest < ActiveRecord::Base
     separated_by_month.flatten!
   end
 
+  def self.id_name_tuples(guests)
+    return Array.new if guests.nil?
+    tuples = guests.map { |g| { id: g.id, name: g.full_name } }
+  end
+
   def parse_birthday
     if self.birthday_before_type_cast
       self.birthday = Chronic.parse(self.birthday_before_type_cast, context: :past)
