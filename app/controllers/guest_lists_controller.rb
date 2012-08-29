@@ -16,7 +16,8 @@ class GuestListsController < ApplicationController
   # GET /guest_lists/1
   # GET /guest_lists/1.json
   def show
-    @guest_list = GuestList.find(params[:id])
+    @guest_list = GuestList.includes( { invitations: :guest },
+                                      :owner).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
