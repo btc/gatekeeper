@@ -111,4 +111,8 @@ class Guest < ActiveRecord::Base
   def is_female?
     self.gender == 'female'
   end
+
+  def is_male?
+    !self.is_female?
+  end
 end
