@@ -1,5 +1,5 @@
 class GuestsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:full_name_search]
   # GET /guests
   # GET /guests.json
   def index
@@ -99,6 +99,7 @@ class GuestsController < ApplicationController
 
   # TODO manage permissions
   def full_name_search
+    authorize! :lookup_names, Guest
     respond_to do |format|
       format.json do
         @guests = Guest.full_name_search params[:q]

@@ -26,6 +26,10 @@ class Ability
     can :view_contact_info, Guest
     can :view_photos, Guest
 
+    # GUEST LIST PERMISSIONS
+    # ======================
+    can :lookup_names, Guest # any user full_name_search always
+
 =begin
     if user.role? :boss
       can :rate, Guest
