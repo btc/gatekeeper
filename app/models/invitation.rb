@@ -5,7 +5,8 @@ class Invitation < ActiveRecord::Base
   belongs_to :event
   belongs_to :guest_list
 
-  validates_presence_of :guest_list, :guest, :redeemed
+  # never validate presence of redeemed
+  validates_presence_of :guest_list, :guest
 
   def date
     self.guest_list.date

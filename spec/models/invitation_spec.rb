@@ -7,7 +7,9 @@ describe Invitation do
 
   it { should validate_presence_of :guest_list }
   it { should validate_presence_of :guest }
-  it { should validate_presence_of :redeemed }
+  # WARNING: it should never validate presence of :redeemed
+  # WHY: because redeemed defaults to true,
+  # it's been determined that validating redeemed's presence causes problems
 
   # GuestList has a date. And since invitation must have GuestList,
   # it gets its date from Guestlist
