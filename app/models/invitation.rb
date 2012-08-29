@@ -8,6 +8,8 @@ class Invitation < ActiveRecord::Base
   # never validate presence of redeemed
   validates_presence_of :guest_list, :guest
 
+  has_paper_trail
+
   def date
     self.guest_list.date
   end
