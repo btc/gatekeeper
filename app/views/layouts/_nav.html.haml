@@ -1,7 +1,5 @@
-%ul.nav
-  %li{ active_if(root_path) }
-    %a{ href: root_path }
-      %i.icon-home
+%a.brand{ href: root_path }
+  %i.icon-home
 
 - unless user_signed_in?
   %ul.nav.pull-right
