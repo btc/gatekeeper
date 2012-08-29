@@ -6,7 +6,7 @@ class GuestList < ActiveRecord::Base
   belongs_to :creator, class_name: 'User'
   belongs_to :owner, class_name: 'Guest'
   belongs_to :event
-  has_many :invitations
+  has_many :invitations, dependent: :destroy, inverse_of: :guest_list
   has_many :guests, through: :invitations
 
   validates_presence_of :date, :owner, :creator
