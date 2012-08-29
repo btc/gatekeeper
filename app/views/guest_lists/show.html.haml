@@ -1,0 +1,69 @@
+= render 'shared/back', path: guest_lists_path,
+  back_to: 'all guest lists'
+
+#show-guest-list-header.page-header
+  .row-fluid.centered
+    %h2.span3
+      guest list
+    %h1.span6
+      = @guest_list.owner.full_name
+    %h3.span3
+      = best_in_place @guest_list, :date
+      (#{relative_date(@guest_list.date)})
+      -# TODO link_to_if can?(:update, @guest_list), 'edit date', '#edit-date'
+
+.row-fluid
+  .span6
+
+    #guest-list-table
+      %table.table.hero-unit
+
+        %thead
+          %th name
+          %th plus
+          %th
+            %i.icon-check
+            checked-in!
+
+        %tbody
+          - @guest_list.invitations.each do |i|
+            %tr.invitation{ class: ('redeemed' if i.redeemed) }
+              %td.name
+                %p
+                  = link_to i.guest do
+                    = i.guest.full_name
+              %td
+                = simple_form_for(i, remote: true) do |f|
+                  = f.input :plus, as: :select, collection: (0..100).to_a.reverse,
+                    label: false
+
+              %td
+                = simple_form_for(i, remote: true) do |f|
+                  = f.input :redeemed, label: false, class: 'checkable'
+
+%hr
+#guest-list-stats
+  .row-fluid
+    .span3
+      %small
+        %dl
+          %dt
+            distribution
+          %dd
+            #{@guest_list.pct_female}% female
+
+:coffeescript
+  jQuery ->
+    # submit form to update invitation redemption status
+    # when checkbox is changed
+    $selectPlus = $('.select')
+    $checkboxRedeemed = $('.boolean')
+
+    $selectPlus.live('change', ->
+      $(this).parents('form:first').submit()
+    )
+    $checkboxRedeemed.live('change', ->
+      $(this).parents('form:first').submit()
+      window.location.reload()
+    )
+
