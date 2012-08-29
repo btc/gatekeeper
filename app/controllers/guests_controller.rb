@@ -62,7 +62,7 @@ class GuestsController < ApplicationController
         format.html { redirect_to @guest, notice: 'Guest was successfully created.' }
         format.json { render json: @guest, status: :created, location: @guest }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", status: 400 }
         format.json { render json: @guest.errors, status: :unprocessable_entity }
       end
     end
