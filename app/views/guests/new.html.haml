@@ -20,6 +20,7 @@
           = f.input :first_name, autofocus: true
           = f.input :last_name
           = f.input :gender, collection: Guest.genders, as: :radio_buttons
+          = f.input :email
           -# REQUIRED FIELDS END
     .form-actions
       %button.btn.btn-primary
