@@ -9,7 +9,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, :git
-set :repository, 'git@github.com:brianholderchow/zen-tech.git'
+set :repository, 'git@207.97.227.239:brianholderchow/zen-tech.git'
 set :branch, 'master'
 
 default_run_options[:pty] = true
