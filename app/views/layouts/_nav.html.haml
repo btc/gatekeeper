@@ -14,7 +14,13 @@
         register
 
 - if user_signed_in?
+  %form.navbar-form.pull-left{ action: guests_path }
+    %input.span2(type='text' name='q' autocorrect='off'
+      placeholder='lookup guest or list')
+    %button.btn(type='submit')
+      %i.icon-search
   %ul.nav
+    %li.divider-vertical
     %li{ active_if(guests_path) }
       = link_to guests_path do
         %i.icon-user
