@@ -17,5 +17,6 @@
  *= require bootstrap_and_overrides
  *= require body
  *= require guests
+ *= require guest_lists
  *= require root
  */
