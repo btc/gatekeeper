@@ -103,8 +103,6 @@ class GuestsController < ApplicationController
     respond_to do |format|
       format.json do
         @guests = Guest.full_name_search params[:q]
-        @guests.map! { |g| { id: g.id, name: g.full_name } }
-        render json: @guests
         tuples = Guest.id_name_tuples @guests
         render json: tuples
       end
