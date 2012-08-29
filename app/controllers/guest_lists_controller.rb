@@ -1,6 +1,5 @@
 class GuestListsController < ApplicationController
   load_and_authorize_resource
-  layout 'resources'
 
   # GET /guest_lists
   # GET /guest_lists.json

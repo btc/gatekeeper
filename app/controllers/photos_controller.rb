@@ -1,6 +1,4 @@
 class PhotosController < ApplicationController
-  layout 'resources'
-
   # webcam upload actions are exceptions to load_and_authorize_resource rule
   # private actions need not be authorized (is this obvious?)
   load_and_authorize_resource except: [:link, :webcam_create, :upload]

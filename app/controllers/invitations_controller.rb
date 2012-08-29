@@ -2,7 +2,7 @@ class InvitationsController < ApplicationController
   # GET /invitations
   # GET /invitations.json
   load_and_authorize_resource
-  layout 'resources'
+
   def index
     @invitations = Invitation.all
 
