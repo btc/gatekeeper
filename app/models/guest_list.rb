@@ -10,7 +10,8 @@ class GuestList < ActiveRecord::Base
   has_many :guests, through: :invitations
 
   validates_presence_of :date, :owner, :creator
-  before_save :parse_date
+  # NOT before_save (since date is a required field and validation occurs first)
+  before_validation :parse_date
 
   has_paper_trail
 
