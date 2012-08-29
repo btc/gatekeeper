@@ -1,13 +1,11 @@
 -if flash[:alert].present?
   .row-fluid
-    .alert.fade.in.alert-warning#global-alert
-      .close(data-dismiss='alert' href='#') &times;
+    .alert.fade.in.alert-warning#global-alert(data-dismiss='alert' href='#')
       %h2
         = flash[:alert]
 
 -if flash[:notice].present?
   .row-fluid
-    .alert.fade.in.alert-info#global-alert
-      .close(data-dismiss='alert' href='#') &times;
+    .alert.fade.in.alert-info#global-alert(data-dismiss='alert' href='#')
       %h3
         = flash[:notice]
