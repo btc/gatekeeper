@@ -22,4 +22,17 @@ class GuestList < ActiveRecord::Base
     end
   end
 
+  def pct_female
+    n_men = n_women = 0
+
+    self.guests.each do |guest|
+      if guest.is_female?
+        n_women += 1
+      else
+        n_men += 1
+      end
+    end
+
+    n_women.to_f / (n_men + n_women).to_f * 100
+  end
 end
