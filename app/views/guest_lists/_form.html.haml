@@ -1,0 +1,34 @@
+-# TODO use rails helper to generate form for post to create action
+#guest-list-form
+  = form_tag(guest_lists_path, method: :post) do
+    %div.row-fluid
+      %i.icon-user
+
+    = tag('div', id: 'saved_selections', data: { entries: @saved_selections })
+    %input.guest-lookup(autocomplete='off' type='text'
+      name='q'){ id: id }
+
+    %span.pull-right
+      guest not found?
+      %a#guest-modal-trigger(href='#guest-qcfw' data-toggle='modal')
+        create new guest
+        %i.icon-star
+
+    %hr
+    %div.icon-calendar
+    %div
+      %input.datepicker.span12(name='guest_list[date]'
+        type='text'
+        placeholder="date (eg. 'this friday')"){'data-title' => "did you know?",
+        'data-content' => 'you can enter dates using plain english',
+        'data-placement' => 'right',
+        'data-delay' => 0,
+        'data-trigger' => 'focus',
+        rel: 'popover' }
+
+    .form-actions
+      %button.btn.btn-block
+        %i.icon-list-alt
+        %i.icon-plus
+
+= render 'modal_guest_remote_form'
