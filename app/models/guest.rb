@@ -26,6 +26,8 @@ class Guest < ActiveRecord::Base
 
   has_many :photos
   has_many :notes
+  has_many :guest_lists, through: :invitations
+  has_many :invitations
   has_and_belongs_to_many :events
   has_one :user
   belongs_to :creator, class_name: 'User'
