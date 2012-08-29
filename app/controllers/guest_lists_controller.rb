@@ -50,12 +50,54 @@ class GuestListsController < ApplicationController
     @guest_list = GuestList.new(params[:guest_list])
     @guest_list.creator = current_user
 
+    if params[:q].nil? || params[:q].empty?
+      flash[:alert] = 'please select at least one guest'
+    else
+      # pre-process the comma-separated ids
+      guest_ids = params[:q].split(',')
+
+      # set the owner
+      owner_id = guest_ids[0] # semantically, 1st id represents owner
+      owner = Guest.find_by_id owner_id
+      if owner.nil?
+        # invalid id was passed in with request
+        flash[:alert] = 'primary guest not found. please try again'
+        render action: :new and return
+      end
+      @guest_list.owner = owner
+
+      # for all specified guests
+      @guests = []
+      guest_ids.each do |guest_id|
+        guest = Guest.find_by_id(guest_id)
+        @guests << guest
+        if guest.present?
+          # create invitation
+          invitation = @guest_list.invitations.build
+          invitation.guest = guest
+        end
+      end
+      @guest_list.invitations.sort_by! { |i| i.guest.first_name }
+    end
+
+    # ensure date is present and apply it
+    raw_date = params[:guest_list][:date]
+    if (raw_date.nil? || raw_date.empty?) && @guest_list.date.nil?
+      flash[:alert] ||= 'please enter a date'
+    else
+      @guest_list.update_attribute :date, raw_date
+    end
+
     respond_to do |format|
       if @guest_list.save
         format.html { redirect_to @guest_list, notice: 'Guest list was successfully created.' }
         format.json { respond_with_bip @guest_list }
       else
-        format.html { render action: "new" }
+        format.html do
+          # pass data to pre-populate list upon failure
+          @saved_selections = Guest.id_name_tuples @guests
+          render action: "new"
+        end
         format.json { respond_with_bip @guest_list }
       end
     end
