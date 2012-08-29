@@ -24,6 +24,16 @@
       = link_to new_guest_path do
         %i.icon-plus
         %i.icon-user
+    -# GUEST LISTS
+    %li{ active_if(guest_lists_path) }
+      = link_to guest_lists_path do
+        %i.icon-list-alt
+        lists
+    %li{ active_if(new_guest_list_path) }
+      = link_to new_guest_list_path do
+        %i.icon-plus
+        %i.icon-list-alt
+
 
   %ul.nav.pull-right
     %li.dropdown
