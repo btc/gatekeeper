@@ -28,6 +28,8 @@ class Ability
 
     # GUEST LIST PERMISSIONS
     # ======================
+    can :manage, GuestList # FIXME TODO restrict by role
+    can :manage, Invitation # FIXME TODO restrict by role
     can :lookup_names, Guest # any user full_name_search always
 
 =begin
