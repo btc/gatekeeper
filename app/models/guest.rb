@@ -109,5 +109,7 @@ class Guest < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}".titlecase
   end
 
-
+  def is_female?
+    self.gender == 'female'
+  end
 end
