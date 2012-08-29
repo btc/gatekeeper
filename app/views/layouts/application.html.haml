@@ -3,9 +3,12 @@
   = render partial: 'layouts/head'
 
   %body.page_classes
-    = render partial: 'layouts/nav'
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          = render partial: 'layouts/nav'
 
-    .container
+    .container-fluid
       = render 'layouts/alert'
       = yield
 
