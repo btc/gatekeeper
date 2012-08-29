@@ -17,6 +17,7 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require cocoon
+//= require best_in_place
 //  APPLICATION FUNCTIONALITY
 //= require guests
 //= require webcam
