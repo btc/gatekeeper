@@ -15,7 +15,10 @@
   %ul.nav
     %form.navbar-search.pull-left{ action: guests_path }
       %input.search-query.span3(type='text' name='q' autocorrect='off'
+        autofocus='true'
         placeholder='lookup guest or list')
+
+    %li.divider-vertical
     %li{ active_if(new_guest_path) }
       = link_to new_guest_path do
         %span
