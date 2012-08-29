@@ -18,6 +18,9 @@ class GuestListsController < ApplicationController
   def show
     @guest_list = GuestList.includes( { invitations: :guest },
                                       :owner).find(params[:id])
+    @guest_list.invitations.sort_by! do |i|
+      i.guest.full_name
+    end
 
     respond_to do |format|
       format.html # show.html.erb
