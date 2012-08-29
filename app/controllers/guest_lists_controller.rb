@@ -9,7 +9,7 @@ class GuestListsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @guest_lists }
+      format.json { respond_with_bip @guest_lists }
     end
   end
 
@@ -20,7 +20,7 @@ class GuestListsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @guest_list }
+      format.json { respond_with_bip @guest_list }
     end
   end
 
@@ -31,7 +31,7 @@ class GuestListsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @guest_list }
+      format.json { respond_with_bip @guest_list }
     end
   end
 
@@ -49,10 +49,10 @@ class GuestListsController < ApplicationController
     respond_to do |format|
       if @guest_list.save
         format.html { redirect_to @guest_list, notice: 'Guest list was successfully created.' }
-        format.json { render json: @guest_list, status: :created, location: @guest_list }
+        format.json { respond_with_bip @guest_list }
       else
         format.html { render action: "new" }
-        format.json { render json: @guest_list.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip @guest_list }
       end
     end
   end
@@ -65,10 +65,10 @@ class GuestListsController < ApplicationController
     respond_to do |format|
       if @guest_list.update_attributes(params[:guest_list])
         format.html { redirect_to @guest_list, notice: 'Guest list was successfully updated.' }
-        format.json { head :no_content }
+        format.json { respond_with_bip(@guest_list) }
       else
         format.html { render action: "edit" }
-        format.json { render json: @guest_list.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@guest_list) }
       end
     end
   end
@@ -81,7 +81,7 @@ class GuestListsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to guest_lists_url }
-      format.json { head :no_content }
+      format.json { respond_with_bip @guest_list }
     end
   end
 end
