@@ -3,7 +3,7 @@ class Invitation < ActiveRecord::Base
 
   belongs_to :guest
   belongs_to :event
-  belongs_to :guest_list
+  belongs_to :guest_list, inverse_of: :invitations
 
   # never validate presence of redeemed
   validates_presence_of :guest_list, :guest
