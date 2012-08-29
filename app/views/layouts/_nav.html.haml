@@ -15,29 +15,17 @@
 
 - if user_signed_in?
   %ul.nav
-    %form.navbar-form.pull-left{ action: guests_path }
-      %input.span3(type='text' name='q' autocorrect='off'
+    %form.navbar-search.pull-left{ action: guests_path }
+      %input.search-query.span3(type='text' name='q' autocorrect='off'
         placeholder='lookup guest or list')
-      %button.btn(type='submit')
-        %i.icon-search
-    %li.divider-vertical
-    %li{ active_if(guests_path) }
-      = link_to guests_path do
-        %i.icon-user
     %li{ active_if(new_guest_path) }
       = link_to new_guest_path do
-        %span.hidden-phone
-          %i.icon-plus
-          add guest
-        %span.visible-phone
+        %span
           %i.icon-plus
           %i.icon-user
     %li{ active_if(new_guest_list_path) }
       = link_to new_guest_list_path do
-        %span.hidden-phone
-          %i.icon-plus
-          new list
-        %span.visible-phone
+        %span
           %i.icon-plus
           %i.icon-list-alt
 
