@@ -4,12 +4,14 @@ class GuestsController < ApplicationController
   # GET /guests.json
   def index
 
+    @guests = Guest.includes(:guest_lists, :photos).scoped
+
     @guests = case
               when params[:q].present?
                 @q = params[:q]
-                Guest.by_first_last_gender.full_name_search @q
+                @guests.by_first_last_gender.full_name_search @q
               else
-                Guest.by_first_last_gender.all
+                @guests.by_first_last_gender.all
               end
 
     respond_to do |format|
