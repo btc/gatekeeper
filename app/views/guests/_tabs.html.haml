@@ -16,7 +16,7 @@
     - if current_page?(guests_path) && @q.present?
       %li.active
         = link_to guests_path do
-          &times;
+          %i.icon-remove
           = "results for '#{@q}'"
           %small (#{@guests.length})
 
