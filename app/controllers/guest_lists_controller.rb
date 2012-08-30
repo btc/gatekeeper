@@ -148,4 +148,9 @@ class GuestListsController < ApplicationController
       end
     end
   end
+
+  def form
+    @guest_list = GuestList.new
+    render partial: 'form'
+  end
 end

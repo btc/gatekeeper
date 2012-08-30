@@ -16,6 +16,7 @@ Vern::Application.routes.draw do
     resources :invitations
     resources :guest_lists do
       get 'search', on: :collection
+      get 'form', on: :collection
     end
   end
 
