@@ -18,20 +18,7 @@
         autofocus='true'
         placeholder='lookup guest or list')
 
-    %li.divider-vertical
-    %li{ active_if(new_guest_path) }
-      = link_to new_guest_path do
-        %span
-          %i.icon-plus
-          %i.icon-user
-    %li{ active_if(new_guest_list_path) }
-      = link_to new_guest_list_path do
-        %span
-          %i.icon-plus
-          %i.icon-list-ol
-
-
-  %ul.nav.pull-right.hidden-phone
+  %ul.nav.pull-right
     %li.dropdown
       %a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target="#" href='#')
         %i.icon-cog
