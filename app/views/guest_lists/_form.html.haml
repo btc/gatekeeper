@@ -3,16 +3,15 @@
   = form_tag(guest_lists_path, method: :post) do
     %div.row-fluid
       %i.icon-user
-
+      %span.pull-right
+        guest not found?
+        %a#guest-modal-trigger(href='#guest-qcfw' data-toggle='modal')
+          create new guest
+          %i.icon-star
     = tag('div', id: 'saved_selections', data: { entries: @saved_selections })
     %input.guest-lookup(autocomplete='off' type='text'
       name='q'){ id: id }
 
-    %span.pull-right
-      guest not found?
-      %a#guest-modal-trigger(href='#guest-qcfw' data-toggle='modal')
-        create new guest
-        %i.icon-star
 
     %hr
     %div.icon-calendar
