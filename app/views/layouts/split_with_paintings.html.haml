@@ -8,7 +8,7 @@
     .container
       = render 'layouts/alert'
       .row-fluid
-        .span6.thumbnail
+        .span6.thumbnail.hidden-phone
           - paintings = ['paintings.png', 'paintings2.png']
           = image_tag paintings[rand(paintings.length)]
 
