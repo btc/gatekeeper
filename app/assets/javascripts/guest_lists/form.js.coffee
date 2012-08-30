@@ -1,6 +1,6 @@
 window.VIP ?= {}
 
-class window.VIP.GuestListSelectForm
+class window.VIP.GuestListForm
 
   constructor: (@options) ->
     $(@options.id).tokenInput(

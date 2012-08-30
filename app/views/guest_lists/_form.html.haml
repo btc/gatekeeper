@@ -31,3 +31,13 @@
         %i.icon-plus
 
 = render 'modal_guest_remote_form'
+
+:coffeescript
+  jQuery ->
+
+    new window.VIP.GuestListForm
+      id: '#index-guest-list-select'
+      savedSelections: $('#saved_selections').data('entries')
+
+    $('#index-guest-list-select').focus()
+
