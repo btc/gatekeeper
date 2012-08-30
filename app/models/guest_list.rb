@@ -49,6 +49,11 @@ class GuestList < ActiveRecord::Base
 
     n_women.to_f / (n_men + n_women).to_f * 100
   end
+
+  def friendly_date
+    self.date.strftime('%A %e %B')
+  end
+
   def total
     n = 0
     self.invitations.each do |i|
