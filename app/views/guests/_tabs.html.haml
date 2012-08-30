@@ -1,0 +1,27 @@
+.guests-nav-tabs
+  %ul.nav.nav-pills
+
+    %li{ active_if(new_guest_path) }
+      = link_to new_guest_path do
+        add new guest
+
+    %li{ active_if(guests_path, !@q.present?) }
+      = link_to guests_path do
+        all
+
+    %li{ active_if(birthdays_guests_path) }
+      = link_to birthdays_guests_path do
+        %i.icon-gift
+
+    - if current_page?(guests_path) && @q.present?
+      %li.active
+        = link_to guests_path do
+          &times;
+          = "results for '#{@q}'"
+          %small (#{@guests.length})
+
+    - if @guest.present? && !current_page?(new_guest_path) && @guest.id.present? && current_page?(guest_path(@guest))
+      %li{ active_if(guest_path(@guest)) }
+        = link_to guest_path(@guest) do
+          = @guest.full_name
+

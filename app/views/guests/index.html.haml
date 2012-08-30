@@ -1,19 +1,5 @@
 #guests-index
-  .guests-nav-tabs
-    %ul.nav.nav-pills
-      - if @q.present?
-        %li
-          = link_to guests_path do
-            all
-        %li.active
-          = link_to guests_path do
-            &times;
-            = "results for '#{@q}'"
-            %small (#{@guests.length})
-      - else
-        %li{ active_if(guests_path) }
-          = link_to guests_path do
-            all
+  = render 'tabs'
 
   .row-fluid
     %table.table
