@@ -8,7 +8,7 @@
   - @birthday_guests.each do |guest|
     - if day != guest.birthday.day
       .row-fluid
-        %h6= guest.birthday.strftime('%A %e %B')
+        %h6= guest.birthday.strftime('%e %B')
       - day = guest.birthday.day
     .row-fluid
       = link_to guest_path(guest) do
