@@ -9,7 +9,7 @@
       #{list.owner.full_name}'s list
     - if can? :view_rating, list.owner
       = stars(list.owner.rating)
-    = pluralize list.total, 'guest'
+    %small= pluralize list.total, 'guest'
 
 .guest-list-stats
   %span.list-count
