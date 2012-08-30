@@ -24,11 +24,15 @@
         %tbody
           %tr
             %td
-              = link_to guest do
-                %p
-                  .guest-name= guest.full_name
+              %p
+                .guest-name
+                  = link_to guest do
+                    = guest.full_name
+                  - if can? :view_rating, guest
+                    = stars(guest.rating)
                 .thumbnail
-                  = image_tag url_for_profile_pic(guest, :thumb), width: '100'
+                  = link_to guest do
+                    = image_tag url_for_profile_pic(guest, :thumb), width: '100'
 
             %td.lists-and-invitations
               %span= render '/guest_lists/list_by_date', guest_lists: guest.guest_lists.active
