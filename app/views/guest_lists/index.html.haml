@@ -6,15 +6,36 @@
     %li
       = link_to '#active-lists', data: { toggle: 'tab' } do
         active
-    %li
-      = link_to '#thursday-lists', data: { toggle: 'tab' } do
-        thursday
-    %li
-      = link_to '#friday-lists', data: { toggle: 'tab' } do
-        friday
-    %li
-      = link_to '#saturday-lists', data: { toggle: 'tab' } do
-        saturday
+
+    %li.dropdown
+
+      %a.dropdown-toggle(data-toggle='dropdown' href='#')
+        %i.icon-calendar
+        by day
+        %b.caret
+
+      %ul.dropdown-menu
+        %li
+          = link_to '#thursday-lists', data: { toggle: 'tab' } do
+            thursday
+        %li
+          = link_to '#friday-lists', data: { toggle: 'tab' } do
+            friday
+        %li
+          = link_to '#saturday-lists', data: { toggle: 'tab' } do
+            saturday
+        %li
+          = link_to '#sunday-lists', data: { toggle: 'tab' } do
+            sunday
+        %li
+          = link_to '#monday-lists', data: { toggle: 'tab' } do
+            monday
+        %li
+          = link_to '#tuesday-lists', data: { toggle: 'tab' } do
+            tuesday
+        %li
+          = link_to '#wednesday-lists', data: { toggle: 'tab' } do
+            wednesday
     %li
       = link_to '#all-lists', data: { toggle: 'tab' } do
         all
@@ -53,6 +74,26 @@
         # saturday
         url: baseURL + 'nl' + "&nl=saturday"
         $trigger: $("a[href='#saturday-lists']")
+       ,
+
+        # sunday
+        url: baseURL + 'nl' + "&nl=sunday"
+        $trigger: $("a[href='#sunday-lists']")
+       ,
+
+        # monday
+        url: baseURL + 'nl' + "&nl=monday"
+        $trigger: $("a[href='#monday-lists']")
+       ,
+
+        # tuesday
+        url: baseURL + 'nl' + "&nl=tuesday"
+        $trigger: $("a[href='#tuesday-lists']")
+       ,
+
+        # wednesday
+        url: baseURL + 'nl' + "&nl=wednesday"
+        $trigger: $("a[href='#wednesday-lists']")
        ,
 
         # new list
