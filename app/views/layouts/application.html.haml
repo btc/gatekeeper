@@ -5,10 +5,10 @@
   %body.page_classes
     .navbar.navbar-fixed-top
       .navbar-inner
-        .container-fluid
+        .container
           = render partial: 'layouts/nav'
 
-    .container-fluid
+    .container
       = render 'layouts/alert'
       = render 'shared/tabs'
       = yield
