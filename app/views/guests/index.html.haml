@@ -1,36 +1,35 @@
-.row-fluid
-  .span6
-    = link_to new_guest_path,
-      id: 'new-guest-button', class: 'btn btn-block' do
-      create new guest
-
-  %form.form-search.span6
-    .input-append
-      %input.search-query(type='text'
-        name='q'
-        placeholder='lookup guest'
-        autofocus='true')
-      %button.btn(type='submit')
-        %i.icon-search
-
-#guest-index-results
-  .results-header
-    - if @q.present?
-      .pull-right
-        %a.btn{ href: guests_path }
-          %small display all guests
-    %h3
+#guests-index
+  .guests-nav-tabs
+    %ul.nav.nav-pills
       - if @q.present?
-        = "displaying guests whose names match '#{@q}'"
+        %li
+          = link_to guests_path do
+            all
+        %li.active
+          = link_to guests_path do
+            &times;
+            = "results for '#{@q}'"
+            %small (#{@guests.length})
       - else
-        all guests
-      %small (#{@guests.length})
-  %hr
+        %li{ active_if(guests_path) }
+          = link_to guests_path do
+            all
 
-  - @guests.each_with_index do |guest, i|
-    - if i.modulo(3) == 0
-      <div class='row-fluid'>
-    .span4
-      = render 'guest_block', guest: guest
-    - if i.modulo(3) == 2
-      </div>
+  .row-fluid
+    %table.table
+      %thead
+        %th name
+        %th lists & invitations
+      - @guests.each do |guest|
+        %tbody
+          %tr
+            %td
+              = link_to guest do
+                %p
+                  .guest-name= guest.full_name
+                .thumbnail
+                  = image_tag url_for_profile_pic(guest, :thumb), width: '100'
+
+            %td.lists-and-invitations
+              %span= render '/guest_lists/list_by_date', guest_lists: guest.guest_lists.active
+
