@@ -13,6 +13,7 @@
 
 - if user_signed_in?
   %ul.nav
+    %li.divider-vertical
     %form.navbar-search.pull-left{ action: guests_path }
       %input.search-query.span3(type='text' name='q' autocorrect='off'
         autofocus='true'
