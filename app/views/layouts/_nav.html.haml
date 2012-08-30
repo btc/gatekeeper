@@ -1,17 +1,6 @@
-%a.brand{ href: root_path }
-  %i.icon-home
-
-- unless user_signed_in?
-  %ul.nav.pull-right
-    %li
-      = link_to new_user_session_path do
-        sign in
-    %li.divider-vertical
-    %li
-      = link_to new_user_registration_path do
-        register
-
 - if user_signed_in?
+  %a.brand{ href: root_path }
+    %i.icon-home
   %ul.nav
     %li.divider-vertical
     %form.navbar-search.pull-left{ action: guests_path }
