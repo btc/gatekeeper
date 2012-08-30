@@ -7,9 +7,9 @@
   .row-fluid
     = link_to guest_list_path(list) do
       #{list.owner.full_name}'s list
-      (#{list.total})
     - if can? :view_rating, list.owner
       = stars(list.owner.rating)
+    = pluralize list.total, 'guest'
 
 .guest-list-stats
   %span.list-count
