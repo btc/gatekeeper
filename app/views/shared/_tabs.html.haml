@@ -1,0 +1,16 @@
+.global-nav-tabs
+  %ul.nav.nav-tabs.centered
+    %li{ active_if(guests_path) }
+      = link_to guests_path do
+        .tab-icon
+          %i.icon-group
+        .tab-text
+          guests
+
+    %li{ active_if(guest_lists_path) }
+      = link_to guest_lists_path do
+        .tab-icon
+          %i.icon-list-ol
+        .tab-text
+          lists
+
