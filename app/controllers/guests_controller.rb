@@ -1,5 +1,5 @@
 class GuestsController < ApplicationController
-  load_and_authorize_resource except: [:full_name_search]
+  load_and_authorize_resource except: [:full_name_search, :birthdays]
   # GET /guests
   # GET /guests.json
   def index
@@ -109,6 +109,11 @@ class GuestsController < ApplicationController
         render json: tuples
       end
     end
+  end
+
+  def birthdays
+    authorize! :read, Guest
+    @birthday_guests = Guest.find_ordered_birthdays_for_the_next_month
   end
 
   private

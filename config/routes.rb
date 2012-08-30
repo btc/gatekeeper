@@ -10,6 +10,7 @@ Vern::Application.routes.draw do
     resources :photos
     resources :guests do
       get 'full_name_search', on: :collection
+      get 'birthdays', on: :collection
     end
     resources :committees
     resources :events
