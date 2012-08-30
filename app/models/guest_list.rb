@@ -49,4 +49,11 @@ class GuestList < ActiveRecord::Base
 
     n_women.to_f / (n_men + n_women).to_f * 100
   end
+  def total
+    n = 0
+    self.invitations.each do |i|
+      n += 1 + i.plus
+    end
+    n
+  end
 end
