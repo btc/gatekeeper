@@ -1,6 +1,9 @@
 .guest-list-nav-tabs
   %ul.nav.nav-pills
     %li
+      = link_to '#new-list', data: { toggle: 'tab' } do
+        create new list
+    %li
       = link_to '#active-lists', data: { toggle: 'tab' } do
         active
     %li
@@ -50,4 +53,9 @@
         # saturday
         url: baseURL + 'nl' + "&nl=saturday"
         $trigger: $("a[href='#saturday-lists']")
+       ,
+
+        # new list
+        url: '/api/guest_lists/form'
+        $trigger: $("a[href='#new-list']")
       ]
