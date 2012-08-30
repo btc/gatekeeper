@@ -143,7 +143,9 @@ class GuestListsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render partial: 'list_by_date' }
+      format.html do
+        render partial: 'list_by_date', locals: { guest_lists: @guest_lists }
+      end
     end
   end
 end
