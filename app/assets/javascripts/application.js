@@ -22,4 +22,4 @@
 //= require guests
 //= require webcam
 //= require guest_form
-//= require guest_lists/form
+//= require_tree ./guest_lists
