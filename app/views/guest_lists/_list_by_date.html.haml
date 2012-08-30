@@ -10,12 +10,10 @@
     - if can? :view_rating, list.owner
       = stars(guest.rating)
 
-.row-fluid
-  .span2
-    %hr
-    .guest-list-stats
-      = n_lists = guest_lists.count
-      - if n_lists == 1
-        list
-      - else
-        lists
+.guest-list-stats
+  %span.list-count
+    = n_lists = guest_lists.count
+    - if n_lists == 1
+      list
+    - else
+      lists
