@@ -1,5 +1,53 @@
-= link_to new_guest_list_path, class: 'btn btn-primary' do
-  %i.icon-plus.icon-white
-  %i.icon-list-alt.icon-white
+.guest-list-nav-tabs
+  %ul.nav.nav-pills
+    %li
+      = link_to '#active-lists', data: { toggle: 'tab' } do
+        active
+    %li
+      = link_to '#thursday-lists', data: { toggle: 'tab' } do
+        thursday
+    %li
+      = link_to '#friday-lists', data: { toggle: 'tab' } do
+        friday
+    %li
+      = link_to '#saturday-lists', data: { toggle: 'tab' } do
+        saturday
+    %li
+      = link_to '#all-lists', data: { toggle: 'tab' } do
+        all
 
+#list-container
 
+:coffeescript
+  jQuery ->
+    baseURL = "/api/guest_lists/search?q="
+    $default = $("a[href='#active-lists']")
+    new window.VIP.GuestListIndex
+      $container: $('#list-container')
+      $default: $default
+      tuples: [
+
+        # active
+        url: baseURL + 'active'
+        $trigger: $default
+       ,
+
+        # all
+        url: baseURL
+        $trigger: $("a[href='#all-lists']")
+       ,
+
+        # thursday
+        url: baseURL + 'nl' + "&nl=thursday"
+        $trigger: $("a[href='#thursday-lists']")
+       ,
+
+        # friday
+        url: baseURL + 'nl' + "&nl=friday"
+        $trigger: $("a[href='#friday-lists']")
+       ,
+
+        # saturday
+        url: baseURL + 'nl' + "&nl=saturday"
+        $trigger: $("a[href='#saturday-lists']")
+      ]

@@ -1,11 +1,11 @@
+require 'chronic'
+
 class GuestListsController < ApplicationController
   load_and_authorize_resource
 
   # GET /guest_lists
   # GET /guest_lists.json
   def index
-    @guest_lists = GuestList.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { respond_with_bip @guest_lists }
@@ -127,6 +127,23 @@ class GuestListsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to guest_lists_url }
       format.json { respond_with_bip @guest_list }
+    end
+  end
+
+  def search
+    @guest_lists = case params[:q]
+    when :nl.to_s
+      date = Chronic.parse(params[:nl], context: :future)
+      date = Date.today if date.wday == Date.today.wday
+      @guest_lists = GuestList.where('date = ?', date).alphabetic_by_date
+    when :active.to_s
+      @guest_lists = GuestList.active.alphabetic_by_date
+    else
+      @guest_lists = GuestList.scoped.alphabetic_by_date
+    end
+
+    respond_to do |format|
+      format.html { render partial: 'list_by_date' }
     end
   end
 end

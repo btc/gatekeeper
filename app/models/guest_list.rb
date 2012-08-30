@@ -16,6 +16,20 @@ class GuestList < ActiveRecord::Base
 
   has_paper_trail
 
+  # temporary solution to loading lists for friday when it is 2 am saturday
+  scope :active, where("date >= ?", Date.yesterday)
+
+  def self.alphabetic_by_date
+    self.all.sort do |a,b|
+      case a.date <=> b.date
+      when 1 then 1
+      when -1 then -1
+      else
+        a.owner.first_name <=> b.owner.first_name
+      end
+    end
+  end
+
   def parse_date
     if self.date_before_type_cast
       self.date = Chronic.parse(self.date_before_type_cast, context: :future)

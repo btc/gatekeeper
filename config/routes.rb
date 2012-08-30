@@ -14,7 +14,9 @@ Vern::Application.routes.draw do
     resources :committees
     resources :events
     resources :invitations
-    resources :guest_lists
+    resources :guest_lists do
+      get 'search', on: :collection
+    end
   end
 
   devise_for :users,
