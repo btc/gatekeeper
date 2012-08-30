@@ -3,12 +3,12 @@
   = render partial: 'layouts/head'
 
   %body.page_classes
-    .navbar.navbar-fixed-top
+    .navbar.navbar-static-top
       .navbar-inner
         .container
           = render partial: 'layouts/nav'
 
-    .container
+    .container#body-container
       = bootstrap_flash
       = render 'shared/tabs'
       = yield
