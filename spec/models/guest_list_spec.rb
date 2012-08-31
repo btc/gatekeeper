@@ -43,4 +43,32 @@ describe GuestList do
     @guest_list.owner = @guest
     @guest_list.owner.should eq(@guest)
   end
+
+  it 'should default to approved == false' do
+    @guest_list = GuestList.new
+    @guest_list.approved.should eq(false)
+  end
+
+  it 'should default to pending == true' do
+    @guest_list = GuestList.new
+    @guest_list.pending?.should eq(true)
+  end
+
+  it 'should not be pending if approved' do
+    @guest_list.approve!
+    @guest_list.pending?.should eq(false)
+  end
+
+  it 'should not be pending once approved' do
+    @guest_list.approve!
+    @guest_list.pending?.should eq(false)
+  end
+
+  it 'should not be approved once revoked' do
+    @guest_list.approve!
+    @guest_list.pending?.should eq(false)
+    @guest_list.approved?.should eq(true)
+    @guest_list.revoke!
+    @guest_list.pending?.should eq(true)
+    @guest_list.approved?.should eq(false)
 end

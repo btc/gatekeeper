@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826101733) do
+ActiveRecord::Schema.define(:version => 20120830225028) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -45,8 +45,9 @@ ActiveRecord::Schema.define(:version => 20120826101733) do
     t.integer  "owner_id"
     t.integer  "event_id"
     t.date     "date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "approved",   :default => false
   end
 
   create_table "guests", :force => true do |t|

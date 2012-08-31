@@ -1,7 +1,7 @@
 require 'chronic'
 
 class GuestList < ActiveRecord::Base
-  attr_accessible :date, :owner_id, :creator_id, :event_id
+  attr_accessible :date, :owner_id, :creator_id, :event_id, :approved
 
   belongs_to :creator, class_name: 'User'
   belongs_to :owner, class_name: 'Guest'
@@ -18,6 +18,8 @@ class GuestList < ActiveRecord::Base
 
   # temporary solution to loading lists for friday when it is 2 am saturday
   scope :active, where("date >= ?", Date.yesterday)
+
+  scope :pending, where("approved = ?", false)
 
   def self.alphabetic_by_date
     self.all.sort do |a,b|
@@ -60,5 +62,21 @@ class GuestList < ActiveRecord::Base
       n += 1 + i.plus
     end
     n
+  end
+
+  def revoke!
+    self.approved = false
+  end
+
+  def approve!
+    self.approved = true
+  end
+
+  def pending?
+    !self.approved
+  end
+
+  def approved?
+    self.approved
   end
 end
