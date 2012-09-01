@@ -43,6 +43,12 @@
             phone
           %td= @guest.phone_number if @guest.phone_number
 
+  .span6.thumbnail
+    %h3
+      Guest Lists
+      %small and invitations
+    = render 'guest_lists/list_by_date', guest_lists: @guest.guest_lists
+
   - if can? :view_photos, @guest
     .span6.thumbnail
       %h3 photos
