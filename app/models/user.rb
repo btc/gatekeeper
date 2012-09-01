@@ -8,18 +8,22 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  has_many :roles
+  has_many :roles, inverse_of: :user
   has_and_belongs_to_many :committees
   belongs_to :guest
 
-  def is_admin?
-    Role.is_admin? self
+  def has_role?(role_name)
+    Role.find_by_user_id_and_name(self.id, role_name.to_s) ? true : false
   end
 
-  def admin=(bool)
-    if bool == true
-      Role.add_admin(self)
-    end
+  def add_role!(role_name)
+    r = self.roles.build
+    r.name = role_name.to_s
+    r.save!
+    r # return
   end
 
+  def to_s
+    self.email
+  end
 end
