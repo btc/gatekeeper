@@ -10,8 +10,29 @@
 
     .container#body-container
       = bootstrap_flash
+      - if current_user.roles.empty?
+        .alert.alert-info
+
+          %h2 Welcome!
+          Thanks for signing up for zen operations.
+
+          %h2 Getting started
+          %p
+            Before you can do anything here,
+            %strong
+              someone needs to add you to a user group.
+          %p
+            So, contact
+            Johnny, Steven, Karrillee, Chloe, Christina, Leeanna, Gabriel or Brian
+            to get started!
+
       = render 'shared/tabs'
       = yield
+      #footer
+        .pull-right
+          designed with
+          %i.icon-heart
+          by bhc
 
     = render 'layouts/global_javascripts'
 

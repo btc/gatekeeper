@@ -16,10 +16,13 @@ class GuestList < ActiveRecord::Base
 
   has_paper_trail
 
+  default_scope order('date ASC')
+
   # temporary solution to loading lists for friday when it is 2 am saturday
   scope :active, where("date >= ?", Date.yesterday)
 
   scope :pending, where("approved = ?", false)
+  scope :approved, where("approved = ?", true)
 
   def self.alphabetic_by_date
     self.all.sort do |a,b|
