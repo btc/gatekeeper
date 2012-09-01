@@ -1,8 +1,5 @@
 .guest-list-nav-tabs
   %ul.nav.nav-pills
-    %li
-      = link_to '#new-list', data: { toggle: 'tab' } do
-        create new list
     - if can? :create, GuestList
       %li
         = link_to '#new-list', data: { toggle: 'tab' } do
