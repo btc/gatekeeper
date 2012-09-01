@@ -89,7 +89,7 @@ class GuestListsController < ApplicationController
 
     respond_to do |format|
       if @guest_list.save
-        format.html { redirect_to @guest_list, notice: 'Guest list was successfully created.' }
+        format.html { redirect_to @guest_list, notice: 'Hui! Guest list was successfully created.' }
         format.json { respond_with_bip @guest_list }
       else
         format.html do
@@ -109,7 +109,7 @@ class GuestListsController < ApplicationController
 
     respond_to do |format|
       if @guest_list.update_attributes(params[:guest_list])
-        format.html { redirect_to @guest_list, notice: 'Guest list was successfully updated.' }
+        format.html { redirect_to @guest_list, notice: 'Hui! Guest list was successfully updated.' }
         format.json { respond_with_bip(@guest_list) }
       else
         format.html { render action: "edit" }
