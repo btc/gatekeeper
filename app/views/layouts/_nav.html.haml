@@ -6,12 +6,13 @@
     %span.hidden-phone
       zen operations
       %sup &#945;
-  %ul.nav
-    %li.divider-vertical
-    %form.navbar-search.pull-left{ action: guests_path }
-      %input.search-query.span3(type='text' name='q' autocorrect='off'
-        autofocus='true'
-        placeholder='lookup guest or list')
+  - if can?(:read, Guest)
+    %ul.nav
+      %li.divider-vertical
+      %form.navbar-search.pull-left{ action: guests_path }
+        %input.search-query.span3(type='text' name='q' autocorrect='off'
+          autofocus='true'
+          placeholder='lookup guest or list')
 
   %ul.nav.pull-right
     %li.dropdown
