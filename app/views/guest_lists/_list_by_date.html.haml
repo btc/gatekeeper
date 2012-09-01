@@ -15,8 +15,4 @@
 
 .guest-list-stats
   %span.list-count
-    = n_lists = guest_lists.count
-    - if n_lists == 1
-      list
-    - else
-      lists
+    = pluralize guest_lists.count, 'list'
