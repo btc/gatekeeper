@@ -99,7 +99,7 @@ class window.VIP.GuestForm
       api_url = options.api_url
 
       ### reset the api URL appending the auth token parameter ###
-      webcam.set_api_url(api_url + '?' + csrf_param + "=" + encodeURI(encodeURI(csrf_token)))
+      webcam.set_api_url(api_url + '?' + csrf_param + "=" + encodeURI(csrf_token))
 
     webcam.set_hook('onLoad', onloadComplete)
     webcam.set_hook('onComplete', uploadComplete)
