@@ -43,4 +43,7 @@ describe User do
 
   it { should belong_to(:guest) }
   it { should have_and_belong_to_many(:committees) }
+
+  it { should have_db_column(:first_name) }
+  it { should have_db_column(:last_name) }
 end
