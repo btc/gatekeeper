@@ -32,9 +32,9 @@ group :assets do
   # This gem is only needed in this group as it’s onliy used by the assets
   # pipeline. If we’re using static assets in production then it won’t be
   # needed.
-  gem 'twitter-bootstrap-rails'
 end
 
+gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
 
 gem 'haml-rails'
