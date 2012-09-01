@@ -42,19 +42,5 @@ class Ability
     end
 =end
 
-    # QUICK DOCUMENTATION
-    # ===================
-    # first argument to can (action)
-    # :read, :create, :update and :destroy, :manage
-    #
-    # The second argument (resource)
-    # :all it will apply to every resource.
-    # Otherwise pass a Ruby class of the resource.
-    #
-    # third argument (is an optional hash of conditions)
-    # For example, here the user can only update published articles.
-    # can :update, Article, :published => true
-    #
-    # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 end
