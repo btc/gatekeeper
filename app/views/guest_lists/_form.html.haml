@@ -5,7 +5,7 @@
       %i.icon-user
       %span.pull-right
         guest not found?
-        %a#guest-modal-trigger(href='#guest-qcfw' data-toggle='modal')
+        %a#guest-modal-trigger.zoom-cursor(href='#guest-qcfw' data-toggle='modal')
           create new guest
           %i.icon-star
     = tag('div', id: 'saved_selections', data: { entries: @saved_selections })
