@@ -4,7 +4,7 @@
   .page-header
     %i.icon-calendar
     upcoming birthdays
-  - day = Date.today.day << 1
+  - day = Date.yesterday
   - @birthday_guests.each do |guest|
     - if day != guest.birthday.day
       .row-fluid
