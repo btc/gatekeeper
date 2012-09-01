@@ -57,3 +57,5 @@ gem 'capistrano'
 gem 'unicorn'
 
 gem 'paper_trail'
+
+gem 'best_in_place'

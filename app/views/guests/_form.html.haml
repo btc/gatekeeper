@@ -102,6 +102,7 @@
   .row-fluid.submit
     = f.button :submit, class: 'btn-primary btn-large span12'
 
+= content_for :javascript do
   :coffeescript
     jQuery ->
       webcamOptions =

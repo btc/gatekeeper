@@ -1,0 +1,114 @@
+.guest-list-nav-tabs
+
+  %ul.nav.nav-pills
+
+    %li
+      = link_to guest_lists_path do
+        %i.icon-arrow-left
+        back to all lists
+
+    %li.active
+
+      = link_to guest_list_path(@guest_list) do
+        = @guest_list.owner.full_name
+        \:
+        = best_in_place @guest_list, :date,
+          display_as: :friendly_date, activator: '.edit-date'
+        - if @guest_list.pending?
+          %span.label-warning.label pending approval
+        - elsif @guest_list.approved?
+          %span.label-success.label approved
+          -# TODO approved by user
+
+    - if can?(:manage, @guest_list)
+      %li
+        %a.edit-date(href='#') edit the date
+
+- if @guest_list.pending?
+  .alert
+    %strong HEY!
+    this list will not be available at the door until approved
+
+.row-fluid
+  .span9
+
+    #guest-list-table
+      %table.table.hero-unit
+
+        %thead
+          %th name
+          %th plus
+          %th
+            tags
+          %th
+            %i.icon-check
+            checked-in!
+
+        %tbody
+          - @guest_list.invitations.each do |i|
+            %tr.invitation{ class: ('redeemed' if i.redeemed) }
+              %td.name
+                = link_to i.guest do
+                  = i.guest.full_name
+              %td
+                - if can? :update_plus, GuestList
+                  = simple_form_for(i, remote: true) do |f|
+                    = f.input :plus, as: :select, collection: (0..50).to_a.reverse,
+                      label: false
+                - else
+                  %span.badge
+                    = i.plus
+
+              %td
+              %td
+                = simple_form_for(i, remote: true) do |f|
+                  = f.input :redeemed, label: false, class: 'checkable'
+
+    - if can? :manage, @guest_list
+      %hr
+      #guest-list-stats
+        .row-fluid
+          .span3
+            %small
+              %dl
+                %dt
+                  known distribution
+                %dd
+                  #{@guest_list.pct_female}% female
+
+  - if can? :manage, @guest_list
+    .span3.guest-list-manage
+      .row-fluid.actions
+        = simple_form_for(@guest_list) do |f|
+          = f.hidden_field :approved, value: 'false'
+          %button.btn.btn-warning.btn-block
+            revoke
+        = simple_form_for(@guest_list) do |f|
+          = f.hidden_field :approved, value: 'true'
+          %button.btn.btn-success.btn-block
+            approve
+        = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
+          :confirm => 'Are you sure?', :method => :delete
+
+      .lead
+        = pluralize GuestList.active.pending.count, 'list'
+        awaiting approval
+      = render 'list_by_date', guest_lists: GuestList.active.pending.alphabetic_by_date
+
+= content_for :javascript do
+  :coffeescript
+    jQuery ->
+      $(".best_in_place").best_in_place()
+
+      # submit form to update invitation redemption status
+      # when checkbox is changed
+      $selectPlus = $('.select')
+      $checkboxRedeemed = $('.boolean')
+
+      $selectPlus.live('change', ->
+        $(this).parents('form:first').submit()
+      )
+      $checkboxRedeemed.live('change', ->
+        $(this).parents('form:first').submit()
+      )
+

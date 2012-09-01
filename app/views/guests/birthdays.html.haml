@@ -1,0 +1,22 @@
+= render 'tabs'
+
+#birthdays
+  .page-header
+    %i.icon-calendar
+    upcoming birthdays
+    = surround '(', ')' do
+      today is
+      = Date.today.strftime('%A %e %B')
+  - day = Date.yesterday
+  - @birthday_guests.each do |guest|
+    - if day != guest.birthday.day
+      .row-fluid
+        %h6= guest.birthday.strftime('%e %B')
+      - day = guest.birthday.day
+    .row-fluid
+      = link_to guest_path(guest) do
+        = guest.full_name
+      <br>
+      - if can? :view_rating, guest
+        = stars(guest.rating)
+

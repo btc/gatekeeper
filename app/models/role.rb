@@ -1,26 +1,28 @@
 class Role < ActiveRecord::Base
+  # OPTIMIZE use a HABTM relationship between users and roles
+  # in order to conserver database space
+  # it's preetty wasteful to use an individual
+  # role object for each entry in the database
 
-  @@types = ["admin", "root", "community_leader"]
+  @valid_roles = %w[door_attendant committee_member manager admin]
 
   attr_accessible :name, :user_id
 
+  # a role isn't valid without a user associated with it
   validates_presence_of :user_id
-  validates_uniqueness_of :name,:scope => :user_id
-  validates(:name, :inclusion => {:in => @@types,
-    :message => "%{value} is not a valid role"})
+  # one role per user
+  validates_uniqueness_of :name, :scope => :user_id
 
-  belongs_to :user
+  # ensure that only valid roles get committed to the database
+  validates(:name,
+            inclusion: { in: @valid_roles,
+                         message: '%{value} is not a valid role'
+                         }
+            )
 
-  def self.is_admin? user
-    find_by_user_id_and_name(user.id, 'admin') ? true : false
+  belongs_to :user, inverse_of: :roles
+
+  def self.roles
+    @valid_roles
   end
-
-  def self.add_admin user
-    find_or_create_by_user_id_and_name user.id, 'admin'
-  end
-
-  def self.get_types
-    @@types
-  end
-
 end

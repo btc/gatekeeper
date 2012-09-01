@@ -9,46 +9,64 @@ class Ability
     # user ||= User.new # guest user (not logged in)
     # - brianhc
 
-    can :go, :home # every logged in user can go home
+    # GENERAL INFO
+    # ============
+    # By default, users do not have access to any resources.
+    # All permissions must be explicitly defined
+    # for one of the documented, predefined roles.
+    # The one exception to this rule:
+    # all users
+    can :go, :home
 
-    can :upload_webcam, Photo #temp to take webcam photo TODO fix
-
-    # all users can view guests;
-    # attribute-specific permissions are handled at view-level
-    can :read, Guest
-    can :create, Guest # all users can create guests
-
-    can :update, Guest do |guest|
-      true # anyone can update
-      # guest.creator == user
+    # Admins
+    # ======
+    # ======
+    # can manage and view everything
+    if user.has_role?(:admin) || user.has_role?(:manager) || user.is_god?
+      can :manage, :all
     end
 
-    can :view_contact_info, Guest
-    can :view_photos, Guest
+    # if user.has_role? :committee_member
+    #   can :update_plus, GuestList do |guest_list|
+    #     guest_list.creator == user && guest_list.approved == false
+    #   end
+    # end
 
-=begin
-    if user.role? :boss
-      can :rate, Guest
+    # Door attendants
+    # ===============
+    # ===============
+    if user.has_role? :door_attendant
+
+      # managing GuestLists
+      # -------------------
+      can :read, GuestList, :approved => true # to fulfill duties at door
+      can :read, Guest
+      can :read, Invitation do |i|
+        i.guest_list.approved?
+      end
+      # only the redeemed field
+      # must enforce at view level
+      can :update, Invitation
+
+      # view-specific permissions
+      # -------------------------
       can :view_contact_info, Guest
       can :view_photos, Guest
-      can :view_rating, Guest
-      can :update_rating, Guest
-    end
-=end
 
-    # QUICK DOCUMENTATION
-    # ===================
-    # first argument to can (action)
-    # :read, :create, :update and :destroy, :manage
-    #
-    # The second argument (resource)
-    # :all it will apply to every resource.
-    # Otherwise pass a Ruby class of the resource.
-    #
-    # third argument (is an optional hash of conditions)
-    # For example, here the user can only update published articles.
-    # can :update, Article, :published => true
-    #
-    # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+      # creating Guests
+      # ---------------
+      can :upload_webcam, Photo #temp to take webcam photo TODO fix
+      can :create, Guest # needed when guests arrive at the door
+      can :update, Guest # to enrich profiles with new information
+      cannot :destroy, Guest
+
+      # GUEST LIST PERMISSIONS
+      # ======================
+      # can :update_plus, GuestList # managers and admins
+      # can :manage, GuestList # FIXME TODO restrict by role
+      # can :manage, Invitation # FIXME TODO restrict by role
+      # can :lookup_names, Guest # any user full_name_search always
+    end
+
   end
 end

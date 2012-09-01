@@ -1,0 +1,46 @@
+.row-fluid
+  .well.span6
+    .page-header
+      %h1
+        create a guest list
+      %small.visible-phone
+        = link_to 'show tips', '#tips'
+    = render 'form', id: 'index-guest-list-select'
+
+.span6
+  -# TODO toggle tips
+  -# TODO load 'collapsed' if user has created at least three list
+  %span.label.label-info#tips
+    tips
+  %ol
+    %li
+      %dt
+        %h4 primary guest first
+      %dd
+        The first name entered in the <i class='icon-user'></i>
+        field will be treated as the <em>owner</em> of the guest list.
+
+        %h5
+          example:
+        .thumbnail
+          = image_tag 'guest_list_form_eg.png'
+    %li
+      %dt
+        %h4 other guests after
+      %dd
+        Enter the names of other guests.
+        Don't worry if one or more names aren't present in the system.
+    %li
+      %dt
+        %h4 enter the date
+      %dd
+        Did you know you can enter dates in plain english?
+        <br>
+        For example:
+        <br>
+        'this friday' is #{this_friday.strftime('%e %B')}
+        <br>
+        and 'tomorrow' is #{Date.tomorrow.strftime('%e %B')}
+        <br>
+        Cool, huh?
+

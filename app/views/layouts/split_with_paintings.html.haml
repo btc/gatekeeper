@@ -2,13 +2,12 @@
 %html
   = render 'layouts/head'
 
-  %body.page_classes
-    = render 'layouts/nav'
+  %body
 
     .container
-      = render 'layouts/alert'
+      = bootstrap_flash
       .row-fluid
-        .span6.thumbnail
+        .span6.thumbnail.hidden-phone
           - paintings = ['paintings.png', 'paintings2.png']
           = image_tag paintings[rand(paintings.length)]
 

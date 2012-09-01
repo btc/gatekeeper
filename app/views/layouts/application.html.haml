@@ -3,10 +3,40 @@
   = render partial: 'layouts/head'
 
   %body.page_classes
-    = render partial: 'layouts/nav'
+    .navbar.navbar-static-top
+      .navbar-inner
+        .container
+          = render partial: 'layouts/nav'
 
-    .container
-      = render 'layouts/alert'
+    .container#body-container
+      = bootstrap_flash
+      - if current_user.roles.empty?
+        .alert.alert-info
+
+          %h2 Welcome!
+          Thanks for signing up for zen operations.
+
+          %h2 Getting started
+          %p
+            Before you can do anything here,
+            %strong
+              someone needs to add you to a user group.
+          %p
+            So, contact
+            Johnny, Steven, Karrillee, Chloe, Christina, Leeanna, or Brian
+            to get started!
+
+      = render 'shared/tabs'
       = yield
+      #footer
+        .pull-right.lead
+          %small
+            designed with
+            %i.icon-heart
+            by bhc
+
+    = javascript_include_tag  "application"
+    = yield :javascript
+
 
 

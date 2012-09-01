@@ -1,46 +1,37 @@
-.navbar.navbar-fixed-top
-  .navbar-inner
-    .container
-      %ul.nav
-        %li{ active_if(root_path) }
-          %a{ href: root_path }
-            %i.icon-home
+- if user_signed_in?
+  %a.brand{ href: root_path }
+    %span.visible-phone
+      zen
+      %sup &#945;
+    %span.hidden-phone
+      zen operations
+      %sup &#945;
+  - if can?(:read, Guest)
+    %ul.nav
+      %li.divider-vertical
+      %form.navbar-search.pull-left{ action: guests_path }
+        %input.search-query.span3(type='text' name='q' autocorrect='off'
+          autofocus='true'
+          placeholder='lookup guest or list')
 
-      - unless user_signed_in?
-        %ul.nav.pull-right
+  %ul.nav.pull-right
+    %li.dropdown
+      %a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target="#" href='#')
+        %i.icon-cog
+        <b class="caret"></b>
+      %ul.dropdown-menu(role='menu' aria-labelledby="dLabel")
+        - if can?(:manage, Role)
           %li
-            = link_to new_user_session_path do
-              sign in
-          %li.divider-vertical
-          %li
-            = link_to new_user_registration_path do
-              register
-
-      - if user_signed_in?
-        %ul.nav
-          -# GUESTS
-          %li{ active_if(guests_path) }
-            = link_to guests_path do
-              %i.icon-user
-              guests
-          %li{ active_if(new_guest_path) }
-            = link_to new_guest_path do
-              %i.icon-plus
-              %i.icon-user
-
-        %ul.nav.pull-right
-          %li.dropdown
-            %a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target="#" href='#')
-              %i.icon-cog
-              <b class="caret"></b>
-            %ul.dropdown-menu(role='menu' aria-labelledby="dLabel")
-              %li
-                = link_to edit_user_registration_path do
-                  %i.icon-lock
-                  change email address or password
-              %li.divider
-              %li
-                -# currently works by way of get due to bootstrap bug
-                = link_to destroy_user_session_path, method: :delete do
-                  %i.icon-fire
-                  log out
+            = link_to roles_manage_path do
+              %i.icon-legal
+              manage roles
+        %li
+          = link_to edit_user_registration_path do
+            %i.icon-lock
+            change email address or password
+        %li.divider
+        %li
+          -# currently works by way of get due to bootstrap bug
+          = link_to destroy_user_session_path, method: :delete do
+            %i.icon-signout
+            log out

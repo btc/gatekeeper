@@ -1,0 +1,22 @@
+-# REQUIRED FIELDS BEGIN
+= f.input :first_name, autofocus: true
+= f.input :last_name
+= f.input :gender, collection: Guest.genders, as: :radio_buttons
+-# REQUIRED FIELDS END
+
+%div.collapsed-fields(data-collapse)
+  %a.small.collapsed-field-title
+    show optional
+    = 'rating,' if can?(:update_rating, Guest)
+    email and phone fields
+  %div.hide.collapsed-field-contents
+    = f.input :email
+    - if can? :update_rating, @guest
+      = f.input :rating, collection: Guest.ratings, as: :select
+    = f.input :phone_number
+
+-# only initialize using js when form is rendered as a partial
+- unless current_page?(new_guest_path)
+  :coffeescript
+    jQuery ->
+      $('.collapsed-fields').collapse()

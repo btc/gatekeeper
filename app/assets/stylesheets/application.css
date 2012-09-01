@@ -11,8 +11,13 @@
  *= require_self
  *= require normalize
  *= require devise
+ *= require token-input
+ *= require token-input-mac
+ *= require token-input-facebook
  *= require bootstrap_and_overrides
- *= require body
+ *= require globals
+ *= require tabs
  *= require guests
+ *= require guest_lists
  *= require root
  */

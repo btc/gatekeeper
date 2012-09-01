@@ -1,15 +1,17 @@
 class GuestsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:full_name_search, :birthdays]
   # GET /guests
   # GET /guests.json
   def index
 
+    @guests = Guest.includes(:guest_lists, :photos).scoped
+
     @guests = case
               when params[:q].present?
                 @q = params[:q]
-                Guest.by_first_last_gender.full_name_search @q
+                @guests.by_first_last_gender.full_name_search @q
               else
-                Guest.by_first_last_gender.all
+                @guests.by_first_last_gender.all
               end
 
     respond_to do |format|
@@ -61,7 +63,7 @@ class GuestsController < ApplicationController
         format.html { redirect_to @guest, notice: 'Guest was successfully created.' }
         format.json { render json: @guest, status: :created, location: @guest }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", status: 400 }
         format.json { render json: @guest.errors, status: :unprocessable_entity }
       end
     end
@@ -95,6 +97,23 @@ class GuestsController < ApplicationController
       format.html { redirect_to guests_url }
       format.json { head :no_content }
     end
+  end
+
+  # TODO manage permissions
+  def full_name_search
+    authorize! :lookup_names, Guest
+    respond_to do |format|
+      format.json do
+        @guests = Guest.full_name_search params[:q]
+        tuples = Guest.id_name_tuples @guests
+        render json: tuples
+      end
+    end
+  end
+
+  def birthdays
+    authorize! :read, Guest
+    @birthday_guests = Guest.find_ordered_birthdays_for_the_next_month
   end
 
   private

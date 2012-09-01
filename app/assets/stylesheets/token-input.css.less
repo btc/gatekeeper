@@ -1,0 +1,131 @@
+@import "twitter/bootstrap/variables";
+
+@tokenInputWidth: auto;
+
+/* Example tokeninput style #1: Token vertical list*/
+ul.token-input-list {
+    overflow: hidden;
+    height: auto !important;
+    height: 1%;
+    width: @tokenInputWidth;
+    border: 1px solid @inputBorder;
+    border-radius: @inputBorderRadius;
+    cursor: text;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    list-style-type: none;
+    clear: left;
+}
+
+ul.token-input-list li {
+    list-style-type: none;
+}
+
+// show the guest list owner in diff color
+ul.token-input-list li:first-child {
+    color: @successText;
+}
+
+// make sure selected behavior does not change
+ul.token-input-list li.token-input-selected-token:first-child {
+    color: @white;
+}
+
+ul.token-input-list li {
+    list-style-type: none;
+}
+
+
+ul.token-input-list li input {
+    border: 0;
+    width: 350px;
+    padding: 3px 8px;
+    background-color: @white;
+    -webkit-appearance: caret;
+}
+
+li.token-input-token {
+    overflow: hidden;
+    height: auto !important;
+    height: 1%;
+    margin: 3px;
+    padding: 3px 5px;
+    background-color: @grayLighter;
+    color: #000;
+    font-weight: bold;
+    cursor: default;
+    display: block;
+}
+
+li.token-input-token p {
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+li.token-input-token span {
+    float: right;
+    color: @grayLight;
+    cursor: pointer;
+}
+
+li.token-input-selected-token {
+    background-color: @linkColor;
+    color: #fff;
+}
+
+li.token-input-selected-token span {
+    color: #bbb;
+}
+
+div.token-input-dropdown {
+    position: absolute;
+    width: @tokenInputWidth;
+    background-color: @dropdownBackground;
+    overflow: hidden;
+    border-left: 1px solid @dropdownBorder;
+    border-right: 1px solid @dropdownBorder;
+    border-bottom: 1px solid @dropdownBorder;
+    border-radius: @inputBorderRadius;
+    cursor: default;
+    z-index: 1;
+}
+
+div.token-input-dropdown p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: @textColor;
+}
+
+div.token-input-dropdown ul {
+    margin: 0;
+    padding: 0;
+}
+
+div.token-input-dropdown ul li {
+    background-color: @dropdownBackground;
+    padding: 3px;
+    list-style-type: none;
+}
+
+div.token-input-dropdown ul li.token-input-dropdown-item {
+    background-color: #fafafa;
+}
+
+div.token-input-dropdown ul li.token-input-dropdown-item2 {
+    background-color: @dropdownBackground;
+}
+
+div.token-input-dropdown ul li em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.token-input-dropdown ul li.token-input-selected-dropdown-item {
+    background-color: @infoBackground;
+    color: @textColor;
+}
+

@@ -1,3 +1,6 @@
+@import 'twitter/bootstrap/mixins';
+@import 'twitter/bootstrap/variables';
+
 #new-guest-button {
     margin-bottom: 15px;
 }
@@ -36,12 +39,45 @@
     background-color: inherit;
 }
 
-#guest-index-results {
-    .results-header {
-        text-align: center;
+#guests-index {
+
+  .guest-name {
+    padding-left: 5px;
+    font-weight: bold;
+  }
+
+  .lists-and-invitations {
+    vertical-align: middle;
+  }
+
+  table {
+
+    th {
+      text-align: left;
     }
-    .guest-wrapper {
-        padding-bottom: 5px;
+
+    .thumbnail {
+      float: left;
     }
+
+    tr {
+      border-bottom: 1px solid gray;
+      vertical-align: top;
+      td {
+        padding-right: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
 }
 
+.collapsed-fields {
+
+  .collapsed-field-title {
+    font-size: @baseFontSize;
+  }
+
+  .collapsed-field-contents {
+    padding-top: 10px;
+  }
+}

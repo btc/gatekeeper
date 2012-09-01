@@ -13,10 +13,14 @@
 //  THINGS REQUIRED BY THE APPLICATION
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require twitter/bootstrap
 //= require bootstrap
 //= require cocoon
+//= require best_in_place
+//= require jquery.collapse
 //  APPLICATION FUNCTIONALITY
 //= require guests
 //= require webcam
 //= require guest_form
+//= require_tree ./guest_lists

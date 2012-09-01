@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826075724) do
+ActiveRecord::Schema.define(:version => 20120901115433) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -40,15 +40,14 @@ ActiveRecord::Schema.define(:version => 20120826075724) do
     t.integer "guest_id"
   end
 
-  create_table "guestlists", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-  end
-
-  create_table "guestlists_guests", :id => false, :force => true do |t|
-    t.integer "guestlist_id"
-    t.integer "guest_id"
+  create_table "guest_lists", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "owner_id"
+    t.integer  "event_id"
+    t.date     "date"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "approved",   :default => false
   end
 
   create_table "guests", :force => true do |t|
@@ -62,6 +61,16 @@ ActiveRecord::Schema.define(:version => 20120826075724) do
     t.integer  "rating"
     t.integer  "creator_id"
     t.date     "birthday"
+  end
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "guest_id"
+    t.integer  "guest_list_id"
+    t.integer  "event_id"
+    t.integer  "plus",          :default => 0
+    t.boolean  "redeemed",      :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "notes", :force => true do |t|
@@ -106,6 +115,8 @@ ActiveRecord::Schema.define(:version => 20120826075724) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

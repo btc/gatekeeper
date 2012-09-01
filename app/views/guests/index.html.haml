@@ -1,36 +1,42 @@
-.row-fluid
-  .span6
-    = link_to new_guest_path,
-      id: 'new-guest-button', class: 'btn btn-block' do
-      create new guest
+#guests-index
+  = render 'tabs'
 
-  %form.form-search.span6
-    .input-append
-      %input.search-query(type='text'
-        name='q'
-        placeholder='lookup guest'
-        autofocus='true')
-      %button.btn(type='submit')
-        %i.icon-search
+  .row-fluid
+    %table.table
+      %thead
+        %th name
+        %th
+          approved lists/invitations
+          = surround '(', ')' do
+            = Date.yesterday.strftime('%A %e %B')
+            onward
+      - @guests.each do |guest|
+        %tbody
+          %tr
+            %td
+              %p
+                .guest-name
+                  = link_to guest do
+                    = guest.full_name
+                  - if can? :view_rating, guest
+                    = stars(guest.rating)
 
-#guest-index-results
-  .results-header
-    - if @q.present?
-      .pull-right
-        %a.btn{ href: guests_path }
-          %small display all guests
-    %h3
-      - if @q.present?
-        = "displaying guests whose names match '#{@q}'"
-      - else
-        all guests
-      %small (#{@guests.length})
-  %hr
+            %td.lists-and-invitations
+              -# NB: limit the scope to the permitted lists as early in chain as possible
+              - lists = guest.guest_lists.active.accessible_by(current_ability)
+              - if lists.empty?
+                not on any lists
+              - else
+                -# COLLAPSING ELEMENTS
+                %div.collapsed-fields(data-collapse)
+                  %a
+                    show/hide
+                    = pluralize lists.count, 'list'
+                  .collapsed-field-contents
+                    = render '/guest_lists/list_by_date', guest_lists: lists
 
-  - @guests.each_with_index do |guest, i|
-    - if i.modulo(3) == 0
-      <div class='row-fluid'>
-    .span4
-      = render 'guest_block', guest: guest
-    - if i.modulo(3) == 2
-      </div>
+
+= content_for :javascript do
+  :coffeescript
+    jQuery ->
+      $('.collapsed-fields').collapse()

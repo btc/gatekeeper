@@ -26,8 +26,9 @@ class Guest < ActiveRecord::Base
 
   has_many :photos
   has_many :notes
+  has_many :guest_lists, through: :invitations
+  has_many :invitations
   has_and_belongs_to_many :events
-  has_and_belongs_to_many :guestlists
   has_one :user
   belongs_to :creator, class_name: 'User'
 
@@ -51,9 +52,10 @@ class Guest < ActiveRecord::Base
     @@valid_ratings
   end
 
-  def self.full_name_search(string)
+  def self.full_name_search(str)
     guests = self.all
-    tokens = string.downcase.split
+    return guests if str.nil? || str.empty?
+    tokens = str.downcase.split
     guests.select! do |guest|
       keep = true
       tokens.each do |token|
@@ -84,6 +86,11 @@ class Guest < ActiveRecord::Base
     separated_by_month.flatten!
   end
 
+  def self.id_name_tuples(guests)
+    return Array.new if guests.nil?
+    tuples = guests.map { |g| { id: g.id, name: g.full_name } }
+  end
+
   def parse_birthday
     if self.birthday_before_type_cast
       self.birthday = Chronic.parse(self.birthday_before_type_cast, context: :past)
@@ -103,5 +110,11 @@ class Guest < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}".titlecase
   end
 
+  def is_female?
+    self.gender == 'female'
+  end
 
+  def is_male?
+    !self.is_female?
+  end
 end

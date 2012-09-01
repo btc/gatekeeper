@@ -1,0 +1,63 @@
+@import "twitter/bootstrap/variables";
+
+// show.html.haml
+#show-guest-list-header {
+
+  .centered { text-align: center; }
+}
+
+div#guest-list-table {
+
+  th { font-size: 13px; }
+
+  tr.invitation {
+
+    .best_in_place {
+      font-size: 20px;
+      background: @white;
+      padding: 4px;
+    }
+
+    input[type=checkbox] {
+      /* Double-sized Checkboxes */
+      -ms-transform: scale(2); /* IE */
+      -moz-transform: scale(2); /* FF */
+      -webkit-transform: scale(2); /* Safari and Chrome */
+      -o-transform: scale(2); /* Opera */
+      padding: 10px;
+    }
+  }
+
+  .redeemed { background: @infoBackground; }
+
+  .name {
+    p { font-size: @baseFontSize; }
+  }
+
+  select {
+    width: auto;
+  }
+}
+
+// _form.html.haml
+#token-input-index-guest-list-select { // disable bootstrap-style outline
+  // (firefox-specific issue)
+  box-shadow: none;
+}
+
+.guest-list-stats {
+
+  padding-top: 5px;
+
+  .list-count {
+    color: @grayLight;
+    border-top: 1px solid @grayLight;
+  }
+}
+
+.nav-pills {
+  .pending-badge {
+    display: inline-table;
+  }
+}
+

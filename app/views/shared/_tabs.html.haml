@@ -1,0 +1,19 @@
+- if can?(:read, GuestList) || can?(:read, Guest)
+  .global-nav-tabs
+    %ul.nav.nav-tabs.centered
+      - if can?(:read, Guest)
+        %li{ active_if(guests_path) }
+          = link_to guests_path do
+            .tab-icon
+              %i.icon-group
+            .tab-text
+              guests
+
+      - if can?(:read, GuestList)
+        %li{ active_if(guest_lists_path) }
+          = link_to guest_lists_path do
+            .tab-icon
+              %i.icon-list-ul
+            .tab-text
+              lists
+

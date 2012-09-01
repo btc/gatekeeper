@@ -90,10 +90,26 @@ describe Guest do
     @guest.creator.should eq(u)
   end
 
+  it 'should be male if not female' do
+    @guest.gender = 'female'
+    @guest.is_male?.should eq(false)
+    @guest.is_female?.should eq(true)
+  end
+
+  it "'s gender should be assignable " do
+    @guest.gender = 'male'
+    @guest.valid?.should eq(true)
+  end
+
+  it 'should be female if not male' do
+    @guest.gender = 'male'
+    @guest.is_male?.should eq(true)
+    @guest.is_female?.should eq(false)
+  end
+
   it { should have_many(:photos) }
   it { should have_many(:notes) }
   it { should have_and_belong_to_many(:events) }
-  it { should have_and_belong_to_many(:guestlists) }
   it { should have_one(:user) }
   it { should belong_to(:creator) }
 

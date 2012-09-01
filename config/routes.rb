@@ -1,5 +1,9 @@
 Vern::Application.routes.draw do
 
+
+  get "roles/manage"
+  post "roles/update"
+
   get 'photos/webcam'
   post 'photos/upload'
   post 'photos/webcam_create'
@@ -7,10 +11,17 @@ Vern::Application.routes.draw do
 
   scope 'api' do
     resources :photos
-    resources :guests
+    resources :guests do
+      get 'full_name_search', on: :collection
+      get 'birthdays', on: :collection
+    end
     resources :committees
-    resources :guestlists
     resources :events
+    resources :invitations
+    resources :guest_lists do
+      get 'search', on: :collection
+      get 'form', on: :collection
+    end
   end
 
   devise_for :users,
