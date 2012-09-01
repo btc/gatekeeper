@@ -6,10 +6,8 @@
       create a guest
   .modal-body
     = simple_form_for Guest.new, class: 'form form-horizontal', remote: true do |f|
-      = f.input :first_name, autofocus: true, validate: true
-      = f.input :last_name
-      = f.input :gender, collection: Guest.genders, as: :radio_buttons
-      = f.button :submit
+      = render 'guests/form_fields', f: f
+      = f.button :submit, class: 'btn-primary'
   .modal-footer
     %small
       first name, last name, and gender are <em>all</em> required

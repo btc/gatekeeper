@@ -1,0 +1,25 @@
+-# REQUIRED FIELDS BEGIN
+= f.input :first_name, autofocus: true
+= f.input :last_name
+= f.input :gender, collection: Guest.genders, as: :radio_buttons
+%a.btn(data-toggle='collapse' data-target='#extra-fields')
+  show optional email, birthday, and phone fields
+
+%div#extra-fields.collapse
+  = f.input :birthday do
+    = f.input_field :birthday, value: @guest.try(:birthday).try(:strftime, '%e %B'),
+      as: :string,
+      'data-title' => 'pro-tip:',
+      'data-content' => render('shared/date_hint_popover'),
+      'data-placement' => 'right',
+      'data-delay' => 0,
+      'data-trigger' => 'focus',
+      rel: 'popover'
+
+
+  = f.input :email
+  - if can? :update_rating, @guest
+    = f.input :rating, collection: Guest.ratings, as: :select
+  = f.input :phone_number
+
+-# REQUIRED FIELDS END

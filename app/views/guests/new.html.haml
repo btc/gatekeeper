@@ -16,11 +16,7 @@
           -# HIDDEN FIELD TO LINK WEBCAM PHOTO TO GUEST
           = f.hidden_field :webcam_photo_id
 
-          -# REQUIRED FIELDS BEGIN
-          = f.input :first_name, autofocus: true
-          = f.input :last_name
-          = f.input :gender, collection: Guest.genders, as: :radio_buttons
-          -# REQUIRED FIELDS END
+          = render 'form_fields', f: f
     .form-actions
       %button.btn.btn-primary
         create guest
