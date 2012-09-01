@@ -10,6 +10,8 @@
     - if can? :view_rating, list.owner
       = stars(list.owner.rating)
     %small= pluralize list.total, 'guest'
+    - if list.pending?
+      %span.label.label-warning pending
 
 .guest-list-stats
   %span.list-count
