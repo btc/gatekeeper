@@ -27,9 +27,16 @@
               - if lists.empty?
                 not on any lists
               - else
-                - id = "collapse-lists#{guest.id}"
-                = content_tag 'button', class: 'btn', data: { target: "##{id}", toggle: 'collapse' } do
-                  show/hide
-                  = pluralize lists.count, 'list'
-                .collapse{ id: id }= render '/guest_lists/list_by_date', guest_lists: lists
+                -# COLLAPSING ELEMENTS
+                %div.collapsed-fields(data-collapse)
+                  %a
+                    show/hide
+                    = pluralize lists.count, 'list'
+                  .collapsed-field-contents
+                    = render '/guest_lists/list_by_date', guest_lists: lists
 
+
+= content_for :javascript do
+  :coffeescript
+    jQuery ->
+      $('.collapsed-fields').collapse()
