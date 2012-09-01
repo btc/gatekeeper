@@ -39,6 +39,13 @@
     %li
       = link_to '#all-lists', data: { toggle: 'tab' } do
         all
+    - if can? :approve, GuestList
+      %li
+        = link_to '#active-pending-lists', data: { toggle: 'tab' } do
+          .pending-badge
+            pending
+            %span.badge.badge-warning
+              = GuestList.active.pending.count
 
 #list-container
 
@@ -99,4 +106,9 @@
         # new list
         url: '/api/guest_lists/form'
         $trigger: $("a[href='#new-list']")
+       ,
+
+        # active and pending
+        url: baseURL + 'active_pending'
+        $trigger: $("a[href='#active-pending-lists']")
       ]

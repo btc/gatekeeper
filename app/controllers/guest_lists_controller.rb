@@ -132,16 +132,23 @@ class GuestListsController < ApplicationController
 
   def search
     @guest_lists = GuestList.includes(:guests, :invitations).scoped
+
     @guest_lists = case params[:q]
-    when :nl.to_s
-      date = Chronic.parse(params[:nl], context: :future)
-      date = Date.today if date.wday == Date.today.wday
-      @guest_lists = @guest_lists.where('date = ?', date).alphabetic_by_date
-    when :active.to_s
-      @guest_lists = @guest_lists.active.alphabetic_by_date
-    else
-      @guest_lists = @guest_lists.scoped.alphabetic_by_date
-    end
+                   when :nl.to_s
+                     date = Chronic.parse(params[:nl], context: :future)
+                     date = Date.today if date.wday == Date.today.wday
+                     @guest_lists = @guest_lists
+                       .approved.where('date = ?', date).alphabetic_by_date
+                   when :active.to_s
+                     @guest_lists = @guest_lists
+                       .approved.active.alphabetic_by_date
+                   when :active_pending.to_s
+                     @guest_lists = @guest_lists
+                       .active.pending.alphabetic_by_date
+                   else
+                     @guest_lists = @guest_lists
+                       .approved.scoped.alphabetic_by_date
+                   end
 
     respond_to do |format|
       format.html do
