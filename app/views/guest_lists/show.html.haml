@@ -1,18 +1,28 @@
 .guest-list-nav-tabs
+
   %ul.nav.nav-pills
+
     %li
       = link_to guest_lists_path do
         %i.icon-arrow-left
         back to all lists
+
     %li.active
+
       = link_to guest_list_path(@guest_list) do
         = @guest_list.owner.full_name
         \:
         = best_in_place @guest_list, :date,
           display_as: :friendly_date, activator: '.edit-date'
-      -# TODO link_to_if can?(:update, @guest_list), 'edit date', '#edit-date'
-    %li
-      %a.edit-date(href='#') edit the date
+        - if @guest_list.pending?
+          %span.label-warning.label pending approval
+        - elsif @guest_list.approved?
+          %span.label-success.label approved
+          -# TODO approved by user
+
+    - if can?(:manage, @guest_list)
+      %li
+        %a.edit-date(href='#') edit the date
 
 .row-fluid
   .span6
