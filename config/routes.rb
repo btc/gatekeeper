@@ -1,6 +1,9 @@
 Vern::Application.routes.draw do
 
 
+  get "roles/manage"
+  post "roles/update"
+
   get 'photos/webcam'
   post 'photos/upload'
   post 'photos/webcam_create'
