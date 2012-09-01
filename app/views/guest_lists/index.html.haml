@@ -51,66 +51,67 @@
 .lead
   #list-container
 
-:coffeescript
-  jQuery ->
-    baseURL = "/api/guest_lists/search?q="
-    $default = $("a[href='#active-lists']")
-    new window.VIP.GuestListIndex
-      $container: $('#list-container')
-      $default: $default
-      tuples: [
+= content_for :javascript do
+  :coffeescript
+    jQuery ->
+      baseURL = "/api/guest_lists/search?q="
+      $default = $("a[href='#active-lists']")
+      new window.VIP.GuestListIndex
+        $container: $('#list-container')
+        $default: $default
+        tuples: [
 
-        # active
-        url: baseURL + 'active'
-        $trigger: $default
-       ,
+          # active
+          url: baseURL + 'active'
+          $trigger: $default
+         ,
 
-        # all
-        url: baseURL
-        $trigger: $("a[href='#all-lists']")
-       ,
+          # all
+          url: baseURL
+          $trigger: $("a[href='#all-lists']")
+         ,
 
-        # thursday
-        url: baseURL + 'nl' + "&nl=thursday"
-        $trigger: $("a[href='#thursday-lists']")
-       ,
+          # thursday
+          url: baseURL + 'nl' + "&nl=thursday"
+          $trigger: $("a[href='#thursday-lists']")
+         ,
 
-        # friday
-        url: baseURL + 'nl' + "&nl=friday"
-        $trigger: $("a[href='#friday-lists']")
-       ,
+          # friday
+          url: baseURL + 'nl' + "&nl=friday"
+          $trigger: $("a[href='#friday-lists']")
+         ,
 
-        # saturday
-        url: baseURL + 'nl' + "&nl=saturday"
-        $trigger: $("a[href='#saturday-lists']")
-       ,
+          # saturday
+          url: baseURL + 'nl' + "&nl=saturday"
+          $trigger: $("a[href='#saturday-lists']")
+         ,
 
-        # sunday
-        url: baseURL + 'nl' + "&nl=sunday"
-        $trigger: $("a[href='#sunday-lists']")
-       ,
+          # sunday
+          url: baseURL + 'nl' + "&nl=sunday"
+          $trigger: $("a[href='#sunday-lists']")
+         ,
 
-        # monday
-        url: baseURL + 'nl' + "&nl=monday"
-        $trigger: $("a[href='#monday-lists']")
-       ,
+          # monday
+          url: baseURL + 'nl' + "&nl=monday"
+          $trigger: $("a[href='#monday-lists']")
+         ,
 
-        # tuesday
-        url: baseURL + 'nl' + "&nl=tuesday"
-        $trigger: $("a[href='#tuesday-lists']")
-       ,
+          # tuesday
+          url: baseURL + 'nl' + "&nl=tuesday"
+          $trigger: $("a[href='#tuesday-lists']")
+         ,
 
-        # wednesday
-        url: baseURL + 'nl' + "&nl=wednesday"
-        $trigger: $("a[href='#wednesday-lists']")
-       ,
+          # wednesday
+          url: baseURL + 'nl' + "&nl=wednesday"
+          $trigger: $("a[href='#wednesday-lists']")
+         ,
 
-        # new list
-        url: '/api/guest_lists/form'
-        $trigger: $("a[href='#new-list']")
-       ,
+          # new list
+          url: '/api/guest_lists/form'
+          $trigger: $("a[href='#new-list']")
+         ,
 
-        # active and pending
-        url: baseURL + 'active_pending'
-        $trigger: $("a[href='#active-pending-lists']")
-      ]
+          # active and pending
+          url: baseURL + 'active_pending'
+          $trigger: $("a[href='#active-pending-lists']")
+        ]

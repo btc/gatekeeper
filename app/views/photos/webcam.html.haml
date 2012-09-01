@@ -16,13 +16,15 @@
       or
       = link_to "Take another", photos_webcam_path, class: 'btn'
 
-:coffeescript
-  webcamApp = new window.VIP.WebcamApp
-    api_url: "#{photos_upload_path}"
-    quality: 90
-    swf_path: '/webcam.swf'
-    sound_path: '/shutter.mp3'
-    div_id: '#webcam'
-    width: 640
-    height: 480
+= content_for :javascript do
+  :coffeescript
+    jQuery ->
+      webcamApp = new window.VIP.WebcamApp
+        api_url: "#{photos_upload_path}"
+        quality: 90
+        swf_path: '/webcam.swf'
+        sound_path: '/shutter.mp3'
+        div_id: '#webcam'
+        width: 640
+        height: 480
 

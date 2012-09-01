@@ -95,19 +95,20 @@
         awaiting approval
       = render 'list_by_date', guest_lists: GuestList.active.pending.alphabetic_by_date
 
-:coffeescript
-  jQuery ->
-    $(".best_in_place").best_in_place()
+= content_for :javascript do
+  :coffeescript
+    jQuery ->
+      $(".best_in_place").best_in_place()
 
-    # submit form to update invitation redemption status
-    # when checkbox is changed
-    $selectPlus = $('.select')
-    $checkboxRedeemed = $('.boolean')
+      # submit form to update invitation redemption status
+      # when checkbox is changed
+      $selectPlus = $('.select')
+      $checkboxRedeemed = $('.boolean')
 
-    $selectPlus.live('change', ->
-      $(this).parents('form:first').submit()
-    )
-    $checkboxRedeemed.live('change', ->
-      $(this).parents('form:first').submit()
-    )
+      $selectPlus.live('change', ->
+        $(this).parents('form:first').submit()
+      )
+      $checkboxRedeemed.live('change', ->
+        $(this).parents('form:first').submit()
+      )
 
