@@ -1,7 +1,7 @@
 require 'chronic'
 
 class GuestListsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:form, :search]
 
   # GET /guest_lists
   # GET /guest_lists.json
@@ -131,6 +131,8 @@ class GuestListsController < ApplicationController
   end
 
   def search
+    authorize! :read, GuestList
+
     @guest_lists = GuestList.includes(:guests, :invitations).scoped
 
     @guest_lists = case params[:q]
@@ -159,6 +161,7 @@ class GuestListsController < ApplicationController
 
   def form
     @guest_list = GuestList.new
+    authorize! :create, @guest_list
     render partial: 'form'
   end
 end
