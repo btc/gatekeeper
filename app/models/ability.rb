@@ -2,6 +2,25 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    if user.has_role? :admin
+      can :manage, :all
+    end
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # TEMP BEGIN
+    can :manage, Role
+    # TEMP END
     # WARNING!
     # ========
     # Do not attempt to use the line below. Users who are not logged in
