@@ -1,0 +1,46 @@
+.page-header
+  %h1
+    Manage Roles
+
+.page-header
+  %h2 Update
+.row-fluid
+  = form_tag action: :update, html: { class: 'form-inline' } do
+    = select_tag :user_id,
+      options_from_collection_for_select(User.all, 'id', 'to_s'),
+      prompt: '(user)'
+    = select_tag :instruction, options_for_select(%w[add remove]),
+      prompt: '(add or remove)'
+    = select_tag :role, options_for_select(Role.roles),
+      prompt: '(role)'
+    .input-append
+      %button.btn(type='submit') change
+
+
+.page-header
+  %h2 all users
+
+%table.table
+  %thead
+    %th
+      user
+    %th
+      email
+    - Role.roles.each do |role|
+      %th
+        = role.titleize
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = user
+        %td
+          = user.email
+        - Role.roles.each do |role|
+          %td
+            - if user.has_role? role
+              yes
+            - else
+              no
+
+
