@@ -7,8 +7,10 @@
   .row-fluid
     = link_to guest_list_path(list) do
       #{list.owner.full_name}'s list
+
     - if can? :view_rating, list.owner
       = stars(list.owner.rating)
+
     %small= pluralize list.total, 'guest'
     - if list.pending?
       %span.label.label-warning pending
