@@ -32,15 +32,13 @@ class Ability
     can :manage, Invitation # FIXME TODO restrict by role
     can :lookup_names, Guest # any user full_name_search always
 
-=begin
-    if user.role? :boss
-      can :rate, Guest
-      can :view_contact_info, Guest
-      can :view_photos, Guest
-      can :view_rating, Guest
-      can :update_rating, Guest
-    end
-=end
+    # if user.role? :boss
+    #   can :rate, Guest
+    #   can :view_contact_info, Guest
+    #   can :view_photos, Guest
+    #   can :view_rating, Guest
+    #   can :update_rating, Guest
+    # end
 
   end
 end
