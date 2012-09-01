@@ -3,6 +3,10 @@
     %li
       = link_to '#new-list', data: { toggle: 'tab' } do
         create new list
+    - if can? :create, GuestList
+      %li
+        = link_to '#new-list', data: { toggle: 'tab' } do
+          create new list
     %li
       = link_to '#active-lists', data: { toggle: 'tab' } do
         active
