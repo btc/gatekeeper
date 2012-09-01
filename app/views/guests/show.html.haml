@@ -47,7 +47,7 @@
     %h3
       Guest Lists
       %small and invitations
-    = render 'guest_lists/list_by_date', guest_lists: @guest.guest_lists
+    = render 'guest_lists/list_by_date', guest_lists: @guest.guest_lists.accessible_by(current_ability)
 
   - if can? :view_photos, @guest
     .span6.thumbnail
