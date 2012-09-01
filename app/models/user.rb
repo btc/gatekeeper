@@ -23,6 +23,11 @@ class User < ActiveRecord::Base
     r # return
   end
 
+  def remove_role!(role_name)
+    r = Role.find_by_user_id_and_name(self.id, role_name.to_s)
+    r.destroy
+  end
+
   def to_s
     self.email
   end
