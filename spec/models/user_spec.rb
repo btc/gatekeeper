@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe User do
+  before :each do
+    @u = FactoryGirl.create(:user)
+  end
 
   it "creation can be simulated with FactoryGirl" do
     u = FactoryGirl.create(:user)
@@ -28,6 +31,14 @@ describe User do
     u.save
 
     u.has_role?(:door_attendant).should eq(true)
+  end
+
+  it 'should no longer have a role once removed' do
+    r = Role.roles.first
+    @u.add_role! r
+    @u.has_role?(r).should eq(true)
+    @u.remove_role!(r)
+    @u.has_role?(r).should eq(false)
   end
 
   it { should belong_to(:guest) }
