@@ -71,4 +71,5 @@ describe GuestList do
     @guest_list.revoke!
     @guest_list.pending?.should eq(true)
     @guest_list.approved?.should eq(false)
+  end
 end
