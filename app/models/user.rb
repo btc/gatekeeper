@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :committees
   belongs_to :guest
 
+  def is_god?
+    true if self.email == 'brian.holderchow@gmail.com'
+  end
+
   def has_role?(role_name)
     Role.find_by_user_id_and_name(self.id, role_name.to_s) ? true : false
   end
