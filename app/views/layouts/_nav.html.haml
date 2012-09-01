@@ -19,6 +19,11 @@
         %i.icon-cog
         <b class="caret"></b>
       %ul.dropdown-menu(role='menu' aria-labelledby="dLabel")
+        - if can?(:manage, Role)
+          %li
+            = link_to roles_manage_path do
+              %i.icon-legal
+              manage roles
         %li
           = link_to edit_user_registration_path do
             %i.icon-lock
