@@ -2,25 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.has_role? :admin
-      can :manage, :all
-    end
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # TEMP BEGIN
-    can :manage, Role
-    # TEMP END
     # WARNING!
     # ========
     # Do not attempt to use the line below. Users who are not logged in
@@ -28,36 +9,64 @@ class Ability
     # user ||= User.new # guest user (not logged in)
     # - brianhc
 
-    can :go, :home # every logged in user can go home
+    # GENERAL INFO
+    # ============
+    # By default, users do not have access to any resources.
+    # All permissions must be explicitly defined
+    # for one of the documented, predefined roles.
+    # The one exception to this rule:
+    # all users
+    can :go, :home
 
-    can :upload_webcam, Photo #temp to take webcam photo TODO fix
-
-    # all users can view guests;
-    # attribute-specific permissions are handled at view-level
-    can :read, Guest
-    can :create, Guest # all users can create guests
-
-    can :update, Guest do |guest|
-      true # anyone can update
-      # guest.creator == user
+    # Admins
+    # ======
+    # ======
+    # can manage and view everything
+    if user.has_role?(:admin) || user.has_role?(:manager) || user.is_god?
+      can :manage, :all
     end
 
-    can :view_contact_info, Guest
-    can :view_photos, Guest
-
-    # GUEST LIST PERMISSIONS
-    # ======================
-    can :manage, GuestList # FIXME TODO restrict by role
-    can :manage, Invitation # FIXME TODO restrict by role
-    can :lookup_names, Guest # any user full_name_search always
-
-    # if user.role? :boss
-    #   can :rate, Guest
-    #   can :view_contact_info, Guest
-    #   can :view_photos, Guest
-    #   can :view_rating, Guest
-    #   can :update_rating, Guest
+    # if user.has_role? :committee_member
+    #   can :update_plus, GuestList do |guest_list|
+    #     guest_list.creator == user && guest_list.approved == false
+    #   end
     # end
+
+    # Door attendants
+    # ===============
+    # ===============
+    if user.has_role? :door_attendant
+
+      # managing GuestLists
+      # -------------------
+      can :read, GuestList, :approved => true # to fulfill duties at door
+      can :read, Guest
+      can :read, Invitation do |i|
+        i.guest_list.approved?
+      end
+      # only the redeemed field
+      # must enforce at view level
+      can :update, Invitation
+
+      # view-specific permissions
+      # -------------------------
+      can :view_contact_info, Guest
+      can :view_photos, Guest
+
+      # creating Guests
+      # ---------------
+      can :upload_webcam, Photo #temp to take webcam photo TODO fix
+      can :create, Guest # needed when guests arrive at the door
+      can :update, Guest # to enrich profiles with new information
+      cannot :destroy, Guest
+
+      # GUEST LIST PERMISSIONS
+      # ======================
+      # can :update_plus, GuestList # managers and admins
+      # can :manage, GuestList # FIXME TODO restrict by role
+      # can :manage, Invitation # FIXME TODO restrict by role
+      # can :lookup_names, Guest # any user full_name_search always
+    end
 
   end
 end
