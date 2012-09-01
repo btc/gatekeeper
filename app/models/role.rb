@@ -22,12 +22,7 @@ class Role < ActiveRecord::Base
 
   belongs_to :user, inverse_of: :roles
 
-
-  def roles
-    @@valid_roles
-  end
-
-  def self.get_types
-    @@types
+  def self.roles
+    @valid_roles
   end
 end
