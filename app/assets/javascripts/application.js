@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require cocoon
 //= require best_in_place
+//= require jquery.collapse
 //  APPLICATION FUNCTIONALITY
 //= require guests
 //= require webcam
