@@ -22,5 +22,14 @@
                     = stars(guest.rating)
 
             %td.lists-and-invitations
-              %span= render '/guest_lists/list_by_date', guest_lists: guest.guest_lists.active
+              -# NB: limit the scope to the permitted lists as early in chain as possible
+              - lists = guest.guest_lists.active.accessible_by(current_ability)
+              - if lists.empty?
+                not on any lists
+              - else
+                - id = "collapse-lists#{guest.id}"
+                = content_tag 'button', class: 'btn', data: { target: "##{id}", toggle: 'collapse' } do
+                  show/hide
+                  = pluralize lists.count, 'list'
+                .collapse{ id: id }= render '/guest_lists/list_by_date', guest_lists: lists
 
