@@ -17,7 +17,9 @@ Vern::Application.routes.draw do
     end
     resources :committees
     resources :events
-    resources :invitations
+    resources :invitations do
+      get :autocomplete_tag_name, on: :collection
+    end
     resources :guest_lists do
       get 'search', on: :collection
       get 'form', on: :collection

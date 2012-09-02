@@ -60,6 +60,14 @@
                     = i.plus
 
               %td
+                -# tags
+                - if can?(:manage, Invitation)
+                  = simple_form_for(i, remote: true) do |f|
+                    = f.input :tag_list, url: autocomplete_tag_name_invitations_path, as: :autocomplete, label: false
+                    %button.btn.btn-mini
+                      save
+                - else
+                  = i.tag_list
               %td
                 = simple_form_for(i, remote: true) do |f|
                   = f.input :redeemed, label: false, class: 'checkable'

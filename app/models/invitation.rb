@@ -1,5 +1,5 @@
 class Invitation < ActiveRecord::Base
-  attr_accessible :event_id, :guest_id, :guest_list_id, :plus, :redeemed
+  attr_accessible :event_id, :guest_id, :guest_list_id, :plus, :redeemed, :tag_list
 
   belongs_to :guest
   belongs_to :event
@@ -9,6 +9,8 @@ class Invitation < ActiveRecord::Base
   validates_presence_of :guest_list, :guest
 
   has_paper_trail
+
+  acts_as_taggable_on :tags
 
   def date
     self.guest_list.date

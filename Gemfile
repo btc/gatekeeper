@@ -59,3 +59,7 @@ gem 'unicorn'
 gem 'paper_trail'
 
 gem 'best_in_place'
+
+gem 'jquery-ui-rails'
+gem 'acts-as-taggable-on'
+gem 'rails3-jquery-autocomplete'

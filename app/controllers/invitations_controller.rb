@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  autocomplete :tag, :name, class_name: 'ActsAsTaggableOn::Tag'
+
   # GET /invitations
   # GET /invitations.json
   load_and_authorize_resource

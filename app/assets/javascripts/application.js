@@ -12,6 +12,7 @@
 //
 //  THINGS REQUIRED BY THE APPLICATION
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery.tokeninput
 //= require twitter/bootstrap
@@ -19,6 +20,7 @@
 //= require cocoon
 //= require best_in_place
 //= require jquery.collapse
+//= require autocomplete-rails
 //  APPLICATION FUNCTIONALITY
 //= require guests
 //= require webcam
