@@ -9,6 +9,7 @@ class Guest < ActiveRecord::Base
   acts_as_birthday :birthday
 
   before_save :parse_birthday
+  after_save  :clear_cached_full_name_search_results
 
   # validate presence but NOT inclusion.
   # it is acceptable and expected that duplicate names will exist
@@ -53,6 +54,11 @@ class Guest < ActiveRecord::Base
   end
 
   def self.full_name_search(str)
+    @@cached_full_name_search_results ||= {}
+    @@cached_full_name_search_results[str] ||= self.compute_full_name_search(str)
+  end
+
+  def self.compute_full_name_search(str)
     guests = self.all
     return guests if str.nil? || str.empty?
     tokens = str.downcase.split
@@ -66,6 +72,14 @@ class Guest < ActiveRecord::Base
       keep
     end
     guests
+  end
+
+  def self.clear_cached_full_name_search_results
+    @@cached_full_name_search_results = nil
+  end
+
+  def clear_cached_full_name_search_results
+    Guest.clear_cached_full_name_search_results
   end
 
   def self.find_ordered_birthdays_for_the_next_month
