@@ -32,8 +32,6 @@ Vern::Application.routes.draw do
                 registrations: 'my_devise/registrations'
               }
 
-  get 'users/name'
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
