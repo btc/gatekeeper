@@ -29,6 +29,10 @@
       = render 'shared/tabs'
       = yield
       #footer
+        .pull-left.lead
+          %small
+            logged in as
+            = current_user
         .pull-right.lead
           %small
             designed with
