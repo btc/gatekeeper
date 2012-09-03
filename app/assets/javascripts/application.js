@@ -22,7 +22,7 @@
 //= require jquery.collapse
 //= require autocomplete-rails
 //  APPLICATION FUNCTIONALITY
-//= require guests
+//= require infinite_scroll
 //= require webcam
 //= require guest_form
 //= require_tree ./guest_lists

@@ -1,0 +1,6 @@
+$('#guests').append("<%= j render('guests') %>");
+<% if @guests.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@guests) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

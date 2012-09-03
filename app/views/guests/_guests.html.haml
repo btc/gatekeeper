@@ -1,0 +1,24 @@
+- @guests.each do |guest|
+  %tr
+    %td
+      %p
+        .guest-name
+          = link_to guest do
+            = guest.full_name
+          - if can? :view_rating, guest
+            = stars(guest.rating)
+
+    %td.lists-and-invitations
+      -# NB: limit the scope to the permitted lists as early in chain as possible
+      - lists = guest.guest_lists.active.accessible_by(current_ability)
+      - if lists.empty?
+        not on any lists
+      - else
+        -# COLLAPSING ELEMENTS
+        %div.collapsed-fields(data-collapse)
+          %a
+            show/hide
+            = pluralize lists.count, 'list'
+          .collapsed-field-contents.hide
+            = render '/guest_lists/list_by_date', guest_lists: lists
+
