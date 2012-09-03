@@ -65,3 +65,4 @@ gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
 
 gem 'will_paginate'
+gem 'will_paginate-bootstrap'
