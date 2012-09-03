@@ -68,3 +68,5 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
 gem 'text'
+
+gem 'rb-fsevent', '~> 0.9.1'
