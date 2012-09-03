@@ -75,6 +75,12 @@
                 = simple_form_for(i, remote: true) do |f|
                   = f.input :redeemed, label: false, class: 'checkable'
 
+              - if can? :destroy, Invitation
+                %td
+                  = button_to 'x', i, class: 'btn btn-danger btn-mini span12',
+                    :confirm => 'Are you sure?', :method => :delete, remote: true
+
+
     - if can? :manage, @guest_list
       %hr
       #guest-list-stats
