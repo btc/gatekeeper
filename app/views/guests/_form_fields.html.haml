@@ -15,8 +15,6 @@
       = f.input :rating, collection: Guest.ratings, as: :select
     = f.input :phone_number
 
--# only initialize using js when form is rendered as a partial
-- unless current_page?(new_guest_path)
-  :coffeescript
-    jQuery ->
-      $('.collapsed-fields').collapse()
+:coffeescript
+  jQuery ->
+    $('.collapsed-fields').collapse()
