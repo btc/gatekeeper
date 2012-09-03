@@ -44,6 +44,7 @@ class window.VIP.GuestListForm
       noResultsText: 'guest not found'
       caching: false
       prePopulate: savedSelections
+      theme: 'facebook'
     )
 
   addGuestToTokenInput: (guest, $tokenInput) ->
