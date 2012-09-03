@@ -27,8 +27,9 @@ class GuestList < ActiveRecord::Base
   def self.alphabetic_by_date
     self.all.sort do |a,b|
       case a.date <=> b.date
-      when 1 then 1
-      when -1 then -1
+      # future dates first
+      when 1 then -1
+      when -1 then 1
       else
         a.owner.first_name <=> b.owner.first_name
       end
