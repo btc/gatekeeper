@@ -19,7 +19,7 @@ class GuestsController < ApplicationController
     # get count now, because checking count after paginating will lie
     # we paginate with js (inf scroll)
     @count = @guests.count if params[:q].present?
-    @guests = @guests.paginate(per_page: 10, page: params[:page])
+    @guests = @guests.paginate(per_page: 20, page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
