@@ -30,11 +30,7 @@ class GuestList < ActiveRecord::Base
       when 1 then 1
       when -1 then -1
       else
-        if a.owner.present? && b.owner.present?
-          a.owner.first_name <=> b.owner.first_name
-        else
-          0
-        end
+        a.owner.first_name <=> b.owner.first_name
       end
     end
   end
