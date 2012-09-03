@@ -21,7 +21,7 @@
         = link_to guests_path do
           %i.icon-remove
           = "results for '#{@q}'"
-          %small (#{@guests.length})
+          %small (#{@count})
 
     - if @guest.present? && !current_page?(new_guest_path) && @guest.id.present? && current_page?(guest_path(@guest))
       %li{ active_if(guest_path(@guest)) }
