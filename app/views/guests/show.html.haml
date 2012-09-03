@@ -57,3 +57,6 @@
           %li.span3.thumbnail
             = link_to photo do
               = image_tag photo.image.url(:medium)
+
+= button_to 'delete', @guest, class: 'btn btn-danger', confirm: 'are you sure?', method: :delete
+
