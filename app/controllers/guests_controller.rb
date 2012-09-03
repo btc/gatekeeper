@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class GuestsController < ApplicationController
   load_and_authorize_resource except: [:full_name_search, :birthdays]
   # GET /guests
@@ -5,15 +7,16 @@ class GuestsController < ApplicationController
   def index
 
     @guests = Guest.includes(:guest_lists, :photos).scoped
-      .paginate(page: params[:page], per_page: 10)
 
     @guests = case
               when params[:q].present?
                 @q = params[:q]
-                @guests.by_first_last_gender.full_name_search @q
+                @guests.by_first_last_gender.full_name_search(@q)
               else
-                @guests.by_first_last_gender.all
+                @guests.by_first_last_gender
               end
+
+    @guests = @guests.paginate(per_page: 10, page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
