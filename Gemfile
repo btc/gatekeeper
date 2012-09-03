@@ -63,3 +63,5 @@ gem 'best_in_place'
 gem 'jquery-ui-rails'
 gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
+
+gem 'will_paginate'
