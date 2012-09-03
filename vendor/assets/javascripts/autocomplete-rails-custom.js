@@ -46,6 +46,7 @@
       }
 
       jQuery(e).autocomplete({
+        delay: 0,
         source: function( request, response ) {
           jQuery.getJSON( jQuery(e).attr('data-autocomplete'), {
             term: extractLast( request.term )
@@ -61,7 +62,7 @@
         search: function() {
           // custom minLength
           var term = extractLast( this.value );
-          if ( term.length < 2 ) {
+          if ( term.length < 1 ) {
             return false;
           }
         },
