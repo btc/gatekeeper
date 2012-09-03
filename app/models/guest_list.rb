@@ -25,7 +25,7 @@ class GuestList < ActiveRecord::Base
   scope :approved, where("approved = ?", true)
 
   def self.alphabetic_by_date
-    self.all.sort do |a,b|
+    self.scoped.sort do |a,b|
       case a.date <=> b.date
       # future dates first
       when 1 then -1
