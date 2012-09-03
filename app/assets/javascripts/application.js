@@ -20,7 +20,7 @@
 //= require cocoon
 //= require best_in_place
 //= require jquery.collapse
-//= require autocomplete-rails
+//= require autocomplete-rails-custom
 //  APPLICATION FUNCTIONALITY
 //= require infinite_scroll
 //= require webcam
