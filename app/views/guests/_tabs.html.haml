@@ -9,6 +9,8 @@
     %li{ active_if(guests_path, !@q.present?) }
       = link_to guests_path do
         all
+        = surround '(', ')' do
+          = Guest.count
 
     %li{ active_if(birthdays_guests_path) }
       = link_to birthdays_guests_path do
