@@ -17,3 +17,10 @@
             .tab-text
               lists
 
+      - if can?(:manage, Reservation)
+        %li{ active_if(guest_lists_path) }
+          = link_to guest_lists_path do
+            .tab-icon
+              %i.icon-th-large
+            .tab-text
+              reservations

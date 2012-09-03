@@ -1,6 +1,5 @@
 Vern::Application.routes.draw do
 
-
   get "roles/manage"
   post "roles/update"
 
@@ -10,6 +9,8 @@ Vern::Application.routes.draw do
   get 'photos/link'       # presently* used to retrieve url for photo given id
 
   scope 'api' do
+    resources :reservations
+    resources :tables
     resources :photos
     resources :guests do
       get 'full_name_search', on: :collection
@@ -28,11 +29,13 @@ Vern::Application.routes.draw do
   end
 
   devise_for :users,
-              controllers: {
-                registrations: 'my_devise/registrations'
-              }
+  controllers: {
+    registrations: 'my_devise/registrations'
+  }
 
   get 'users/name'
+
+  root :to => 'root#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -83,7 +86,6 @@ Vern::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'root#index'
 
   # See how all your routes lay out with "rake routes"
 

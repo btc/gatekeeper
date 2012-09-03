@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @table.name
+%p
+  %b Number:
+  = @table.number
+
+= link_to 'Edit', edit_table_path(@table)
+\|
+= link_to 'Back', tables_path

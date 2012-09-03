@@ -109,6 +109,7 @@ describe Guest do
 
   it { should have_many(:photos) }
   it { should have_many(:notes) }
+  it { should have_many(:reservations) }
   it { should have_and_belong_to_many(:events) }
   it { should have_one(:user) }
   it { should belong_to(:creator) }

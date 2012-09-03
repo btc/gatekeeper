@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903183835) do
+ActiveRecord::Schema.define(:version => 20120903220346) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -90,9 +90,25 @@ ActiveRecord::Schema.define(:version => 20120903183835) do
     t.datetime "image_updated_at"
   end
 
+  create_table "reservations", :force => true do |t|
+    t.date     "date"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "table_id"
+    t.integer  "guest_id"
+    t.integer  "guest_list_id"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tables", :force => true do |t|
+    t.string   "name"
+    t.integer  "number"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -132,8 +148,6 @@ ActiveRecord::Schema.define(:version => 20120903183835) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "full_name"
   end
 

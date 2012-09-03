@@ -1,0 +1,8 @@
+= simple_form_for(@reservation) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :date
+
+  .form-actions
+    = f.button :submit

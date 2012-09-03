@@ -1,0 +1,21 @@
+%h1 Listing tables
+
+%table
+  %tr
+    %th Name
+    %th Number
+    %th
+    %th
+    %th
+
+  - @tables.each do |table|
+    %tr
+      %td= table.name
+      %td= table.number
+      %td= link_to 'Show', table
+      %td= link_to 'Edit', edit_table_path(table)
+      %td= link_to 'Destroy', table, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Table', new_table_path
