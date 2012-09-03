@@ -27,8 +27,3 @@
       %li{ active_if(guest_path(@guest)) }
         = link_to guest_path(@guest) do
           = @guest.full_name
-
-    - if can?(:manage, Guest)
-      %li{ active_if(duplicates_guests_path) }
-        = link_to 'dupes', duplicates_guests_path
-
