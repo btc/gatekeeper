@@ -5,6 +5,7 @@ class GuestsController < ApplicationController
   def index
 
     @guests = Guest.includes(:guest_lists, :photos).scoped
+      .paginate(page: params[:page], per_page: 10)
 
     @guests = case
               when params[:q].present?

@@ -35,6 +35,8 @@
                   .collapsed-field-contents
                     = render '/guest_lists/list_by_date', guest_lists: lists
 
+  = will_paginate @guests, renderer: BootstrapPagination::Rails
+
 
 = content_for :javascript do
   :coffeescript
