@@ -105,6 +105,35 @@ class Guest < ActiveRecord::Base
     tuples = guests.map { |g| { id: g.id, name: g.full_name } }
   end
 
+  def self.duplicates(n = 0)
+    if n.nil?
+      ceiling = 0
+    else
+      ceiling = n.to_i
+    end
+    @@duplicates ||= {}
+    @@duplicates[ceiling] ||= self.compute_duplicates(ceiling)
+  end
+
+  def self.compute_duplicates(n)
+    tuples = []
+    guests = self.scoped
+    guests.each do |guest_a|
+      guests.each do |guest_b|
+        if guest_a.id != guest_b.id
+          h = {}
+          h[:distance] = Text::Levenshtein.distance(guest_a.full_name, guest_b.full_name)
+          if h[:distance] <= n
+            h[:a] = guest_a
+            h[:b] = guest_b
+            tuples << h
+          end
+        end
+      end
+    end
+    tuples.sort_by! { |tuple| tuple[:distance] }
+  end
+
   def parse_birthday
     if self.birthday_before_type_cast
       self.birthday = Chronic.parse(self.birthday_before_type_cast, context: :past)

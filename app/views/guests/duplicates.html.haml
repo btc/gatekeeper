@@ -1,0 +1,20 @@
+= render 'tabs'
+
+%form
+  %label(type='text' name='q')
+  %input(type='text' name='q')
+
+- @duplicates.each do |d|
+  .row-fluid
+    .span2
+      = d[:distance]
+    .span5
+      = link_to d[:a] do
+        = d[:a].full_name
+        = surround '(', ')' do
+          = d[:a].id
+    .span5
+      = link_to d[:b] do
+        = d[:b].full_name
+        = surround '(', ')' do
+          = d[:b].id

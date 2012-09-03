@@ -14,6 +14,7 @@ Vern::Application.routes.draw do
     resources :guests do
       get 'full_name_search', on: :collection
       get 'birthdays', on: :collection
+      get 'duplicates', on: :collection
     end
     resources :committees
     resources :events

@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 
 class GuestsController < ApplicationController
-  load_and_authorize_resource except: [:full_name_search, :birthdays]
+  load_and_authorize_resource except: [:full_name_search, :birthdays, :duplicates]
   # GET /guests
   # GET /guests.json
   def index
@@ -122,6 +122,11 @@ class GuestsController < ApplicationController
   def birthdays
     authorize! :read, Guest
     @birthday_guests = Guest.find_ordered_birthdays_for_the_next_month
+  end
+
+  def duplicates
+    authorize! :manage, Guest
+    @duplicates = Guest.duplicates(params[:q])
   end
 
   private
