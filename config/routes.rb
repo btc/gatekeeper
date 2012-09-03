@@ -33,8 +33,6 @@ Vern::Application.routes.draw do
     registrations: 'my_devise/registrations'
   }
 
-  get 'users/name'
-
   root :to => 'root#index'
 
   # The priority is based upon order of creation:
