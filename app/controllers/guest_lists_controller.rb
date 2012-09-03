@@ -149,7 +149,7 @@ class GuestListsController < ApplicationController
                        .active.pending.alphabetic_by_date
                    when :pending.to_s
                      @guest_lists = @guest_lists
-                       .pending.alphabetic_by_date
+                       .pending.scoped.alphabetic_by_date
                    else
                      @guest_lists = @guest_lists
                        .approved.scoped.alphabetic_by_date
