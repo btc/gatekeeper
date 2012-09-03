@@ -29,14 +29,27 @@
         %i.icon-list-alt
         %i.icon-plus
 
-= render 'modal_guest_remote_form'
+#guest-qcfw.modal.hide
+  .modal-header
+    %button.pull-right.btn(data-dismiss='modal')
+      %i.icon-remove
+    %h3
+      create a guest
+  .modal-body
+    = simple_form_for Guest.new, class: 'form form-horizontal', remote: true, format: :json do |f|
+      = render 'guests/form_fields', f: f
+      = f.button :submit, class: 'btn-primary'
+  .modal-footer
+    %small
+      first name, last name, and gender are <em>all</em> required
 
-:coffeescript
-  jQuery ->
-
-    new window.VIP.GuestListForm
-      id: '#index-guest-list-select'
-      savedSelections: $('#saved_selections').data('entries')
-
-    $('#index-guest-list-select').focus()
+  :coffeescript
+    jQuery ->
+      $tokenInput = $('#index-guest-list-select')
+      new window.VIP.GuestListForm
+        $tokenInput: $tokenInput
+        $modal: $('#guest-qcfw')
+        $guestForm: $('#new_guest')
+        savedSelections: $('#saved_selections').data('entries')
+      $tokenInput.focus()
 
