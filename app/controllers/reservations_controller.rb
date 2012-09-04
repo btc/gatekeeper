@@ -28,6 +28,13 @@ class ReservationsController < ApplicationController
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
+    if params[:table]
+      @table = Table.find(params[:table])
+      @reservation.table = @table
+    end
+    if params[:date]
+      @reservation.date = params[:date]
+    end
     @guest_data = []
 
     respond_to do |format|
