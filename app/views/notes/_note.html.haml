@@ -1,0 +1,10 @@
+.row-fluid
+%blockquote
+  %p
+    = surround '"' do
+      = note.body
+  %small
+    = note.guest.creator
+    %cite(title='test')
+      on
+      = note.updated_at.try(:strftime, '%A %e %B %Y')
