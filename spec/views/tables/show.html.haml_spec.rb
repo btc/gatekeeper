@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tables/show" do
+describe "tables/show", auth: true do
   before(:each) do
     @table = assign(:table, stub_model(Table,
       :name => "Name",

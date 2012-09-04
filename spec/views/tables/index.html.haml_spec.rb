@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tables/index" do
+describe "tables/index", auth: true do
   before(:each) do
     assign(:tables, [
       stub_model(Table,

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "reservations/show" do
+describe "reservations/show", auth: true do
   before(:each) do
     @reservation = assign(:reservation, stub_model(Reservation))
   end

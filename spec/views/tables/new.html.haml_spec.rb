@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tables/new" do
+describe "tables/new", auth: true do
   before(:each) do
     assign(:table, stub_model(Table,
       :name => "MyString",
