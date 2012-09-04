@@ -13,7 +13,12 @@
         %i.icon-cog
         <b class="caret"></b>
       %ul.dropdown-menu(role='menu' aria-labelledby="dLabel")
+        %li
+          = link_to root_path do
+            %i.icon-home
+            home
         - if can?(:manage, Role)
+          %li.divider
           %li
             = link_to roles_manage_path do
               %i.icon-legal
