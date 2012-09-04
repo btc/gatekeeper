@@ -1,0 +1,7 @@
+.reservations
+  - reservations.each_with_index do |r, i|
+    - if i == 0 || reservations[i].date != reservations[i-1].date
+      %h6.reservation-date-heading
+        = r.date.try(:strftime, '%A %e %B') || 'blank date'
+    .reservation
+      = render 'reservations/reservation', reservation: r

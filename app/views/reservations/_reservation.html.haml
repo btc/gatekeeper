@@ -1,0 +1,17 @@
+.row-fluid
+  - if reservation.guest.present?
+    = link_to reservation.guest do
+      %span>= reservation.guest
+  - else
+    %i.icon-warning-sign
+    no guest
+
+  = 'at' if reservation.table.present?
+  = link_to reservation.table do
+    %span>= reservation.table
+  &nbsp;
+  %a.btn-mini.btn{ href: reservation_path(reservation) }
+    %i.icon-book.icon-large
+    &rarr;
+
+

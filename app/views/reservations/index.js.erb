@@ -1,0 +1,7 @@
+$('#reservations').append("<%= j render('reservations', reservations: @reservations) %>");
+<% if @reservations.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@reservations) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+

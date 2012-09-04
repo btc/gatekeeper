@@ -4,10 +4,12 @@ class ReservationsController < ApplicationController
   # GET /reservations.json
   def index
     @reservations = Reservation.scoped
+      .paginate(page: params[:page], per_page: 30)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @reservations }
+      format.js { render template: 'reservations/index.js.erb' }
     end
   end
 
