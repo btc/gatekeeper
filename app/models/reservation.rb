@@ -5,4 +5,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :guest_list
   belongs_to :guest
   validates_uniqueness_of :table_id, scope: :date, allow_nil: true
+
+  scope :dateless, where(date: nil)
+  scope :dated, where('date IS NOT NULL')
 end
