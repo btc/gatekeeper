@@ -1,62 +1,67 @@
 = render 'tabs'
 
-.row-fluid
-  .pull-right
-    = link_to edit_guest_path(@guest) do
-      %button.btn.btn-primary{ class: ('disabled' unless can?(:update, @guest)) }
-        edit profile / add info
-%hr
-
 -# photo picture, gender, rating (permission)
 .row-fluid
-  .span2.thumbnail= image_tag url_for_profile_pic(@guest, :thumb), width: '100'
-  .span10
-    .page-header
-      %h2
-        = @guest.full_name
-        %small= @guest.gender[0]
+  .span12
 
-      - if can? :view_rating, @guest
-        - case @guest.rating
-        - when Numeric
-          = raw(stars(@guest.rating))
-        - else
-          %small unrated
+    .span3.thumbnail= image_tag url_for_profile_pic(@guest, :thumb), width: '100'
+    .span5
+      .page-header
+        %h2
+          = @guest.full_name
+          %small= @guest.gender[0] if @guest.gender.present?
 
+        - if can? :view_rating, @guest
+          = stars(@guest.rating) || "<small>unrated</small>".html_safe
+
+    .span4.pull-right
+      %a.btn.btn-primary.btn-block{ href: edit_guest_path(@guest), class: ('disabled' unless can?(:update, @guest)) }
+        edit profile / add info
+      %table.table
+        - if can? :view_contact_info, @guest
+          %tr
+            %td
+              %i.icon-gift
+              birthday
+            %td= @guest.birthday.try(:strftime, '%e %B')
+          %tr
+            %td
+              %i.icon-envelope
+              email
+            %td= mail_to @guest.email
+          %tr
+            %td
+              %i.icon-telephone
+              phone
+            %td= @guest.phone_number if @guest.phone_number
+
+
+-# info and notes
 .row-fluid
-  .span6.thumbnail
-    %table.table
-      - if can? :view_contact_info, @guest
-        %tr
-          %td
-            %i.icon-gift
-            birthday
-          %td= @guest.birthday.try(:strftime, '%e %B')
-        %tr
-          %td
-            %i.icon-envelope
-            email
-          %td= mail_to @guest.email
-        %tr
-          %td
-            %i.icon-telephone
-            phone
-          %td= @guest.phone_number if @guest.phone_number
+  .span6
+    .page-header
+      %h3
+        notes
+        %small.label TODO let you add a new note here
 
-  .span6.thumbnail
-    %h3
-      Guest Lists
-      %small and invitations
+    = render @guest.notes
+
+  .span6
+    .page-header
+      %h3
+        guest lists
+        %small and invitations
     = render 'guest_lists/list_by_date', guest_lists: @guest.guest_lists.accessible_by(current_ability)
 
-  - if can? :view_photos, @guest
-    .span6.thumbnail
-      %h3 photos
-      %ul.thumbnails
-        - @guest.photos.each do |photo|
-          %li.span3.thumbnail
-            = link_to photo do
-              = image_tag photo.image.url(:medium)
+.row-fluid
+  .span6
+    .page-header
+      %h3
+        reservations
+        %small
+          tables, etc.
+    = render @guest.reservations
 
-= button_to 'delete', @guest, class: 'btn btn-danger', confirm: 'are you sure?', method: :delete
-
+.hide
+  -# TODO move to edit page
+  = button_to 'delete', @guest, class: 'span12 btn btn-danger', confirm: 'are you sure?', method: :delete
