@@ -7,4 +7,6 @@ class Table < ActiveRecord::Base
 
   validates_presence_of :name, :number
 
+  default_scope order('number ASC')
+
 end
