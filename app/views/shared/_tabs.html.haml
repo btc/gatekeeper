@@ -18,9 +18,9 @@
               lists
 
       - if can?(:manage, Reservation)
-        %li{ active_if(guest_lists_path) }
-          = link_to guest_lists_path do
+        %li{ active_if_controller(:reservations) }
+          = link_to reservations_path do
             .tab-icon
-              %i.icon-th-large
+              %i.icon-book
             .tab-text
               reservations
