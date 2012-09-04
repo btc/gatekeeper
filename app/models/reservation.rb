@@ -4,5 +4,5 @@ class Reservation < ActiveRecord::Base
   belongs_to :table
   belongs_to :guest_list
   belongs_to :guest
-  validates_uniqueness_of :table_id, scope: :date
+  validates_uniqueness_of :table_id, scope: :date, allow_nil: true
 end
