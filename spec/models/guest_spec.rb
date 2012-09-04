@@ -107,6 +107,26 @@ describe Guest do
     @guest.is_female?.should eq(false)
   end
 
+  it 'id_name_tuples should return an array if passed a non-empty array of guests' do
+    g = FactoryGirl.create(:guest)
+    @guests = Guest.all
+    @guests.count.should_not eq(0)
+    tuples = Guest.id_name_tuples(@guests)
+    tuples.class.should eq(Array)
+  end
+
+  it 'instance method id_name_tuple should return an array' do
+    @guest.id_name_tuple.class.should eq(Array)
+  end
+
+  it 'instance method id_name_tuple should have its id' do
+    @guest.id_name_tuple[0][:id].should eq(@guest.id)
+  end
+
+  it 'instance method id_name_tuple should have its full_name' do
+    @guest.id_name_tuple[0][:name].should eq(@guest.full_name)
+  end
+
   it { should have_many(:photos) }
   it { should have_many(:notes) }
   it { should have_many(:reservations) }
