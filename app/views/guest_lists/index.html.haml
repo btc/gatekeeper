@@ -3,6 +3,7 @@
     - if can? :create, GuestList
       %li
         = link_to '#new-list', data: { toggle: 'tab' } do
+          %i.icon-plus
           create new list
     %li
       = link_to '#active-lists', data: { toggle: 'tab' } do
