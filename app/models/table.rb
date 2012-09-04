@@ -9,4 +9,7 @@ class Table < ActiveRecord::Base
 
   default_scope order('number ASC')
 
+  def to_s
+    "#{self.name} (##{self.number})"
+  end
 end
