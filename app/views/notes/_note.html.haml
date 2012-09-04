@@ -4,7 +4,7 @@
     = surround '"' do
       = note.body
   %small
-    = note.guest.creator
+    = note.user
     %cite(title='test')
       on
       = note.updated_at.try(:strftime, '%A %e %B %Y')
