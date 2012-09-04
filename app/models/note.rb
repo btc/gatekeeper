@@ -9,6 +9,8 @@ class Note < ActiveRecord::Base
   belongs_to :guest
   belongs_to :user
 
+  default_scope order('updated_at DESC')
+
   private
   def strip_body
     self.body.strip! if self.body.present?
