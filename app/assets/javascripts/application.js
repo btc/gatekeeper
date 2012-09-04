@@ -26,3 +26,4 @@
 //= require webcam
 //= require guest_form
 //= require_tree ./guest_lists
+//= require_tree ./reservations
