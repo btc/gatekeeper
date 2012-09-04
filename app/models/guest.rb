@@ -102,7 +102,7 @@ class Guest < ActiveRecord::Base
   end
 
   def self.id_name_tuples(guests)
-    return Array.new if guests.nil? || []
+    return Array.new if guests.nil?
     tuples = guests.map { |g| { id: g.id, name: g.full_name } }
   end
 
