@@ -10,4 +10,26 @@ class Reservation < ActiveRecord::Base
   scope :dated, where('date IS NOT NULL')
 
   default_scope order('date DESC')
+
+  def to_s
+    guest = case self.guest.present?
+            when true
+              "#{self.guest}'s reservation"
+            else
+              'nameless reservation'
+            end
+    table = case self.table.present?
+            when true
+              "at #{self.table}"
+            else
+             ''
+            end
+    date = case self.date.present?
+           when true
+             "(#{self.date.strftime('%A %e %B')})"
+           else
+            '(no date associated)'
+           end
+    [guest, table, date].join(' ')
+  end
 end
