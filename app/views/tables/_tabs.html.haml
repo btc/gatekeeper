@@ -1,0 +1,24 @@
+= content_for :title do
+  tables -
+.guests-nav-tabs
+  %ul.nav.nav-pills
+
+    - if can? :create, Table
+      %li{ active_if(new_table_path) }
+        = link_to new_table_path do
+          %i.icon-plus
+          add new table to inventory
+
+    - if can? :read, Table
+      %li{ active_if(date_tables_path) }
+        = link_to date_tables_path do
+          %i.icon-calendar
+          all tables
+
+    - if table.present? && can?(:read, table)
+      %li{ active_if(table_path(table)) }
+        = link_to table_path(table) do
+          = table
+
+
+

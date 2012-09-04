@@ -62,7 +62,7 @@ class GuestList < ActiveRecord::Base
   end
 
   def friendly_date
-    self.date.strftime('%A %e %B')
+    self.date.try(:strftime, '%A %e %B')
   end
 
   def total

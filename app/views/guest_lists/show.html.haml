@@ -10,7 +10,7 @@
     %li.active
 
       = link_to guest_list_path(@guest_list) do
-        = @guest_list.owner.full_name
+        = @guest_list.owner.try(:full_name)
         \:
         = best_in_place @guest_list, :date,
           display_as: :friendly_date, activator: '.edit-date'
@@ -49,10 +49,10 @@
             %tr.invitation{ class: ('redeemed' if i.redeemed) }
               %td.name
                 = link_to i.guest do
-                  = i.guest.full_name
+                  = i.guest.try(:full_name)
               %td
                 - if can? :update_plus, GuestList
-                  = simple_form_for(i, remote: true) do |f|
+                  = simple_form_for(i) do |f|
                     = f.input :plus, as: :select, collection: (0..50).to_a.reverse,
                       label: false
                 - else

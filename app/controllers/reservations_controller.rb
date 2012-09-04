@@ -35,7 +35,11 @@ class ReservationsController < ApplicationController
     if params[:date]
       @reservation.date = params[:date]
     end
-    @guest_data = []
+    if params[:guest_id] && (@guest = Guest.find_by_id params[:guest_id])
+      @guest_data = @guest.id_name_tuple
+    else
+      @guest_data = []
+    end
 
     respond_to do |format|
       format.html # new.html.erb

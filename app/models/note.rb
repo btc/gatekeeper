@@ -1,5 +1,5 @@
 class Note < ActiveRecord::Base
-  attr_accessible :body
+  attr_accessible :body, :guest_id
 
   validates_presence_of :body
   validates_length_of :body, in: (1..140)

@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(:version => 20120903220346) do
 
   create_table "tables", :force => true do |t|
     t.string   "name"
-    t.integer  "number"
+    t.string   "number"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -148,7 +148,6 @@ ActiveRecord::Schema.define(:version => 20120903220346) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "full_name"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

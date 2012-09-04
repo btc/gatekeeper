@@ -1,0 +1,27 @@
+%table.table
+  %tr
+    %th actions
+    %th #
+    %th name
+
+  - @tables.each do |table|
+    - free = table.free_on(date)
+    %tr{ green_if(free) }
+      %td
+        - if free
+          = link_to new_reservation_path(table: table, date: date), class: 'btn' do
+            %i.icon-plus
+            %i.icon-book
+        - else
+          = link_to reservation_path(table.reservation_on(date)), class: 'btn' do
+            show
+            %i.icon-book
+
+      %td
+        .lead= table.number
+
+      %td
+        = link_to table do
+          .lead
+            = table.name
+            &rarr;

@@ -1,5 +1,5 @@
 class TablesController < ApplicationController
-  authorize_resource
+  authorize_resource except: [:date]
   # GET /tables
   # GET /tables.json
   def index
@@ -80,5 +80,16 @@ class TablesController < ApplicationController
       format.html { redirect_to tables_url }
       format.json { head :no_content }
     end
+  end
+
+  def date
+    authorize! :read, Table
+    @tables = Table.scoped
+    @date = case params[:date].present?
+            when true
+              Date.parse(params[:date])
+            else
+              Nightclub.today
+            end
   end
 end

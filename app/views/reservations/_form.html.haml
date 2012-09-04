@@ -2,7 +2,16 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :date
+    = tag 'span', id: 'guest-data', data: { guest: @guest_data }
+    = f.input :date, as: :string, autofocus: true
+    = f.input :guest_id
+    = f.association :table, as: :radio_buttons
 
   .form-actions
     = f.button :submit
+
+:coffeescript
+  jQuery ->
+    new window.VIP.ReservationForm
+      $guestInputField: $('#reservation_guest_id')
+      $data: $('#guest-data').data('guest')

@@ -10,7 +10,9 @@ Vern::Application.routes.draw do
 
   scope 'api' do
     resources :reservations
-    resources :tables
+    resources :tables do
+      get 'date', on: :collection
+    end
     resources :photos
     resources :guests do
       get 'full_name_search', on: :collection

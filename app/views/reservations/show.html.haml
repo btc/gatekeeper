@@ -1,9 +1,2 @@
-%p#notice= notice
+= render 'tabs', reservation: @reservation
 
-%p
-  %b Date:
-  = @reservation.date
-
-= link_to 'Edit', edit_reservation_path(@reservation)
-\|
-= link_to 'Back', reservations_path

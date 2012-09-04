@@ -1,21 +1,24 @@
-%h1 Listing tables
+= render 'tabs', table: nil
 
-%table
-  %tr
-    %th Name
-    %th Number
-    %th
-    %th
-    %th
+.row-fluid
+  .span9
+    = render 'tables', tables: @tables, date: nil
 
-  - @tables.each do |table|
-    %tr
-      %td= table.name
-      %td= table.number
-      %td= link_to 'Show', table
-      %td= link_to 'Edit', edit_table_path(table)
-      %td= link_to 'Destroy', table, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Table', new_table_path
+  .span3
+    %span.label.label-info
+      naming scheme
+    %div
+      0XX
+      &rarr;
+      VIP
+    %div
+      1XX
+      &rarr;
+      General
+    %span.label.label-info
+      reserving a table
+    %div
+      select
+      %i.icon-plus
+      %i.icon-book
+      to create a new reservation for this table

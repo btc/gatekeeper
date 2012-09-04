@@ -12,4 +12,21 @@ class Table < ActiveRecord::Base
   def to_s
     "#{self.name} (##{self.number})"
   end
+
+  def to_label
+    "#{self.number} #{self.name}"
+  end
+
+  def free_on(date)
+    return true if date == nil || date == '' || date == []
+    if self.reservations.where(date: date).empty?
+      true
+    else
+      false
+    end
+  end
+
+  def reservation_on(date)
+    self.reservations.where(date: date).first
+  end
 end

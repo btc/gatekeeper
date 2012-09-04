@@ -19,6 +19,9 @@
  *= require globals
  *= require tabs
  *= require guests
+ *= require tables
  *= require guest_lists
+ *= require reservations
  *= require root
+ *= require jumbo-search
  */

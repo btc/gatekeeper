@@ -25,11 +25,11 @@ class Guest < ActiveRecord::Base
   @@valid_ratings = (1..5)
   validates :rating, inclusion: { in: @@valid_ratings }, allow_nil: true
 
-  has_many :photos
-  has_many :notes
-  has_many :guest_lists, through: :invitations
-  has_many :invitations
-  has_many :reservations
+  has_many :photos, dependent: :destroy
+  has_many :notes, dependent: :destroy
+  has_many :guest_lists, through: :invitations, dependent: :destroy
+  has_many :invitations, dependent: :destroy
+  has_many :reservations, dependent: :destroy
   has_and_belongs_to_many :events
   has_one :user
   belongs_to :creator, class_name: 'User'
@@ -169,4 +169,9 @@ class Guest < ActiveRecord::Base
   def to_s
     self.full_name
   end
+
+  def friendly_date
+    self.birthday.try(:strftime, '%e %B')
+  end
+
 end

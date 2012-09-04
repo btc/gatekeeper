@@ -127,6 +127,30 @@ describe Guest do
     @guest.id_name_tuple[0][:name].should eq(@guest.full_name)
   end
 
+  it 'should delete associated reservations when i delet guest' do
+    r = @guest.reservations.create(date: Date.today)
+    r_id = r.id
+    Reservation.find_by_id(r_id).should_not eq(nil)
+    @guest.destroy
+    Reservation.find_by_id(r_id).should eq(nil)
+  end
+
+  it 'should delete associated photos when i delet guest' do
+    r = @guest.photos.create()
+    r_id = r.id
+    Photo.find_by_id(r_id).should_not eq(nil)
+    @guest.destroy
+    Photo.find_by_id(r_id).should eq(nil)
+  end
+
+  it 'should delete associated notes when i delet guest' do
+    r = @guest.notes.create(body: 'd')
+    r_id = r.id
+    Note.find_by_id(r_id).should_not eq(nil)
+    @guest.destroy
+    Note.find_by_id(r_id).should eq(nil)
+  end
+
   it { should have_many(:photos) }
   it { should have_many(:notes) }
   it { should have_many(:reservations) }

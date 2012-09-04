@@ -15,7 +15,7 @@
           = stars(@guest.rating) || "<small>unrated</small>".html_safe
 
     .span4.pull-right
-      %a.btn.btn-primary.btn-block{ href: edit_guest_path(@guest), class: ('disabled' unless can?(:update, @guest)) }
+      %a.btn.btn-block{ href: edit_guest_path(@guest), class: ('disabled' unless can?(:update, @guest)) }
         edit profile / add info
       %table.table
         - if can? :view_contact_info, @guest
@@ -23,17 +23,28 @@
             %td
               %i.icon-gift
               birthday
-            %td= @guest.birthday.try(:strftime, '%e %B')
+            %td
+              = best_in_place_if can?(:update, @guest), @guest, :birthday, activator: '.edit-bday', display_as: :friendly_date
+              - if can?(:update, @guest)
+                %span.edit-bday.icon-edit
+
           %tr
             %td
               %i.icon-envelope
-              email
-            %td= mail_to @guest.email
+            %td
+              = best_in_place_if can?(:update, @guest), @guest, :email, activator: '.edit-email', display_with: :mail_to
+              - if can?(:update, @guest)
+                %span.edit-email.icon-edit
+
           %tr
             %td
               %i.icon-telephone
               phone
-            %td= @guest.phone_number if @guest.phone_number
+            %td
+              = best_in_place_if can?(:update, @guest), @guest, :phone_number, activator: '.edit-phone'
+              - if can?(:update, @guest)
+                %span.edit-phone.icon-edit
+
 
 
 -# info and notes
@@ -41,24 +52,49 @@
   .span6
     .page-header
       %h3
+        %a.btn.btn-primary(href='#new_note_modal' role='button' data-toggle='modal')
+          %i.icon-plus
+          %i.icon-pencil
         notes
-        %small.label TODO let you add a new note here
+        %small
+          useful bits of info
 
     = render @guest.notes
+
 
   .span6
     .page-header
       %h3
-        guest lists
-        %small and invitations
+        - if can? :create, GuestList
+          %a.btn.btn-primary{ href: new_guest_list_path(guest_id: @guest.id) }
+            %i.icon-plus
+            %i.icon-list-ul
+        guest lists and invitations
     = render 'guest_lists/list_by_date', guest_lists: @guest.guest_lists.accessible_by(current_ability)
 
 .row-fluid
   .span6
     .page-header
       %h3
-        reservations
-        %small
-          tables, etc.
-    = render @guest.reservations
+        - if can? :create, Reservation
+          %a.btn.btn-primary{ href: new_reservation_path(guest_id: @guest.id) }
+            %i.icon-plus
+            %i.icon-book
+        table reservations
+    = render 'reservations/reservations', reservations: @guest.reservations
 
+.modal.hide#new_note_modal
+  .modal-header
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    write a note
+  .modal-body
+    = simple_form_for Note.new do |f|
+      = f.input :body, as: :string
+      = f.hidden_field :guest_id, value: @guest.id
+      %button.btn.btn-primary
+        create new note for #{@guest}
+
+
+:coffeescript
+  jQuery ->
+    $('.best_in_place').best_in_place()

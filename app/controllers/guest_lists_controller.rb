@@ -32,6 +32,12 @@ class GuestListsController < ApplicationController
   def new
     @guest_list = GuestList.new
 
+    if params[:guest_id] && (@guest = Guest.find_by_id params[:guest_id])
+      @saved_selections = @guest.id_name_tuple
+    else
+      @saved_selections = []
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { respond_with_bip @guest_list }
@@ -140,16 +146,13 @@ class GuestListsController < ApplicationController
                      date = Chronic.parse(params[:nl], context: :future)
                      date = Date.today if date.wday == Date.today.wday
                      @guest_lists = @guest_lists
-                       .approved.where('date = ?', date).alphabetic_by_date
-                   when :active.to_s
+                       .where('date = ?', date).alphabetic_by_date
+                   when :pending.to_s
                      @guest_lists = @guest_lists
-                       .approved.active.alphabetic_by_date
-                   when :active_pending.to_s
-                     @guest_lists = @guest_lists
-                       .active.pending.alphabetic_by_date
+                       .pending.alphabetic_by_date
                    else
                      @guest_lists = @guest_lists
-                       .approved.scoped.alphabetic_by_date
+                       .alphabetic_by_date
                    end
 
     respond_to do |format|

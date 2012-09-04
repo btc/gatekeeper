@@ -6,8 +6,11 @@
           %i.icon-plus
           create new list
     %li
-      = link_to '#active-lists', data: { toggle: 'tab' } do
-        active
+      = link_to '#all-lists', data: { toggle: 'tab' } do
+        .pending-badge
+          all
+          %span.badge
+            = GuestList.count
 
     %li.dropdown
 
@@ -38,9 +41,6 @@
         %li
           = link_to '#wednesday-lists', data: { toggle: 'tab' } do
             wednesday
-    %li
-      = link_to '#all-lists', data: { toggle: 'tab' } do
-        all
     - if can? :approve, GuestList
       %li
         = link_to '#active-pending-lists', data: { toggle: 'tab' } do
@@ -56,7 +56,7 @@
   :coffeescript
     jQuery ->
       baseURL = "/api/guest_lists/search?q="
-      $default = $("a[href='#active-lists']")
+      $default = $("a[href='#all-lists']")
       new window.VIP.GuestListIndex
         $container: $('#list-container')
         $default: $default

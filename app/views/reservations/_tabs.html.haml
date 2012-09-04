@@ -1,0 +1,18 @@
+.guests-nav-tabs
+  %ul.nav.nav-pills
+
+    - if can? :create, Reservation
+      %li{ active_if(new_reservation_path) }
+        = link_to new_reservation_path do
+          %i.icon-plus
+          create new reservation
+
+    - if can? :read, Reservation
+      %li{ active_if(reservations_path) }
+        = link_to reservations_path do
+          show all by date
+
+    - if reservation.present? && can?(:read, reservation)
+      %li{ active_if(reservation_path(reservation)) }
+        = link_to reservation_path(reservation) do
+          = reservation
