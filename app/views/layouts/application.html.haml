@@ -8,14 +8,6 @@
         .container
           = render partial: 'layouts/nav'
 
-    - if can?(:read, Guest)
-      .container
-        .row-fluid
-          %form.form-search{ action: guests_path }
-            .jumbo-search
-              %input.span12.search-query(type='text' name='q' autocorrect='off'
-                placeholder='lookup guest')
-
     .container#body-container
       = bootstrap_flash
       - if current_user.roles.empty?
@@ -34,6 +26,15 @@
             Johnny, Steven, Karrillee, Chloe, Christina, Leeanna, or Brian
             to get started!
 
+      - if can?(:read, Guest)
+        .row-fluid
+          %form#global-search-form.form-inline{ action: guests_path }
+            .span10
+              %input.span12(type='text' name='q' autocorrect='off'
+                placeholder='search for guest')
+            .span2
+              %button.btn.btn-block
+                %i.icon-search
 
       = render 'shared/tabs'
       #content-container
