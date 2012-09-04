@@ -84,15 +84,12 @@
     = render 'reservations/reservations', reservations: @guest.reservations
 
 .modal.hide#new_note_modal
-  .modal-header
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    write a note
-  .modal-body
+  .modal-body.centered
     = simple_form_for Note.new do |f|
-      = f.input :body, as: :string
+      = f.input :body, as: :text, input_html: { rows: 3 }, label: false
       = f.hidden_field :guest_id, value: @guest.id
       %button.btn.btn-primary
-        create new note for #{@guest}
+        save new note about #{@guest}
 
 
 :coffeescript
