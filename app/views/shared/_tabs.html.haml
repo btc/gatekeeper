@@ -33,3 +33,19 @@
             .tab-text
               tables
 
+      - if can?(:manage, :all)
+        %li
+          = link_to reservations_path do
+            .tab-icon
+              %i.icon-map-marker
+            .tab-text
+              map
+
+      - if can?(:manage, :all)
+        %li
+          = link_to reservations_path do
+            .tab-icon
+              %i.icon-calendar
+            .tab-text
+              calendar
+
