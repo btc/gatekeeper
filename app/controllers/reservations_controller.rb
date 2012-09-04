@@ -26,6 +26,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
+    @guest_data = []
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,12 +37,14 @@ class ReservationsController < ApplicationController
   # GET /reservations/1/edit
   def edit
     @reservation = Reservation.find(params[:id])
+    @guest_data = @reservation.guest.id_name_tuple
   end
 
   # POST /reservations
   # POST /reservations.json
   def create
     @reservation = Reservation.new(params[:reservation])
+    @guest_data = @reservation.guest.id_name_tuple
 
     respond_to do |format|
       if @reservation.save
@@ -58,6 +61,7 @@ class ReservationsController < ApplicationController
   # PUT /reservations/1.json
   def update
     @reservation = Reservation.find(params[:id])
+    @guest_data = @reservation.guest.id_name_tuple
 
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
