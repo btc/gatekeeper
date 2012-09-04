@@ -43,7 +43,7 @@
             wednesday
     - if can? :approve, GuestList
       %li
-        = link_to '#active-pending-lists', data: { toggle: 'tab' } do
+        = link_to '#pending-lists', data: { toggle: 'tab' } do
           .pending-badge
             pending
             %span.badge.badge-warning
@@ -62,14 +62,9 @@
         $default: $default
         tuples: [
 
-          # active
-          url: baseURL + 'active'
-          $trigger: $default
-         ,
-
           # all
           url: baseURL
-          $trigger: $("a[href='#all-lists']")
+          $trigger: $default
          ,
 
           # thursday
@@ -112,7 +107,7 @@
           $trigger: $("a[href='#new-list']")
          ,
 
-          # active and pending
-          url: baseURL + 'active_pending'
-          $trigger: $("a[href='#active-pending-lists']")
+          # pending
+          url: baseURL + 'pending'
+          $trigger: $("a[href='#pending-lists']")
         ]
