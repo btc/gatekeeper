@@ -2,7 +2,7 @@
   .global-nav-tabs
     %ul.nav.nav-tabs.centered
       - if can?(:read, Guest)
-        %li{ active_if(guests_path) }
+        %li{ active_if_controller(:guests) }
           = link_to guests_path do
             .tab-icon
               %i.icon-group
@@ -10,7 +10,7 @@
               guests
 
       - if can?(:read, GuestList)
-        %li{ active_if(guest_lists_path) }
+        %li{ active_if_controller(:guest_lists) }
           = link_to guest_lists_path do
             .tab-icon
               %i.icon-list-ul
