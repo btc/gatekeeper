@@ -101,6 +101,10 @@ class Guest < ActiveRecord::Base
     separated_by_month.flatten!
   end
 
+  def id_name_tuple
+    [{ id: self.id, name: self.full_name }]
+  end
+
   def self.id_name_tuples(guests)
     return Array.new if guests.nil?
     tuples = guests.map { |g| { id: g.id, name: g.full_name } }
