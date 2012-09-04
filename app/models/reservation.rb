@@ -8,4 +8,6 @@ class Reservation < ActiveRecord::Base
 
   scope :dateless, where(date: nil)
   scope :dated, where('date IS NOT NULL')
+
+  default_scope order('date DESC')
 end
