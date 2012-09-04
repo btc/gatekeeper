@@ -48,7 +48,7 @@ class NotesController < ApplicationController
         format.html { redirect_to @note.guest, notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to @note.guest, alert: "note wasn't saved. please try again" }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
