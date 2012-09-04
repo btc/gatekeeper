@@ -6,5 +6,8 @@
     %small
       = link_to @guest do
         cancel
+    .pull-right
+      - if can? :destroy, @guest
+        = button_to 'delete', @guest, class: 'btn btn-danger', confirm: 'are you sure?', method: :delete
 
 = render 'form'
