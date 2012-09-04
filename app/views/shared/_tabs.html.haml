@@ -24,3 +24,12 @@
               %i.icon-book
             .tab-text
               reservations
+
+      - if can?(:manage, Table)
+        %li{ active_if_controller(:tables) }
+          = link_to tables_path do
+            .tab-icon
+              %i.icon-th-large
+            .tab-text
+              tables
+
