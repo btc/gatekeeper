@@ -26,6 +26,7 @@ Vern::Application.routes.draw do
       get 'search', on: :collection
       get 'form', on: :collection
     end
+    resources :notes
   end
 
   devise_for :users,
