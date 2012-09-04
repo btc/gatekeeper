@@ -7,9 +7,6 @@
         %th name
         %th
           approved lists/invitations
-          = surround '(', ')' do
-            = Date.yesterday.strftime('%A %e %B')
-            onward
 
       %tbody#guests
         = render 'guests'
