@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def active_if_controller(controller, other_condition = true)
+    if other_condition && params[:controller] == controller.to_s
+      { class: 'active' }
+    else
+      {}
+    end
+  end
+
   def active_if(path, other_condition = true)
     if other_condition && current_page?(path)
       { class: 'active' }
