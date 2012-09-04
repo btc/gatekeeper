@@ -51,7 +51,7 @@
                 = link_to i.guest do
                   = i.guest.try(:full_name)
               %td
-                - if can? :update_plus, GuestList
+                - if can? :update_plus, @guest_list
                   = simple_form_for(i) do |f|
                     = f.input :plus, as: :select, collection: (0..50).to_a.reverse,
                       label: false
@@ -61,7 +61,7 @@
 
               %td
                 -# tags
-                - if can?(:manage, Invitation)
+                - if can?(:update, i)
                   = simple_form_for(i, remote: true) do |f|
                     .input-prepend
                       = f.input :tag_list,
@@ -79,6 +79,9 @@
                 %td
                   = button_to 'x', i, class: 'btn btn-danger btn-mini span12',
                     :confirm => 'Are you sure?', :method => :delete, remote: true
+
+    = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
+      :confirm => 'Are you sure?', :method => :delete
 
 
     - if can? :manage, @guest_list

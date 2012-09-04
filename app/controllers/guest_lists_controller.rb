@@ -139,7 +139,7 @@ class GuestListsController < ApplicationController
   def search
     authorize! :read, GuestList
 
-    @guest_lists = GuestList.includes(:guests, :invitations).scoped
+    @guest_lists = GuestList.includes(:guests, :invitations)
 
     @guest_lists = case params[:q]
                    when :nl.to_s
@@ -154,6 +154,8 @@ class GuestListsController < ApplicationController
                      @guest_lists = @guest_lists
                        .alphabetic_by_date
                    end
+
+    @guest_lists = @guest_lists.select { |list| can? :read, list }
 
     respond_to do |format|
       format.html do

@@ -68,5 +68,19 @@ class Ability
       # can :lookup_names, Guest # any user full_name_search always
     end
 
+    if user.has_role? :committee_member
+      can :read, GuestList do |list|
+        list.creator == user
+      end
+      can :update, Invitation do |i|
+        g = i.guest_list
+        if g.present? && g.creator == user && g.approved == false
+        end
+      end
+      can :create, Guest
+      can :lookup_names, Guest
+      can :create, GuestList
+    end
+
   end
 end
