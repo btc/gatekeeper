@@ -161,4 +161,8 @@ class Guest < ActiveRecord::Base
   def is_male?
     !self.is_female?
   end
+
+  def to_s
+    self.full_name
+  end
 end
