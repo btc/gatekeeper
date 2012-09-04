@@ -3,10 +3,10 @@
 -# this goes back one month. caution if changing behavior from 'active' lists
 - day = guest_lists[0].date << 1 if guest_lists.present?
 - guest_lists.each do |list|
-  - if day != list.date.day
+  - if day != list.date.try(:day)
     .row-fluid
-      %h6= list.date.strftime('%A %e %B')
-    - day = list.date.day
+      %h6= list.date.try(:strftime, '%A %e %B')
+    - day = list.date.try(:day)
   .row-fluid
     = link_to guest_list_path(list) do
       #{list.owner.try(:full_name)}'s list
