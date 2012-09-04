@@ -1,4 +1,5 @@
 class TablesController < ApplicationController
+  authorize_resource
   # GET /tables
   # GET /tables.json
   def index
