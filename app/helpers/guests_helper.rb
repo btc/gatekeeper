@@ -8,7 +8,7 @@ module GuestsHelper
   end
 
   def stars(rating)
-    return nil if rating.blank?
+    return nil if rating.nil? || rating.blank?
 
     star  = case rating
             when 5
