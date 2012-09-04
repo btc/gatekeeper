@@ -9,7 +9,6 @@
           = render partial: 'layouts/nav'
 
     .container#body-container
-      = bootstrap_flash
       - if current_user.roles.empty?
         .alert.alert-info
 
@@ -38,6 +37,7 @@
 
       = render 'shared/tabs'
       #content-container
+        = bootstrap_flash
         = yield
       #footer
         .pull-left.lead
