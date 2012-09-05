@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    self.full_name
+    name = self.full_name
+    if name.nil? || name.blank?
+      name = self.email
+    end
+    return name
   end
 end
