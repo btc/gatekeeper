@@ -1,0 +1,10 @@
+- if current_user.full_name.nil? || current_user.full_name.blank?
+  .alert.alert-notice
+    %h3
+      hey!
+      %small
+        please enter your name:
+
+        = form_tag(notifications_post_full_name_path, method: :post, class: 'form-inline') do
+          %input(type='text' name='full_name')
+          %button.btn.btn-primary update my name

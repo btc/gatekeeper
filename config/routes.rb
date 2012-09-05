@@ -1,5 +1,7 @@
 Vern::Application.routes.draw do
 
+  post "notifications/post_full_name"
+
   get "roles/manage"
   post "roles/update"
 

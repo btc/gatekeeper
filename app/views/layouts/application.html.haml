@@ -9,6 +9,7 @@
           = render partial: 'layouts/nav'
 
     .container#body-container
+      = render 'notifications/prompts'
       - if current_user.roles.empty?
         .alert.alert-info
 
