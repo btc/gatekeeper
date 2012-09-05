@@ -9,6 +9,7 @@
       = link_to '#all-lists', data: { toggle: 'tab' } do
         .pending-badge
           all
+          = yield :list_count
 
     %li.dropdown
 
