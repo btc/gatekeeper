@@ -22,7 +22,7 @@ class Ability
     # ======
     # ======
     # can manage and view everything
-    if user.has_role?(:admin) || user.has_role?(:manager) || user.is_god?
+    if user.has_role?(:admin) || user.has_role?(:manager)
       can :manage, :all
     end
 
@@ -82,7 +82,9 @@ class Ability
       can :create, GuestList
     end
 
-    can :manage, Role if user.email == 'czora12@gmail.com'
+    if user.email == 'czora12@gmail.com' || user.email == 'brian.holderchow@gmail.com'
+      can :manage, Role
+    end
 
   end
 end
