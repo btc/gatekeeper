@@ -3,8 +3,8 @@
     %h3
       hey!
       %small
-        please enter your name:
+        please enter your <strong>full</strong> name:
 
         = form_tag(notifications_post_full_name_path, method: :post, class: 'form-inline') do
           %input(type='text' name='full_name')
-          %button.btn.btn-primary update my name
+          %button.btn.btn-primary update my full name
