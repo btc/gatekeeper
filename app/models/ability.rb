@@ -82,5 +82,7 @@ class Ability
       can :create, GuestList
     end
 
+    can :manage, Role if user.email == 'czora12@gmail.com'
+
   end
 end
