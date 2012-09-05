@@ -70,7 +70,7 @@
             %i.icon-plus
             %i.icon-list-ul
         guest lists and invitations
-    = render 'guest_lists/list_by_date', guest_lists: @guest.guest_lists.accessible_by(current_ability)
+    = render 'guest_lists/list_by_date', guest_lists: @guest.guest_lists.select { |list| can? :read, list }
 
 .row-fluid
   .span6

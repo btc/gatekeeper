@@ -10,7 +10,7 @@
 
     %td.lists-and-invitations
       -# NB: limit the scope to the permitted lists as early in chain as possible
-      - lists = guest.guest_lists.accessible_by(current_ability)
+      - lists = guest.guest_lists.select { |list| can? :read, list }
       - if lists.empty?
         not on any lists
       - else
