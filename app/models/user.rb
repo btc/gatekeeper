@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-    :first_name, :last_name
+    :first_name, :last_name, :full_name
 
   has_many :roles, inverse_of: :user
   has_and_belongs_to_many :committees
@@ -34,6 +34,6 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    self.email
+    self.full_name
   end
 end
