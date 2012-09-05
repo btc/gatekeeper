@@ -2,19 +2,20 @@
 -# RE: day
 -# this goes back one month. caution if changing behavior from 'active' lists
 - guest_lists.each_with_index do |list,i|
-  - if i == 0 || guest_lists[i].date != guest_lists[i-1].date
+  - if can? :read, i
+    - if i == 0 || guest_lists[i].date != guest_lists[i-1].date
+      .row-fluid
+        %h6= list.date.try(:strftime, '%A %e %B')
     .row-fluid
-      %h6= list.date.try(:strftime, '%A %e %B')
-  .row-fluid
-    = link_to guest_list_path(list) do
-      #{list.owner.try(:full_name)}'s list
+      = link_to guest_list_path(list) do
+        #{list.owner.try(:full_name)}'s list
 
-    - if can? :view_rating, list.owner
-      = stars(list.owner.try(:rating))
+      - if can? :view_rating, list.owner
+        = stars(list.owner.try(:rating))
 
-    %small= pluralize list.total, 'guest'
-    - if list.pending?
-      %span.label.label-warning pending
+      %small= pluralize list.total, 'guest'
+      - if list.pending?
+        %span.label.label-warning pending
 
 .guest-list-stats
   %span.list-count
