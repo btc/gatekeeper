@@ -142,11 +142,6 @@ class GuestListsController < ApplicationController
     @guest_lists = GuestList.includes(:guests, :invitations)
 
     @guest_lists = case params[:q]
-                   when :nl.to_s
-                     date = Chronic.parse(params[:nl], context: :future)
-                     date = Date.today if date.wday == Date.today.wday
-                     @guest_lists = @guest_lists
-                       .where('date = ?', date).alphabetic_by_date
                    when :pending.to_s
                      @guest_lists = @guest_lists
                        .pending.alphabetic_by_date
