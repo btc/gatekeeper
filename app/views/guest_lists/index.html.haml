@@ -9,6 +9,7 @@
         = link_to '#my-lists', rel: 'tooltip',
           data: { placement: 'top',
             :'original-title' => 'lists created by me', toggle: 'tab' } do
+          %i.icon-list-ul
           my lists
 
     - if can? :view_all_listings_view, GuestList
