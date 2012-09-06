@@ -19,6 +19,8 @@
         %small= pluralize list.total, 'guest'
         - if list.pending?
           %span.label.label-warning pending
+        - elsif list.approved?
+          %span.label.label-success approved
 
   .guest-list-stats
     %span.list-count
