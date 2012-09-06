@@ -21,6 +21,7 @@
 //= require best_in_place
 //= require jquery.collapse
 //= require autocomplete-rails-custom
+//= require bootstrap-datepicker
 //  APPLICATION FUNCTIONALITY
 //= require infinite_scroll
 //= require webcam

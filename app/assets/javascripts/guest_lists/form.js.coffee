@@ -12,6 +12,11 @@ class window.VIP.GuestListForm
       @options.$tokenInput
       @options.savedSelections
     )
+    @configureDatepicker(@options.$datepicker)
+
+  configureDatepicker: ($datepicker) ->
+    $datepicker
+      .datepicker(format: 'yyyy-mm-dd')
 
   configureModal: ($modal, $form, $tokenInput) ->
     @configureLinksToFocusForm($modal)

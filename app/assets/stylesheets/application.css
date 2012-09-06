@@ -16,6 +16,7 @@
  *= require token-input-facebook
  *= require jquery.ui.all
  *= require bootstrap_and_overrides
+ *= require datepicker
  *= require globals
  *= require tabs
  *= require guests

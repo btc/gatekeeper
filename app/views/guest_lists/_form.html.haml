@@ -1,8 +1,16 @@
 -# TODO use rails helper to generate form for post to create action
 #guest-list-form
   = form_tag(guest_lists_path, method: :post) do
+
+    %div
+      %i.icon-calendar
+      select the date
+    %div.row-fluid
+      %input#datepicker(name='guest_list[date]' type='text' autocomplete='off'){ value: Date.today }
+
     %div.row-fluid
       %i.icon-user
+      lookup & add guests
       %span.pull-right
         guest not found?
         %a#guest-modal-trigger.zoom-cursor(href='#guest-qcfw' data-toggle='modal')
@@ -12,22 +20,15 @@
     %input.guest-lookup(autocomplete='off' type='text'
       name='q'){ id: 'index-guest-list-select' }
 
-    %hr
-    %div.icon-calendar
-    %div.row-fluid
-      %input.datepicker.span12(name='guest_list[date]'
-        type='text'
-        placeholder="date (eg. 'this friday')"){'data-title' => "did you know?",
-        'data-content' => 'you can enter dates using plain english',
-        'data-placement' => 'right',
-        'data-delay' => 0,
-        'data-trigger' => 'focus',
-        rel: 'popover' }
+    %small
+      %p
+        %span.label.label-info creating a list for yourself?
+        If this is your list, enter your name first. Then, enter the names of your
+        guests on subsequent lines.
 
     .form-actions
-      %button.btn.btn-block
-        %i.icon-list-alt
-        %i.icon-plus
+      %button.btn.btn-block.btn-primary.btn-large
+        create new guest list
 
 #guest-qcfw.modal.hide
   .modal-header
@@ -45,11 +46,10 @@
 
   :coffeescript
     jQuery ->
-      $tokenInput = $('#index-guest-list-select')
       new window.VIP.GuestListForm
-        $tokenInput: $tokenInput
+        $tokenInput: $('#index-guest-list-select')
         $modal: $('#guest-qcfw')
         $guestForm: $('#new_guest')
         savedSelections: $('#saved_selections').data('entries')
-      $tokenInput.focus()
+        $datepicker: $('#datepicker')
 
