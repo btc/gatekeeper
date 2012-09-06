@@ -27,7 +27,9 @@ module GuestListsHelper
     elsif guest_list.draft?
       "<span class='label'>draft</span>".html_safe
     elsif guest_list.invalid?
-      "<span class='label label-important'>invalid state</span>".html_safe
+      "<span class='label label-important'>invalid state</span>".html_safe +
+      "<span class='label'>draft</span>".html_safe +
+      "<span class='label label-success'>approved</span>".html_safe
     else
       ''
     end
