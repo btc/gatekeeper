@@ -1,2 +1,4 @@
 = render 'tabs', reservation: @reservation
 
+= button_to 'delete', @reservation, class: 'btn btn-danger',
+  :confirm => 'Are you sure?', :method => :delete
