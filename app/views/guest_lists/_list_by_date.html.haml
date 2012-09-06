@@ -1,28 +1,29 @@
--# NB: assumes permissions have been handled already
--# RE: day
--# this goes back one month. caution if changing behavior from 'active' lists
-- count = 0
-- guest_lists.each_with_index do |list,i|
-  - if can? :read, list
-    - count += 1
-    - if i == 0 || guest_lists[i].date != guest_lists[i-1].date
+.lead
+  -# NB: assumes permissions have been handled already
+  -# RE: day
+  -# this goes back one month. caution if changing behavior from 'active' lists
+  - count = 0
+  - guest_lists.each_with_index do |list,i|
+    - if can? :read, list
+      - count += 1
+      - if i == 0 || guest_lists[i].date != guest_lists[i-1].date
+        .row-fluid
+          %h6= list.date.try(:strftime, '%A %e %B')
       .row-fluid
-        %h6= list.date.try(:strftime, '%A %e %B')
-    .row-fluid
-      = link_to guest_list_path(list) do
-        #{list.owner.try(:full_name)}'s list
+        = link_to guest_list_path(list) do
+          #{list.owner.try(:full_name)}'s list
 
-      - if can? :view_rating, list.owner
-        = stars(list.owner.try(:rating))
+        - if can? :view_rating, list.owner
+          = stars(list.owner.try(:rating))
 
-      %small= pluralize list.total, 'guest'
-      - if list.pending?
-        %span.label.label-warning pending
+        %small= pluralize list.total, 'guest'
+        - if list.pending?
+          %span.label.label-warning pending
 
-.guest-list-stats
-  %span.list-count
-    = pluralize count, 'list'
+  .guest-list-stats
+    %span.list-count
+      = pluralize count, 'list'
 
-= content_for :list_count do
-  %span.badge
-    = count
+  = content_for :list_count do
+    %span.badge
+      = count
