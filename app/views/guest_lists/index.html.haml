@@ -5,41 +5,49 @@
         = link_to '#new-list', data: { toggle: 'tab' } do
           %i.icon-plus
           create new list
-    %li
-      = link_to '#all-lists', data: { toggle: 'tab' } do
-        .pending-badge
-          all
-          = yield :list_count
+      %li
+        = link_to '#my-lists', rel: 'tooltip',
+          data: { placement: 'top',
+            :'original-title' => 'lists created by me', toggle: 'tab' } do
+          my lists
 
-    %li.dropdown
+    - if can? :view_all_listings_view, GuestList
+      %li
+        = link_to '#all-lists', data: { toggle: 'tab' } do
+          .pending-badge
+            all
 
-      %a.dropdown-toggle(data-toggle='dropdown' href='#')
-        %i.icon-calendar
-        by day
-        %b.caret
+    - if can? :view_by_day, GuestList
+      %li.dropdown
 
-      %ul.dropdown-menu
-        %li
-          = link_to '#thursday-lists', data: { toggle: 'tab' } do
-            thursday
-        %li
-          = link_to '#friday-lists', data: { toggle: 'tab' } do
-            friday
-        %li
-          = link_to '#saturday-lists', data: { toggle: 'tab' } do
-            saturday
-        %li
-          = link_to '#sunday-lists', data: { toggle: 'tab' } do
-            sunday
-        %li
-          = link_to '#monday-lists', data: { toggle: 'tab' } do
-            monday
-        %li
-          = link_to '#tuesday-lists', data: { toggle: 'tab' } do
-            tuesday
-        %li
-          = link_to '#wednesday-lists', data: { toggle: 'tab' } do
-            wednesday
+        %a.dropdown-toggle(data-toggle='dropdown' href='#')
+          %i.icon-calendar
+          by day
+          %b.caret
+
+        %ul.dropdown-menu
+          %li
+            = link_to '#thursday-lists', data: { toggle: 'tab' } do
+              thursday
+          %li
+            = link_to '#friday-lists', data: { toggle: 'tab' } do
+              friday
+          %li
+            = link_to '#saturday-lists', data: { toggle: 'tab' } do
+              saturday
+          %li
+            = link_to '#sunday-lists', data: { toggle: 'tab' } do
+              sunday
+          %li
+            = link_to '#monday-lists', data: { toggle: 'tab' } do
+              monday
+          %li
+            = link_to '#tuesday-lists', data: { toggle: 'tab' } do
+              tuesday
+          %li
+            = link_to '#wednesday-lists', data: { toggle: 'tab' } do
+              wednesday
+
     - if can? :approve, GuestList
       %li
         = link_to '#pending-lists', data: { toggle: 'tab' } do
@@ -108,4 +116,9 @@
           # pending
           url: baseURL + 'pending'
           $trigger: $("a[href='#pending-lists']")
+         ,
+
+          # my
+          url: baseURL + 'my'
+          $trigger: $("a[href='#my-lists']")
         ]

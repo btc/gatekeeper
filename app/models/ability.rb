@@ -40,6 +40,8 @@ class Ability
       # managing GuestLists
       # -------------------
       can :read, GuestList, :approved => true # to fulfill duties at door
+      can :view_by_day, GuestList
+      can :view_all_listings_view, GuestList
       can :read, Guest
       can :read, Invitation do |i|
         i.guest_list.approved?

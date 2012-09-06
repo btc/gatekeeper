@@ -3,14 +3,16 @@
   = form_tag(guest_lists_path, method: :post) do
 
     %div
-      %i.icon-calendar
-      select the date
+      1
+      %i.icon-calendar.icon-large
+      %span.lead select the date
     %div.row-fluid
       %input#datepicker(name='guest_list[date]' type='text' autocomplete='off'){ value: Date.today }
 
     %div.row-fluid
-      %i.icon-user
-      lookup & add guests
+      2
+      %i.icon-user.icon-large
+      %span.lead lookup & add guests
       %span.pull-right
         guest not found?
         %a#guest-modal-trigger.zoom-cursor(href='#guest-qcfw' data-toggle='modal')
@@ -28,7 +30,7 @@
 
     .form-actions
       %button.btn.btn-block.btn-primary.btn-large
-        create new guest list
+        3. create new guest list
 
 #guest-qcfw.modal.hide
   .modal-header
