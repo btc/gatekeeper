@@ -18,4 +18,18 @@ module GuestListsHelper
     end
     # TODO FIXME handle case where it's like 3 am
   end
+
+  def status_badge(guest_list)
+    if guest_list.pending?
+      "<span class='label label-warning'>pending</span>".html_safe
+    elsif guest_list.approved?
+      "<span class='label label-success'>approved</span>".html_safe
+    elsif guest_list.draft?
+      "<span class='label'>draft</span>".html_safe
+    elsif guest_list.invalid?
+      "<span class='label label-important'>invalid state</span>".html_safe
+    else
+      ''
+    end
+  end
 end
