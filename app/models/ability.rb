@@ -88,6 +88,9 @@ class Ability
       can :edit_date, GuestList do |list|
         list.creator == user
       end
+      can :update, GuestList do |list|
+        !list.approved?
+      end
       can :destroy, Invitation
       can :tag, Invitation do |i|
         g = i.guest_list
