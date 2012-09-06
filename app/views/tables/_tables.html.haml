@@ -9,11 +9,11 @@
     %tr{ green_if(free) }
       %td
         - if free
-          = link_to new_reservation_path(table: table, date: date), class: 'btn' do
+          = link_to new_reservation_path(table: table, date: date), class: 'btn btn-mini' do
             %i.icon-plus
             %i.icon-book
         - else
-          = link_to reservation_path(table.reservation_on(date)), class: 'btn' do
+          = link_to reservation_path(table.reservation_on(date)), class: 'btn btn-mini' do
             show
             %i.icon-book
 
@@ -23,7 +23,7 @@
       %td
         = best_in_place table, :name
         = link_to table do
-          %button.btn
+          %button.btn.btn-mini
             &rarr;
 
 :coffeescript
