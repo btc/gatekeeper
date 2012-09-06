@@ -72,7 +72,7 @@
                       = f.input :tag_list,
                         url: autocomplete_tag_name_invitations_path,
                         as: :autocomplete, label: false,
-                        input_html: { data: { delimiter: ',' } }
+                        input_html: { class: 'js-tags', data: { delimiter: ',' } }
                     %button.btn.btn-mini.add-on quicksave tags
                 - else
                   = i.tag_list
@@ -153,6 +153,7 @@
     jQuery ->
       new window.VIP.GuestListShow
         $tokenInput: $('#append-guests')
+        $tagInputField: $('.js-tags')
       $(".best_in_place").best_in_place()
 
       # submit form to update invitation redemption status

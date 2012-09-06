@@ -3,6 +3,7 @@ window.VIP ?= {}
 class window.VIP.GuestListShow
   constructor: (options) ->
     @initTokenInput(options.$tokenInput)
+    @updateTags(options.$tagInputField)
 
   initTokenInput: ($tokenInput) ->
     $tokenInput.tokenInput(
@@ -14,3 +15,7 @@ class window.VIP.GuestListShow
       noResultsText: 'guest not found'
       caching: true
     )
+
+  updateTags: ($tagInputField) ->
+    $tagInputField.live 'change', ->
+      $(this).parents('form:first').submit()
