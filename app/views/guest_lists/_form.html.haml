@@ -41,7 +41,8 @@
   .modal-body
     = simple_form_for Guest.new, class: 'form form-horizontal', remote: true, format: :json do |f|
       = render 'guests/form_fields', f: f
-      = f.button :submit, class: 'btn-primary'
+      %button.guest-form-submit.btn.btn-primary{ data: { :'loading-text' => 'creating guest. please wait...' } }
+        create new guest
   .modal-footer
     %small
       first name, last name, and gender are <em>all</em> required

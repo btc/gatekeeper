@@ -20,6 +20,7 @@ class window.VIP.GuestListForm
 
   configureModal: ($modal, $form, $tokenInput) ->
     @configureLinksToFocusForm($modal)
+    @configureButton($modal)
     # listen for ajaxComplete in modal and capture it
     $modal.ajaxComplete (event, XMLHttpRequest, ajaxOptions) =>
       status = XMLHttpRequest.status
@@ -34,6 +35,19 @@ class window.VIP.GuestListForm
         # reset the form
         $form[0].reset()
         # focus tokenInput
+
+  configureButton: ($modal) ->
+    $submitButton = $('.guest-form-submit') # TODO put outside file
+    $submitButton.button()
+
+    # set in loading state on submit and prevent events from firing
+    $modal.ajaxSend (event, XMLHttpRequest, ajaxOptions) =>
+      $submitButton.button('loading')
+
+    # on complete, reset
+    # it will hide modal if successful so no need to worry about that
+    $modal.ajaxComplete (event, XMLHttpRequest, ajaxOptions) =>
+      $submitButton.button('reset')
 
   configureLinksToFocusForm: ($modal) ->
     $modal.on 'shown', ->
