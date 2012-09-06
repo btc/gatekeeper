@@ -39,7 +39,6 @@ class Ability
 
       # managing GuestLists
       # -------------------
-      can :view_by_day, GuestList
       cannot :destroy, GuestList
       can :read, GuestList do |list|
         list.approved? && list.date == Nightclub.today
