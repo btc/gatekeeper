@@ -5,7 +5,10 @@
     = tag 'span', id: 'guest-data', data: { guest: @guest_data }
     = f.input :date, as: :string, autofocus: true
     = f.input :guest_id
-    = f.association :table, as: :radio_buttons
+    - if @reservation.date.present?
+      = f.association :table, as: :radio_buttons, collection: Table.free_on(@reservation.date)
+    - else
+      = f.association :table, as: :radio_buttons
 
   .form-actions
     = f.button :submit

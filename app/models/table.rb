@@ -17,6 +17,12 @@ class Table < ActiveRecord::Base
     "#{self.number} #{self.name}"
   end
 
+  def self.free_on(date)
+    @tables = self.scoped
+    @tables.delete_if { |table| !table.free_on(date) }
+    @tables
+  end
+
   def free_on(date)
     return true if date == nil || date == '' || date == []
     if self.reservations.where(date: date).empty?
