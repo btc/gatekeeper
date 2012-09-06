@@ -39,7 +39,8 @@
         - Role.roles.each do |role|
           %td
             - if user.has_role? role
-              yes
+              %span.badge.badge-success
+                yes
             - else
               no
 
