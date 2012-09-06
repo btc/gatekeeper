@@ -15,7 +15,7 @@
       %span.lead lookup & add guests
       %span.pull-right
         guest not found?
-        %a#guest-modal-trigger.zoom-cursor(href='#guest-qcfw' data-toggle='modal')
+        %a#guest-modal-trigger.btn.btn-large.zoom-cursor(href='#guest-qcfw' data-toggle='modal')
           create new guest
     = tag('div', id: 'saved_selections', data: { entries: @saved_selections })
     %input.guest-lookup(autocomplete='off' type='text'
