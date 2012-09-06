@@ -174,4 +174,15 @@ class Guest < ActiveRecord::Base
     self.birthday.try(:strftime, '%e %B')
   end
 
+  def matches_by_full_name(str)
+    tokens = str.downcase.split
+    matches = true
+    tokens.each do |token|
+      unless self.first_name.downcase.include?(token) || self.last_name.downcase.include?(token)
+        matches = false
+      end
+    end
+    matches
+  end
+
 end

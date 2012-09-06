@@ -13,6 +13,12 @@
           %i.icon-list-ul
           my lists
 
+    - if can?(:check_in_guest, Invitation)
+      %li
+        = link_to master_guest_lists_path do
+          %i.icon-globe
+          tonight's master list
+
     %li
       = link_to '#tonight-lists', data: { toggle: 'tab' } do
         .pending-badge

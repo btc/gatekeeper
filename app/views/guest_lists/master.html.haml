@@ -1,0 +1,36 @@
+.guest-list-nav-tabs
+
+  %ul.nav.nav-pills
+
+    %li
+      = link_to guest_lists_path do
+        %i.icon-arrow-left
+        back to all lists
+
+    %li.active
+
+      = link_to master_guest_lists_path do
+        %i.icon-globe.icon-large
+        &nbsp;
+        viewing tonight's master list
+        = surround '(', ')' do
+          = Nightclub.today.strftime('%A %e %B')
+
+.row-fluid.centered
+  .span6
+    %form
+      %input#invi-search.span12(type='text' name='q' autocomplete='off'
+        placeholder='search for a guest by name' autofocus='on')
+  .span6
+    = link_to master_guest_lists_path, class: 'btn btn-block btn-primary' do
+      show all guests
+
+#invitations
+  = render 'invitations', invitations: @invitations
+
+:coffeescript
+  jQuery ->
+    new window.VIP.GuestListMaster
+      $input: $('#invi-search')
+      $container: $('#invitations')
+      url: '/api/guest_lists/master'

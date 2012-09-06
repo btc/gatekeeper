@@ -15,4 +15,8 @@ class Invitation < ActiveRecord::Base
   def date
     self.guest_list.date
   end
+
+  def to_s
+    self.guest.try(:full_name)
+  end
 end

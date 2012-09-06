@@ -1,0 +1,62 @@
+#guest-list-table
+  %table.table
+    %caption
+      %h2
+        - if params[:q]
+          displaying
+          = pluralize invitations.count, 'results'
+          for
+          = surround "'" do
+            = params[:q]
+        - else
+          showing all guests
+    %th
+      %i.icon-user
+      name
+    %th
+      %i.icon-plus
+    %th
+      %i.icon-tags
+      tags
+    %th
+      %i.icon-list-ul
+      list
+    %th
+      notes
+    %th
+      %i.icon-check
+      checked-in
+    - invitations.each do |i|
+      - if can?(:read, i)
+        %tr.invitation{ class: ('redeemed' if i.redeemed) }
+          %td
+            = link_to guest_path(i.guest) do
+              = i.guest
+          %td
+            %span.badge
+              = i.plus
+          %td
+            - i.tag_list.each do |tag|
+              %span.label.label-info
+                = tag
+              &nbsp;
+          %td
+            - if i.guest_list.present?
+              = link_to guest_list_path(i.guest_list) do
+                #{i.guest_list.try(:owner)}'s list
+          %td
+            - if i.guest.present?
+              = render i.guest.notes
+
+          %td
+            - if can? :check_in_guest, i
+              = simple_form_for(i, remote: true) do |f|
+                = f.input :redeemed, label: false, class: 'checkable'
+
+:coffeescript
+  jQuery ->
+    $('.boolean').live('change', ->
+      $(this).parents('form:first').submit()
+    )
+
+

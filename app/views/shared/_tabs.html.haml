@@ -1,6 +1,14 @@
 - if can?(:read, GuestList) || can?(:read, Guest)
   .global-nav-tabs
     %ul.nav.nav-tabs.centered
+      - if can?(:check_in_guest, Invitation)
+        %li{ active_if(master_guest_lists_path) }
+          = link_to master_guest_lists_path do
+            .tab-icon
+              %i.icon-globe
+            .tab-text
+              tonight's master list
+
       - if can?(:read, Guest)
         %li{ active_if_controller(:guests) }
           = link_to guests_path do
@@ -10,7 +18,7 @@
               guests
 
       - if can?(:read, GuestList)
-        %li{ active_if_controller(:guest_lists) }
+        %li{ active_if_controller(:guest_lists, !current_page?(master_guest_lists_path)) }
           = link_to guest_lists_path do
             .tab-icon
               %i.icon-list-ul

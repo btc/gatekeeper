@@ -30,6 +30,7 @@ Vern::Application.routes.draw do
       get 'search', on: :collection
       post 'append'
       get 'form', on: :collection
+      get 'master', on: :collection
     end
     resources :notes
   end

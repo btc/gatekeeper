@@ -1,7 +1,7 @@
 require 'chronic'
 
 class GuestListsController < ApplicationController
-  load_and_authorize_resource except: [:form, :search, :append]
+  load_and_authorize_resource except: [:form, :search, :append, :master]
 
   # GET /guest_lists
   # GET /guest_lists.json
@@ -195,5 +195,30 @@ class GuestListsController < ApplicationController
       flash[:alert] = "sorry! couldn't add guests to list"
     end
     redirect_to guest_list_path(@guest_list)
+  end
+
+  def master
+    authorize! :check_in_guest, Invitation
+
+    @guest_lists = GuestList.tonight.approved
+    @invitations = []
+    @guest_lists.each do |list|
+      list.invitations.each do |i|
+        if params[:q].present? && !params[:q].empty?
+          @invitations << i if i.guest.matches_by_full_name(params[:q])
+        else
+          @invitations << i
+        end
+      end
+    end
+
+    @invitations.sort_by! { |i| i.guest.try(:first_name) }
+
+    respond_to do |format|
+      format.html {}
+      format.json do
+        render partial: 'invitations', locals: { invitations: @invitations }
+      end
+    end
   end
 end
