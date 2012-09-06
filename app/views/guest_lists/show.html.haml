@@ -120,16 +120,18 @@
             withdraw list
 
       - if can? :manage, @guest_list
-        = simple_form_for(@guest_list) do |f|
-          = f.hidden_field :approved, value: 'true'
-          = f.hidden_field :published, value: 'true'
-          %button.btn.btn-success.btn-block
-            approve
+        - unless @guest_list.approved?
+          = simple_form_for(@guest_list) do |f|
+            = f.hidden_field :approved, value: 'true'
+            = f.hidden_field :published, value: 'true'
+            %button.btn.btn-success.btn-block
+              approve
 
-        = simple_form_for(@guest_list) do |f|
-          = f.hidden_field :approved, value: 'false'
-          %button.btn.btn-warning.btn-block
-            revoke
+        - if @guest_list.approved?
+          = simple_form_for(@guest_list) do |f|
+            = f.hidden_field :approved, value: 'false'
+            %button.btn.btn-warning.btn-block
+              revoke
 
       - if can? :destroy, @guest_list
         = button_to 'delete this guest list', @guest_list, class: 'btn btn-mini btn-danger span12',
