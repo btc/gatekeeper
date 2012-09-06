@@ -73,7 +73,9 @@
                         url: autocomplete_tag_name_invitations_path,
                         as: :autocomplete, label: false,
                         input_html: { class: 'js-tags', data: { delimiter: ',' } }
-                    %button.btn.btn-mini.add-on quicksave tags
+                    %button.btn.btn-mini.add-on
+                      %i.icon-save
+                      save tags
                 - else
                   = i.tag_list
 
