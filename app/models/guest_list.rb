@@ -24,6 +24,7 @@ class GuestList < ActiveRecord::Base
 
   scope :pending, where("approved = ?", false)
   scope :approved, where("approved = ?", true)
+  scope :tonight, lambda { where('date = ?', Nightclub.today) }
 
   def self.alphabetic_by_date
     self.scoped.sort do |a,b|
