@@ -9,6 +9,7 @@ class Guest < ActiveRecord::Base
   acts_as_birthday :birthday
 
   before_save :parse_birthday
+  after_save :clear_cached_full_name_search_results
 
   # validate presence but NOT inclusion.
   # it is acceptable and expected that duplicate names will exist
