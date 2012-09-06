@@ -63,6 +63,9 @@ class Ability
       can :update, Guest # to enrich profiles with new information
       cannot :destroy, Guest
 
+      # creating Guests
+      # ---------------
+      can :create, Note
       # GUEST LIST PERMISSIONS
       # ======================
       # can :update_plus, GuestList # managers and admins
