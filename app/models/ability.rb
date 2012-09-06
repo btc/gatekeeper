@@ -76,6 +76,9 @@ class Ability
       can :destroy, GuestList do |list|
         list.creator == user
       end
+      can :add_more_guests, GuestList do |list|
+        true unless list.approved?
+      end
       can :update, Invitation do |i|
         g = i.guest_list
         if g.present? && g.creator == user && g.approved == false

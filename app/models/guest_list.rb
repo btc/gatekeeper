@@ -89,4 +89,15 @@ class GuestList < ActiveRecord::Base
   def approved?
     self.approved
   end
+
+  def build_invi_from_guest guest
+    return nil if guest == nil
+    self.invitations.each do |i|
+      if i.guest.try(:id) == guest.id
+        return false
+      end
+    end
+    invitation = self.invitations.build
+    invitation.guest = guest
+  end
 end

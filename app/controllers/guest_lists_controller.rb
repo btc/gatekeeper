@@ -1,7 +1,7 @@
 require 'chronic'
 
 class GuestListsController < ApplicationController
-  load_and_authorize_resource except: [:form, :search]
+  load_and_authorize_resource except: [:form, :search, :append]
 
   # GET /guest_lists
   # GET /guest_lists.json
@@ -172,5 +172,28 @@ class GuestListsController < ApplicationController
     @guest_list = GuestList.new
     authorize! :create, @guest_list
     render partial: 'form'
+  end
+
+  def append
+    @guest_list = GuestList.find(params[:guest_list_id])
+    authorize! :add_more_guests, @guest_list
+
+    if params[:q].nil? || params[:q].empty?
+      flash[:alert] = 'please select at least one guest'
+    else
+      # pre-process the comma-separated ids
+      guest_ids = params[:q].split(',')
+
+      guest_ids.each do |id|
+        guest = Guest.find_by_id(id)
+        @guest_list.build_invi_from_guest(guest)
+      end
+    end
+
+    if @guest_list.save
+    else
+      flash[:alert] = "sorry! couldn't add guests to list"
+    end
+    redirect_to guest_list_path(@guest_list)
   end
 end

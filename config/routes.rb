@@ -28,6 +28,7 @@ Vern::Application.routes.draw do
     end
     resources :guest_lists do
       get 'search', on: :collection
+      post 'append'
       get 'form', on: :collection
     end
     resources :notes

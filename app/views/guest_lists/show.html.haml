@@ -29,6 +29,7 @@
     %strong HEY!
     this list will not be available at the door until approved
 
+
 .row-fluid
   .span9
 
@@ -97,9 +98,19 @@
                   #{@guest_list.pct_female}% female
 
   .span3.guest-list-manage
+
+    - if can? :add_more_guests, @guest_list
+      .row-fluid
+        = form_tag(guest_list_append_path(@guest_list), method: :post, class: 'form-horizontal') do
+          .row-fluid
+            %input#append-guests.guest-lookup(autocomplete='off' type='text'name='q')
+          .row-fluid
+            %button.btn.btn-block
+              add more guests to list
+
     .row-fluid.actions
       - if can? :destroy, @guest_list
-        = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
+        = button_to 'delete this guest list', @guest_list, class: 'btn btn-danger span12',
           :confirm => 'Are you sure?', :method => :delete
       - if can? :manage, @guest_list
         = simple_form_for(@guest_list) do |f|
@@ -123,6 +134,8 @@
 = content_for :javascript do
   :coffeescript
     jQuery ->
+      new window.VIP.GuestListShow
+        $tokenInput: $('#append-guests')
       $(".best_in_place").best_in_place()
 
       # submit form to update invitation redemption status
