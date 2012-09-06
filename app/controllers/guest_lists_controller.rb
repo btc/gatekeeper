@@ -151,7 +151,12 @@ class GuestListsController < ApplicationController
                      @guest_lists = @guest_lists
                        .pending.alphabetic_by_date
                    when :my.to_s
-                     @guest_lists.select { |list| list.creator == current_user }
+                     # OPTIMIZE this is potentially computationally expensive
+                     # OPTIMIZE it performs a sort
+                     # prior to narrowing down results
+                     @guest_lists
+                       .alphabetic_by_date
+                       .select { |list| list.creator == current_user }
                    when :tonight.to_s
                      @guest_lists.tonight.alphabetic_by_date
                    else
