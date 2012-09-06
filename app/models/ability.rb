@@ -73,6 +73,9 @@ class Ability
       can :read, GuestList do |list|
         list.creator == user
       end
+      can :destroy, GuestList do |list|
+        list.creator == user
+      end
       can :update, Invitation do |i|
         g = i.guest_list
         if g.present? && g.creator == user && g.approved == false
