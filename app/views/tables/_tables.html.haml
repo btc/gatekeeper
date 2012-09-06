@@ -21,9 +21,10 @@
         = best_in_place table, :number
 
       %td
+        = best_in_place table, :name
         = link_to table do
-          = table.name
-          &rarr;
+          %button.btn
+            &rarr;
 
 :coffeescript
   jQuery ->
