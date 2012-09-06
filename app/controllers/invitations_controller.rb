@@ -3,7 +3,8 @@ class InvitationsController < ApplicationController
 
   # GET /invitations
   # GET /invitations.json
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:autocomplete_tag_name]
+  skip_authorization_check only: [:autocomplete_tag_name]
 
   def index
     @invitations = Invitation.all

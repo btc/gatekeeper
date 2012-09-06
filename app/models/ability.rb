@@ -79,13 +79,17 @@ class Ability
       can :update, Invitation do |i|
         g = i.guest_list
         if g.present? && g.creator == user && g.approved == false
+          true
         end
       end
       can :edit_date, GuestList do |list|
         list.creator == user
       end
       can :destroy, Invitation
-      can :tag, Invitation
+      can :tag, Invitation do |i|
+        g = i.guest_list
+        true unless g.approved?
+      end
       can :create, Guest
       can :lookup_names, Guest
       can :create, GuestList
