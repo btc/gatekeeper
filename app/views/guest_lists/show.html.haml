@@ -98,8 +98,9 @@
 
   .span3.guest-list-manage
     .row-fluid.actions
-      = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
-        :confirm => 'Are you sure?', :method => :delete
+      - if can? :destroy, @guest_list
+        = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
+          :confirm => 'Are you sure?', :method => :delete
       - if can? :manage, @guest_list
         = simple_form_for(@guest_list) do |f|
           = f.hidden_field :approved, value: 'false'
