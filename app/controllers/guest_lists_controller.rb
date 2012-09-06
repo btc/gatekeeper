@@ -152,6 +152,8 @@ class GuestListsController < ApplicationController
                        .pending.alphabetic_by_date
                    when :my.to_s
                      @guest_lists.select { |list| list.creator == current_user }
+                   when :tonight.to_s
+                     @guest_lists.tonight.alphabetic_by_date
                    else
                      @guest_lists = @guest_lists
                        .alphabetic_by_date
