@@ -12,7 +12,7 @@
           %i.icon-list-ul
           my lists
 
-    - if can? :view_all_listings_view, GuestList
+    - if can? :manage, GuestList
       %li
         = link_to '#all-lists', data: { toggle: 'tab' } do
           .pending-badge
