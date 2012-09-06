@@ -18,13 +18,6 @@ class Ability
     # all users
     can :go, :home
 
-    # Admins
-    # ======
-    # ======
-    # can manage and view everything
-    if user.has_role?(:admin) || user.has_role?(:manager)
-      can :manage, :all
-    end
 
     # if user.has_role? :committee_member
     #   can :update_plus, GuestList do |guest_list|
@@ -100,6 +93,15 @@ class Ability
 
     if user.email == 'czora12@gmail.com' || user.email == 'brian.holderchow@gmail.com'
       can :manage, Role
+    end
+
+    # Admins
+    # ======
+    # ======
+    # can manage and view everything
+    # make sure to keep this at the bottom so it can override all rules
+    if user.has_role?(:admin) || user.has_role?(:manager)
+      can :manage, :all
     end
 
   end
