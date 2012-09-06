@@ -47,6 +47,7 @@ class Ability
       # only the redeemed field
       # must enforce at view level
       can :update, Invitation
+      can :check_in_guest, Invitation
 
       # view-specific permissions
       # -------------------------
@@ -72,11 +73,19 @@ class Ability
       can :read, GuestList do |list|
         list.creator == user
       end
+      can :manage, Guest do |guest|
+        guest.creator.has_role? :committee_member
+      end
       can :update, Invitation do |i|
         g = i.guest_list
         if g.present? && g.creator == user && g.approved == false
         end
       end
+      can :edit_date, GuestList do |list|
+        list.creator == user
+      end
+      can :destroy, Invitation
+      can :tag, Invitation
       can :create, Guest
       can :lookup_names, Guest
       can :create, GuestList

@@ -20,7 +20,7 @@
           %span.label-success.label approved
           -# TODO approved by user
 
-    - if can?(:manage, @guest_list)
+    - if can?(:edit_date, @guest_list)
       %li
         %a.edit-date(href='#') edit the date
 
@@ -40,9 +40,10 @@
           %th plus
           %th
             tags
-          %th
-            %i.icon-check
-            checked-in!
+          - if can? :check_in_guest, Invitation
+            %th
+              %i.icon-check
+              checked-in!
 
         %tbody
           - @guest_list.invitations.each do |i|
@@ -61,7 +62,7 @@
 
               %td
                 -# tags
-                - if can?(:update, i)
+                - if can?(:tag, i)
                   = simple_form_for(i, remote: true) do |f|
                     .input-prepend
                       = f.input :tag_list,
@@ -71,17 +72,16 @@
                     %button.btn.btn-mini.add-on quicksave tags
                 - else
                   = i.tag_list
-              %td
-                = simple_form_for(i, remote: true) do |f|
-                  = f.input :redeemed, label: false, class: 'checkable'
+              - if can? :check_in_guest, Invitation
+                %td
+                  = simple_form_for(i, remote: true) do |f|
+                    = f.input :redeemed, label: false, class: 'checkable'
 
               - if can? :destroy, Invitation
                 %td
-                  = button_to 'x', i, class: 'btn btn-danger btn-mini span12',
+                  = button_to 'X', i, class: 'btn btn-danger btn-mini span12',
                     :confirm => 'Are you sure?', :method => :delete, remote: true
 
-    = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
-      :confirm => 'Are you sure?', :method => :delete
 
 
     - if can? :manage, @guest_list
@@ -96,9 +96,11 @@
                 %dd
                   #{@guest_list.pct_female}% female
 
-  - if can? :manage, @guest_list
-    .span3.guest-list-manage
-      .row-fluid.actions
+  .span3.guest-list-manage
+    .row-fluid.actions
+      = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
+        :confirm => 'Are you sure?', :method => :delete
+      - if can? :manage, @guest_list
         = simple_form_for(@guest_list) do |f|
           = f.hidden_field :approved, value: 'false'
           %button.btn.btn-warning.btn-block
@@ -107,13 +109,15 @@
           = f.hidden_field :approved, value: 'true'
           %button.btn.btn-success.btn-block
             approve
-        = button_to 'delete', @guest_list, class: 'btn btn-danger span12',
-          :confirm => 'Are you sure?', :method => :delete
 
-      .lead
-        = pluralize GuestList.active.pending.count, 'list'
-        awaiting approval
-      = render 'list_by_date', guest_lists: GuestList.active.pending.alphabetic_by_date
+        .lead
+          = pluralize GuestList.active.pending.count, 'list'
+          awaiting approval
+        = render 'list_by_date', guest_lists: GuestList.active.pending.alphabetic_by_date
+
+%small
+  created by
+  = @guest_list.creator
 
 = content_for :javascript do
   :coffeescript
