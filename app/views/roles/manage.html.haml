@@ -30,7 +30,7 @@
       %th
         = role.titleize
   %tbody
-    - @users.each do |user|
+    - @users.sort.each do |user|
       %tr
         %td
           = user

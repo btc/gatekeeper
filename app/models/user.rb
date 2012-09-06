@@ -40,4 +40,8 @@ class User < ActiveRecord::Base
     end
     return name
   end
+
+  def <=>(another_user)
+    self.to_s.downcase <=> another_user.to_s.downcase
+  end
 end
