@@ -39,9 +39,11 @@ class Ability
 
       # managing GuestLists
       # -------------------
-      can :read, GuestList, :approved => true # to fulfill duties at door
       can :view_by_day, GuestList
       cannot :destroy, GuestList
+      can :read, GuestList do |list|
+        list.approved? && list.date == Nightclub.today
+      end
       can :view_all_listings_view, GuestList
       can :read, Guest
       can :read, Invitation do |i|
