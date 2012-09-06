@@ -112,9 +112,9 @@
             approve
 
         .lead
-          = pluralize GuestList.active.pending.count, 'list'
+          = pluralize GuestList.pending.count, 'list'
           awaiting approval
-        = render 'list_by_date', guest_lists: GuestList.active.pending.alphabetic_by_date
+        = render 'list_by_date', guest_lists: GuestList.pending.alphabetic_by_date
 
 %small
   created by
