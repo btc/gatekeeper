@@ -31,7 +31,7 @@
         = role.titleize
   %tbody
     - @users.sort.each do |user|
-      %tr
+      %tr{ class: ('success' if user.has_role? :admin)}
         %td
           = user
         %td
