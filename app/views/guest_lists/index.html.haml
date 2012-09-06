@@ -1,5 +1,10 @@
 .guest-list-nav-tabs
   %ul.nav.nav-pills
+    %li
+      = link_to '#tonight-lists', data: { toggle: 'tab' } do
+        .pending-badge
+          tonight
+
     - if can? :create, GuestList
       %li
         = link_to '#new-list', data: { toggle: 'tab' } do
@@ -63,7 +68,7 @@
   :coffeescript
     jQuery ->
       baseURL = "/api/guest_lists/search?q="
-      $default = $("a[href='#all-lists']")
+      $default = $("a[href='#tonight-lists']")
       new window.VIP.GuestListIndex
         $container: $('#list-container')
         $default: $default
@@ -71,7 +76,7 @@
 
           # all
           url: baseURL
-          $trigger: $default
+          $trigger: $("a[href='#all-lists']")
          ,
 
           # thursday
@@ -122,4 +127,9 @@
           # my
           url: baseURL + 'my'
           $trigger: $("a[href='#my-lists']")
+         ,
+
+          # tonight
+          url: baseURL + 'tonight'
+          $trigger: $("a[href='#tonight-lists']")
         ]
