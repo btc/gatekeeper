@@ -13,5 +13,9 @@
   %a.btn-mini.btn{ href: reservation_path(reservation) }
     %i.icon-book.icon-large
     &rarr;
+.row-fluid
+  .span12
+    - if reservation.guest.present?
+      = render reservation.guest.notes
 
 
