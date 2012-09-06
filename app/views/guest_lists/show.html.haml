@@ -14,11 +14,7 @@
         \:
         = best_in_place @guest_list, :date,
           display_as: :friendly_date, activator: '.edit-date'
-        - if @guest_list.pending?
-          %span.label-warning.label pending approval
-        - elsif @guest_list.approved?
-          %span.label-success.label approved
-          -# TODO approved by user
+        = status_badge(@guest_list)
 
     - if can?(:edit_date, @guest_list)
       %li
@@ -28,7 +24,14 @@
   .alert
     %strong HEY!
     this list will not be available at the door until approved
-
+- elsif @guest_list.draft? && !can?(:manage, GuestList)
+  .alert.alert-info.centered
+    %h2
+      Editing Draft
+    = simple_form_for(@guest_list) do |f|
+      = f.hidden_field :published, value: 'true'
+      %button.btn.btn-primary.btn-large
+        submit for approval
 
 .row-fluid
   .span9
@@ -73,17 +76,17 @@
                     %button.btn.btn-mini.add-on quicksave tags
                 - else
                   = i.tag_list
-              - if can? :check_in_guest, Invitation
+
+              - if can? :check_in_guest, i
                 %td
                   = simple_form_for(i, remote: true) do |f|
                     = f.input :redeemed, label: false, class: 'checkable'
 
-              - if can? :destroy, Invitation
+              - if can?(:destroy, i)
                 %td
-                  = button_to 'X', i, class: 'btn btn-danger btn-mini span12',
-                    :confirm => 'Are you sure?', :method => :delete, remote: true
-
-
+                  - if i.guest != @guest_list.owner
+                    = button_to 'X', i, class: 'btn btn-danger btn-mini span12',
+                      :confirm => 'Are you sure?', :method => :delete
 
     - if can? :manage, @guest_list
       %hr
@@ -109,19 +112,31 @@
               add more guests to list
 
     .row-fluid.actions
-      - if can? :destroy, @guest_list
-        = button_to 'delete this guest list', @guest_list, class: 'btn btn-danger span12',
-          :confirm => 'Are you sure?', :method => :delete
+
+      - if @guest_list.pending? && !can?(:manage, GuestList)
+        = simple_form_for(@guest_list) do |f|
+          = f.hidden_field :published, value: 'false'
+          %button.btn.btn-block.btn-large
+            withdraw list
+
       - if can? :manage, @guest_list
+        = simple_form_for(@guest_list) do |f|
+          = f.hidden_field :approved, value: 'true'
+          = f.hidden_field :published, value: 'true'
+          %button.btn.btn-success.btn-block
+            approve
+
         = simple_form_for(@guest_list) do |f|
           = f.hidden_field :approved, value: 'false'
           %button.btn.btn-warning.btn-block
             revoke
-        = simple_form_for(@guest_list) do |f|
-          = f.hidden_field :approved, value: 'true'
-          %button.btn.btn-success.btn-block
-            approve
 
+      - if can? :destroy, @guest_list
+        = button_to 'delete this guest list', @guest_list, class: 'btn btn-mini btn-danger span12',
+          :confirm => 'Are you sure?', :method => :delete
+
+      -# LIST OF PENDING GUEST LISTS
+      - if can? :manage, @guest_list
         .lead
           = pluralize GuestList.pending.count, 'list'
           awaiting approval

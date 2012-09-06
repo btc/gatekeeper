@@ -77,7 +77,7 @@ class Ability
         list.creator == user
       end
       can :add_more_guests, GuestList do |list|
-        true unless list.approved?
+        true unless list.approved? || list.pending?
       end
       can :update, Invitation do |i|
         g = i.guest_list
@@ -94,7 +94,7 @@ class Ability
       can :destroy, Invitation
       can :tag, Invitation do |i|
         g = i.guest_list
-        true unless g.approved?
+        true unless g.approved? || g.pending?
       end
       can :create, Guest
       can :lookup_names, Guest

@@ -20,6 +20,7 @@ describe GuestList do
   it { should have_db_column :creator_id }
   it { should have_db_column :owner_id }
   it { should have_db_column :event_id }
+  it { should have_db_column :published }
 
   it { should allow_mass_assignment_of :date }
   it { should allow_mass_assignment_of :creator_id }

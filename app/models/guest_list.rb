@@ -1,7 +1,7 @@
 require 'chronic'
 
 class GuestList < ActiveRecord::Base
-  attr_accessible :date, :owner_id, :creator_id, :event_id, :approved
+  attr_accessible :date, :owner_id, :creator_id, :event_id, :approved, :published
 
   belongs_to :creator, class_name: 'User'
   belongs_to :owner, class_name: 'Guest'
@@ -22,7 +22,7 @@ class GuestList < ActiveRecord::Base
   # temporary solution to loading lists for friday when it is 2 am saturday
   scope :active, where("date >= ?", Date.yesterday)
 
-  scope :pending, where("approved = ?", false)
+  scope :pending, where("approved = ? AND published = ?", false, true)
   scope :approved, where("approved = ?", true)
   scope :tonight, lambda { where('date = ?', Nightclub.today) }
 
@@ -79,15 +79,24 @@ class GuestList < ActiveRecord::Base
   end
 
   def approve!
+    self.published = true
     self.approved = true
   end
 
+  def draft?
+    !(self.published || self.approved)
+  end
+
+  def invalid?
+    !self.published && self.approved
+  end
+
   def pending?
-    !self.approved
+    self.published && !self.approved
   end
 
   def approved?
-    self.approved
+    self.published && self.approved
   end
 
   def build_invi_from_guest guest
