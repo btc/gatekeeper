@@ -18,10 +18,9 @@
             %i.icon-book
 
       %td
-        .lead= table.number
+        = best_in_place table, :number
 
       %td
         = link_to table do
-          .lead
-            = table.name
-            &rarr;
+          = table.name
+          &rarr;
