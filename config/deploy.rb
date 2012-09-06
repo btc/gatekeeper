@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 
-server "192.168.100.23", :web, :app, :db, primary: true
+server "vip.babaya.net:947", :web, :app, :db, primary: true
 
 set :application, 'vip'
 set :user, 'deployer'
