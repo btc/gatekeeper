@@ -2,14 +2,15 @@
   %table.table
     %caption
       %h2
-        - if params[:q]
+        - if params[:q] && params[:q] != ''
           displaying
           = pluralize invitations.count, 'results'
           for
           = surround "'" do
             = params[:q]
         - else
-          showing all guests
+          showing all guests on master list
+
     %th
       %i.icon-user
       name
