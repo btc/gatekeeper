@@ -2,9 +2,9 @@
 
 .page-header
   %h1
-    brandon's committee
+    = @committee.title
     %small
-      = link_to @committee do 
+      = link_to @committee do
         cancel
 
 = render 'form'
