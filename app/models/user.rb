@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :committees
   belongs_to :guest
 
+  default_scope order('full_name ASC')
+
+
   def is_god?
     true if self.email == 'brian.holderchow@gmail.com'
   end
