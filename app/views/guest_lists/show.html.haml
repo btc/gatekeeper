@@ -68,14 +68,11 @@
                 -# tags
                 - if can?(:tag, i)
                   = simple_form_for(i, remote: true) do |f|
-                    .input-prepend
-                      = f.input :tag_list,
-                        url: autocomplete_tag_name_invitations_path,
-                        as: :autocomplete, label: false,
-                        input_html: { class: 'js-tags', data: { delimiter: ',' } }
-                    %button.btn.btn-mini.add-on
-                      %i.icon-save
-                      save tags
+                    = f.input :tag_list,
+                      url: autocomplete_tag_name_invitations_path,
+                      as: :autocomplete, label: false,
+                      input_html: { class: 'js-tags', data: { delimiter: ',' } }
+
                 - else
                   = i.tag_list
 
