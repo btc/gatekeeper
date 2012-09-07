@@ -146,6 +146,10 @@
 %small
   created by
   = @guest_list.creator
+  - unless @guest_list.creator.committees.empty?
+    = surround '(', ')' do
+      - @guest_list.creator.committees.each do |c|
+        = c
 
 = content_for :javascript do
   :coffeescript

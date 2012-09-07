@@ -41,3 +41,11 @@
             .tab-text
               tables
 
+      - if can?(:manage, Committee)
+        %li{ active_if_controller(:committees) }
+          = link_to committees_path do
+            .tab-icon
+              %i.icon-sitemap
+            .tab-text
+              committees
+

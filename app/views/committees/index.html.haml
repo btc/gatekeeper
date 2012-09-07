@@ -7,12 +7,21 @@
     %h1 all committees
   %thead
     %th
+      name
     %th
+      members
     %th
+      actions
 
   %tbody
     - @committees.each do |committee|
       %tr
+        %td
+          = committee.title
+        %td
+          - committee.users.each do |user|
+            .row-fluid
+              = user
         %td
           = link_to 'Show', committee, class: 'btn'
           = link_to 'Edit', edit_committee_path(committee), class: 'btn'
