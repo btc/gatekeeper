@@ -19,3 +19,5 @@ class window.VIP.GuestListShow
   updateTags: ($tagInputField) ->
     $tagInputField.live 'change', ->
       $(this).parents('form:first').submit()
+    $tagInputField.bind 'autocompletechange', ->
+      $(this).parents('form:first').submit()
