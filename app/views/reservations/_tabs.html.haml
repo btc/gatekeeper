@@ -8,7 +8,12 @@
           create new reservation
 
     - if can? :read, Reservation
-      %li{ active_if(reservations_path) }
+      %li{ active_if(reservations_path(date: Nightclub.today )) }
+        = link_to reservations_path(date: Nightclub.today ) do
+          tonight
+
+    - if can? :read, Reservation
+      %li{ active_if(reservations_path, params[:date].nil?) }
         = link_to reservations_path do
           show all by date
 

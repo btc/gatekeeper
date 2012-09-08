@@ -4,6 +4,12 @@ class ReservationsController < ApplicationController
   # GET /reservations.json
   def index
     @reservations = Reservation.scoped
+
+    if params[:date]
+      @reservations = @reservations.where('date = ?', params[:date])
+    end
+
+    @reservations = @reservations
       .paginate(page: params[:page], per_page: 30)
 
     respond_to do |format|

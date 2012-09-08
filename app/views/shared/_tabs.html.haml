@@ -27,7 +27,7 @@
 
       - if can?(:read, Reservation)
         %li{ active_if_controller(:reservations) }
-          = link_to reservations_path do
+          = link_to reservations_path(date: Nightclub.today) do
             .tab-icon
               %i.icon-book
             .tab-text
