@@ -19,13 +19,15 @@
     %p
       = simple_format(reservation.description)
 
-    %p
-      %strong about this guest:
-      - if reservation.guest.present?
-        = render reservation.guest.notes
+    - if reservation.guest.present? && !reservation.guest.notes.empty?
+      %p
+        %strong about this guest:
+        - if reservation.guest.present?
+          = render reservation.guest.notes
 
-    - if can? :update, reservation
-      = link_to 'edit', edit_reservation_path(reservation)
+    %p
+      - if can? :update, reservation
+        = link_to 'edit reservation', edit_reservation_path(reservation)
 
 %hr
 
