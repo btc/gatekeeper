@@ -51,9 +51,9 @@ describe GuestList do
     @guest_list.approved.should eq(false)
   end
 
-  it 'should default to pending == true' do
+  it 'should default to draft == true' do
     @guest_list = GuestList.new
-    @guest_list.pending?.should eq(true)
+    @guest_list.draft?.should eq(true)
   end
 
   it 'should not be pending if approved' do
