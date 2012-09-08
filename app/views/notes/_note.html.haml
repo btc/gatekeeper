@@ -8,3 +8,7 @@
     %cite(title='test')
       on
       = note.updated_at.try(:strftime, '%A %e %B %Y')
+- if can?(:destroy, note)
+  %small
+    = link_to 'delete note', note, :confirm => 'Are you sure?', :method => :delete
+
