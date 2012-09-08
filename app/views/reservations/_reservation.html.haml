@@ -2,11 +2,10 @@
   .span4
     - if reservation.guest.present?
       = link_to reservation do
-        %span>= "#{reservation.guest}'s"
+        %span>= "#{reservation.guest}'s reservation"
     - else
       %i.icon-warning-sign
-      unknown guest's
-    reservation
+      unknown guest's reservation
 
     at
     - if reservation.table.present?
