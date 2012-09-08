@@ -44,7 +44,9 @@ class Ability
       # only the redeemed field
       # must enforce at view level
       can :update, Invitation
-      can :check_in_guest, Invitation
+      can :check_in_guest, Invitation do |i|
+        i.redeemed == false
+      end
 
       # view-specific permissions
       # -------------------------
