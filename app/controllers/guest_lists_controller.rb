@@ -56,7 +56,7 @@ class GuestListsController < ApplicationController
     @guest_list.creator = current_user
 
     if params[:q].nil? || params[:q].empty?
-      flash[:alert] = 'please select at least one guest'
+      flash[:alert] = "please select at least one guest. if you are the owner of the guest list you'd like to create, add yourself first"
     else
       # pre-process the comma-separated ids
       guest_ids = params[:q].split(',')
