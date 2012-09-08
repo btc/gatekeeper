@@ -1,0 +1,37 @@
+.row-fluid
+  .span9
+    %p
+      %span.jumbo
+        = n_guests = Guest.count
+      guests
+    %p
+      %span.jumbo
+        = n_male_guests = Guest.where('gender = ?', :male).count
+      male
+    %p
+      %span.jumbo
+        = n_guests - n_male_guests
+      female
+  .span3
+    %h2
+      tonight
+    %p
+      .progress
+        .bar{ style: "width: #{@pct_checked_in_tonight}%;"}
+      %p
+        = @n_check_ins_tonight
+        of
+        = pluralize @n_guests_on_lists_tonight, 'invited guest'
+        checked-in
+    %h5
+    - @committees.each do |committee|
+      %p
+        %i.icon-sitemap
+        = committee.title.try(:titleize)
+      %p
+        = committee.users.represented_in(@guest_lists, :creator)
+        of
+        = committee.users.count
+        members
+        submitted lists
+
