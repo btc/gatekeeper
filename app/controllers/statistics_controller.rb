@@ -13,6 +13,5 @@ class StatisticsController < ApplicationController
 
     @pct_checked_in_tonight = (@n_check_ins_tonight.to_f / @n_guests_on_lists_tonight) * 100
 
-    @committees = Committee.all
   end
 end

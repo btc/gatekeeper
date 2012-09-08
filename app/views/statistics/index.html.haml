@@ -23,15 +23,4 @@
         of
         = pluralize @n_guests_on_lists_tonight, 'invited guest'
         checked-in
-    %h5
-    - @committees.each do |committee|
-      %p
-        %i.icon-sitemap
-        = committee.title.try(:titleize)
-      %p
-        = committee.users.represented_in(@guest_lists, :creator)
-        of
-        = committee.users.count
-        members
-        submitted lists
 
