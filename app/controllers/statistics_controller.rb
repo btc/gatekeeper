@@ -11,7 +11,7 @@ class StatisticsController < ApplicationController
       count = 0
       redeemed_invis = list.invitations.where("redeemed = ?", true)
       redeemed_invis.each do |i|
-        count +=1 if i.guest.gender == :male
+        count +=1 if i.guest.gender == 'male'
       end
       count
     end
