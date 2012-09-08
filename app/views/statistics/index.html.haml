@@ -18,22 +18,17 @@
     %p
       .progress
         .bar{ style: "width: #{@pct_checked_in_tonight}%;"}
-    %p
-      = @n_check_ins_tonight
-      of
-      = pluralize @n_guests_on_lists_tonight, 'invited guest'
-      checked in
-      <br>
-      = @n_male_checked_in_tonight
-      male
-      <br>
-      = @n_check_ins_tonight - @n_male_checked_in_tonight
-      female
-    %p
-      - @committees.each do |committee|
+      %p
+        = @n_check_ins_tonight
+        of
+        = pluralize @n_guests_on_lists_tonight, 'invited guest'
+        checked-in
+    %h5
+    - @committees.each do |committee|
+      %p
         %i.icon-sitemap
         = committee.title.try(:titleize)
-        <br>
+      %p
         = committee.users.represented_in(@guest_lists, :creator)
         of
         = committee.users.count

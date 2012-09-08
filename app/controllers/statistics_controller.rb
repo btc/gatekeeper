@@ -7,15 +7,6 @@ class StatisticsController < ApplicationController
       sum + list.invitations.count
     end
 
-    @n_male_checked_in_tonight = @guest_lists.inject(0) do |sum, list|
-      count = 0
-      redeemed_invis = list.invitations.where("redeemed = ?", true)
-      redeemed_invis.each do |i|
-        count +=1 if i.guest.gender == :male
-      end
-      count
-    end
-
     @n_check_ins_tonight = @guest_lists.inject(0) do |sum, list|
       sum + list.invitations.where('redeemed = ?', true).count
     end
