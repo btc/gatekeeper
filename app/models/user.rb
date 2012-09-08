@@ -47,12 +47,4 @@ class User < ActiveRecord::Base
   def <=>(another_user)
     self.to_s.downcase <=> another_user.to_s.downcase
   end
-
-  def self.represented_in(collection, attribute)
-    sum = 0
-    self.scoped.each do |user|
-      sum += 1 if collection.where("#{attribute.to_s} = ?", user)
-    end
-    sum
-  end
 end
