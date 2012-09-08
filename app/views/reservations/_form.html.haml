@@ -9,7 +9,7 @@
         = f.input :guest_id
     = f.input :description, input_html: { rows: 5 }
     - if @reservation.date.present?
-      = f.association :table, as: :radio_buttons, collection: Table.free_on(@reservation.date)
+      = f.association :table, as: :radio_buttons, collection: Table.free_on(@reservation.date, @reservation.table.try(:id))
     - else
       = f.association :table, as: :radio_buttons
 

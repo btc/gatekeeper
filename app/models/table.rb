@@ -17,9 +17,14 @@ class Table < ActiveRecord::Base
     "#{self.number} #{self.name}"
   end
 
-  def self.free_on(date)
+  def self.free_on(date, id = nil)
     @tables = self.scoped
-    @tables.delete_if { |table| !table.free_on(date) }
+    if id.present?
+      @tables.delete_if { |table| !table.free_on(date) && table.id != id }
+    else
+      @tables.delete_if { |table| !table.free_on(date) }
+    end
+
     @tables
   end
 
