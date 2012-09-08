@@ -49,3 +49,10 @@
             .tab-text
               committees
 
+      - if can?(:read, :statistics)
+        %li{ active_if_controller(:statistics) }
+          = link_to statistics_index_path do
+            .tab-icon
+              %i.icon-bar-chart
+            .tab-text
+              stats
