@@ -1,10 +1,13 @@
-= simple_form_for(@reservation) do |f|
+= simple_form_for(@reservation, defaults: { input_html: { class: 'span4' } } ) do |f|
   = f.error_notification
 
   .form-inputs
     = tag 'span', id: 'guest-data', data: { guest: @guest_data }
     = f.input :date, as: :string, autofocus: true
-    = f.input :guest_id
+    .row-fluid
+      .span4
+        = f.input :guest_id
+    = f.input :description, input_html: { rows: 5 }
     - if @reservation.date.present?
       = f.association :table, as: :radio_buttons, collection: Table.free_on(@reservation.date)
     - else

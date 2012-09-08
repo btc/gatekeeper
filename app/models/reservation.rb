@@ -1,7 +1,7 @@
 require 'chronic' # NL date parsing
 
 class Reservation < ActiveRecord::Base
-  attr_accessible :date, :table_id, :guest_list_id, :guest_id
+  attr_accessible :date, :table_id, :guest_list_id, :guest_id, :description
 
   belongs_to :table
   belongs_to :guest_list

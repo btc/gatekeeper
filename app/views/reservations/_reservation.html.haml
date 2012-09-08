@@ -1,21 +1,35 @@
 .row-fluid
-  - if reservation.guest.present?
-    = link_to reservation.guest do
-      %span>= reservation.guest
-  - else
-    %i.icon-warning-sign
-    no guest
-
-  = 'at' if reservation.table.present?
-  = link_to reservation.table do
-    %span>= reservation.table
-  &nbsp;
-  %a.btn-mini.btn{ href: reservation_path(reservation) }
-    %i.icon-book.icon-large
-    &rarr;
-.row-fluid
-  .span12
+  .span4
     - if reservation.guest.present?
-      = render reservation.guest.notes
+      = link_to reservation do
+        %span>= "#{reservation.guest}'s"
+    - else
+      %i.icon-warning-sign
+      unknown guest's
+    reservation
+
+    at
+    - if reservation.table.present?
+      = reservation.table
+    - else
+      unspecified table
+
+  .span8
+    %strong about this reservation:
+    %p
+      = simple_format(reservation.description)
+
+    %p
+      %strong about this guest:
+      - if reservation.guest.present?
+        = render reservation.guest.notes
+
+    - if can? :update, reservation
+      = link_to 'edit', edit_reservation_path(reservation)
+
+%hr
 
 
+:coffeescript
+  jQuery ->
+    $('.best_in_place').best_in_place()

@@ -1,4 +1,6 @@
 = render 'tabs', reservation: @reservation
 
+= link_to 'edit', edit_reservation_path(@reservation)
+
 = button_to 'delete', @reservation, class: 'btn btn-danger',
   :confirm => 'Are you sure?', :method => :delete

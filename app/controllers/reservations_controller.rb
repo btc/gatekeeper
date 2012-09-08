@@ -9,6 +9,7 @@ class ReservationsController < ApplicationController
       @reservations = @reservations.where('date = ?', params[:date])
     end
 
+    @reservations = @reservations.sort_by { |r| r.guest.try(:full_name) || String.new }
     @reservations = @reservations
       .paginate(page: params[:page], per_page: 30)
 
