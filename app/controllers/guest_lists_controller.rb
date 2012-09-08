@@ -90,7 +90,7 @@ class GuestListsController < ApplicationController
     if (raw_date.nil? || raw_date.empty?) && @guest_list.date.nil?
       flash[:alert] ||= 'please enter a date'
     else
-      @guest_list.update_attribute :date, raw_date
+      @guest_list.date = raw_date
     end
 
     respond_to do |format|
