@@ -25,7 +25,7 @@
             .tab-text
               lists
 
-      - if can?(:manage, Reservation)
+      - if can?(:read, Reservation)
         %li{ active_if_controller(:reservations) }
           = link_to reservations_path do
             .tab-icon

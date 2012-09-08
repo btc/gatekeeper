@@ -67,6 +67,10 @@ class Ability
       # can :manage, GuestList # FIXME TODO restrict by role
       # can :manage, Invitation # FIXME TODO restrict by role
       # can :lookup_names, Guest # any user full_name_search always
+
+      # viewing reservations
+      # ---------------
+      can :read, Reservation
     end
 
     if user.has_role? :committee_member
