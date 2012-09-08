@@ -1,5 +1,5 @@
 .row-fluid
-  .span4
+  .span6
     - if reservation.guest.present?
       = link_to reservation do
         %span>= "#{reservation.guest}'s reservation"
@@ -14,7 +14,7 @@
     - else
       unspecified table
 
-  .span8
+  .span6
     %strong about this reservation:
     %p
       = simple_format(reservation.description)
