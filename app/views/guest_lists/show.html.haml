@@ -105,10 +105,13 @@
       .row-fluid
         = form_tag(guest_list_append_path(@guest_list), method: :post, class: 'form-horizontal') do
           .row-fluid
+            .alert.alert-info
+              %small
+                add more guests to guest list by entering names below
             %input#append-guests.guest-lookup(autocomplete='off' type='text'name='q')
           .row-fluid
             %button.btn.btn-block
-              add more guests to list
+              click here to update list with these names
 
     .row-fluid.actions
 
