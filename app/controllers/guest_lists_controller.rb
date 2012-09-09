@@ -198,26 +198,21 @@ class GuestListsController < ApplicationController
   end
 
   def master
-    @limit = 20
     authorize! :check_in_guest, Invitation
 
     @guest_lists = GuestList.tonight.approved
     @invitations = []
-    count = 0
     @guest_lists.each do |list|
       list.invitations.each do |i|
         if params[:q].present? && !params[:q].empty?
           @invitations << i if i.guest.matches_by_full_name(params[:q])
-          count += 1
         else
           @invitations << i
-          count += 1
         end
-        break if count > @limit
       end
     end
 
-    @invitations.sort_by! { |i| i.guest.try(:first_name) }
+    @invitations = @invitations.take(20).sort_by { |i| i.guest.try(:first_name) }
 
     respond_to do |format|
       format.html {}
