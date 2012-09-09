@@ -1,7 +1,7 @@
 = render 'tabs', table: nil
 
 .row-fluid
-  .span9
+  .span12
     .row-fluid
       .date-controls
         .pull-left
@@ -20,22 +20,3 @@
             %input.search-query(type='text' name='date'){ placeholder: @date.try(:strftime, '%A %e %B') }
     .row-fluid
       = render 'tables', tables: @tables, date: @date
-
-  .span3
-    %span.label.label-info
-      naming scheme
-    %div
-      0XX
-      &rarr;
-      VIP
-    %div
-      1XX
-      &rarr;
-      General
-    %span.label.label-info
-      reserving a table
-    %div
-      select
-      %i.icon-plus
-      %i.icon-book
-      to create a new reservation for this table

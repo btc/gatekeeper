@@ -3,31 +3,34 @@
     table openings on
     %strong= date.try(:strftime, '%A %e %B')
   %tr
-    %th actions
     %th #
     %th name
+    %th reserved by
+    %th actions
 
   - @tables.each do |table|
     - free = table.free_on(date)
     %tr{ green_if(free) }
       %td
-        - if free
-          = link_to new_reservation_path(table: table, date: date), class: 'btn btn-mini' do
-            %i.icon-plus
-            %i.icon-book
-        - else
-          = link_to reservation_path(table.reservation_on(date)), class: 'btn btn-mini' do
-            show
-            %i.icon-book
-
-      %td
         = best_in_place table, :number
 
       %td
         = best_in_place table, :name
+      %td
+        - if free
+          = link_to new_reservation_path(table: table, date: date), class: 'btn btn-mini' do
+            %i.icon-book
+            reserve this table
+        - else
+          - reservation = table.reservation_on(date)
+          = link_to reservation do
+            = reservation.guest
+      %td
         = link_to table do
           %button.btn.btn-mini
-            &rarr;
+            %i.icon-th-large
+            view table history
+
 
 :coffeescript
   jQuery ->
