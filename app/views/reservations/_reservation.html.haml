@@ -24,15 +24,16 @@
       - unless reservation.guest.guest_lists.tonight.empty?
         %strong lists:
         - reservation.guest.guest_lists.tonight.each do |list|
-          .row-fluid
-            = link_to guest_list_path(list) do
-              #{list.owner.try(:full_name)}'s list
+          - if can? :read, list
+            .row-fluid
+              = link_to guest_list_path(list) do
+                #{list.owner.try(:full_name)}'s list
 
-            - if can? :view_rating, list.owner
-              = stars(list.owner.try(:rating))
+              - if can? :view_rating, list.owner
+                = stars(list.owner.try(:rating))
 
-            %small= pluralize list.total, 'guest'
-            = status_badge(list)
+              %small= pluralize list.total, 'guest'
+              = status_badge(list)
 
       - if !reservation.guest.notes.empty?
         %p
