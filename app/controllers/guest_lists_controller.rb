@@ -212,7 +212,7 @@ class GuestListsController < ApplicationController
       end
     end
 
-    @invitations.sort_by! { |i| i.guest.try(:first_name) }
+    @invitations = @invitations.take(20).sort_by { |i| i.guest.try(:first_name) }
 
     respond_to do |format|
       format.html {}
