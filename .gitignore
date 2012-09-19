@@ -23,3 +23,5 @@ config/database.yml
 
 /public/assets
 tag_message.txt
+
+/backups/*.bz2

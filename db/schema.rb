@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919050330) do
+ActiveRecord::Schema.define(:version => 20120919050959) do
 
   create_table "committees", :force => true do |t|
     t.datetime "created_at", :null => false
