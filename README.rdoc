@@ -1,3 +1,5 @@
+Simple venue management software; Used in production at night clubs and concert venues; Manage guest profiles, notes, and check-ins, VIP table reservations, and more; A mobile-ready Rails web application
+
 DEPENDENCIES
 ============
 requires imagemagick for paperclip!
